@@ -20,6 +20,8 @@ class RYTabBarController: UITabBarController {
     func replaceTabBar () {
         let tabBar = RYTabBar()
         self.setValue(tabBar, forKey: "tabBar")
+        // MARK: - 为加号按钮添加点击事件
+        tabBar.plusBtn.addTarget(self, action: "clickPlusBtn", forControlEvents: .TouchUpInside)
     }
     
      func addNaviControllers() {
@@ -44,5 +46,9 @@ class RYTabBarController: UITabBarController {
         addChildViewController(navi)
     }
     
+    // MARK: - 家号按钮点击事件
+    @objc private func clickPlusBtn () {
+        print(__FUNCTION__)
+    }
 
 }

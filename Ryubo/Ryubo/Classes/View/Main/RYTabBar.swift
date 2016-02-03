@@ -42,7 +42,7 @@ class RYTabBar: UITabBar {
     }
     
     // MARK: - 懒加载加号按钮
-    lazy var plusBtn:UIButton = {
+    lazy var plusBtn:UIButton = {//不要在此处添加点击事件  放在控制器里添加  将加号设置为属性让控制器可以拿到
         let button = UIButton()
         //设置背景图片
         button.setBackgroundImage(UIImage(named: "tabbar_compose_button"), forState: .Normal)
