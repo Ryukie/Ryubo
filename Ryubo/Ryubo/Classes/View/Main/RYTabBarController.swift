@@ -17,14 +17,14 @@ class RYTabBarController: UITabBarController {
         addNaviControllers()
     }
     // MARK: - 系统自带TabBar只读 使用KVC将自定义的TabBar替换掉系统的
-    func replaceTabBar () {
+    private func replaceTabBar () {
         let tabBar = RYTabBar()
         self.setValue(tabBar, forKey: "tabBar")
         // MARK: - 为加号按钮添加点击事件
         tabBar.plusBtn.addTarget(self, action: "clickPlusBtn", forControlEvents: .TouchUpInside)
     }
     
-     func addNaviControllers() {
+     private func addNaviControllers() {
         addNaviControllers(RYHomeController(), titleName: "主页", imageName: "tabbar_home")
         addNaviControllers(RYMessageController(), titleName: "消息", imageName: "tabbar_message_center")
         addNaviControllers(RYProfileController(), titleName: "我", imageName: "tabbar_profile")
@@ -32,23 +32,22 @@ class RYTabBarController: UITabBarController {
     }
     
     // MARK: - 为每个模块控制器嵌套一个导航控制器并添加到标签控制器内
-    func addNaviControllers (viewController:UIViewController,titleName:String,imageName:String) {
+    private func addNaviControllers (viewController:UIViewController,titleName:String,imageName:String) {
         //设置tabBar 的填充颜色
         self.tabBar.tintColor = UIColor.orangeColor()
         let navi = UINavigationController(rootViewController:viewController)
         //统一设置标签和导航的文字
-//        navi.title = titleName
+        viewController.title = titleName
         //设置不同的title 和 标签文字
-        navi.tabBarItem.title = titleName
-        navi.navigationItem.title = "Ryukie`sWeibo"
-        
-        navi.tabBarItem.image = UIImage(named: imageName)
+//        viewController.tabBarItem.title = titleName
+//        viewController.navigationItem.title = "Ryukie`sWeibo"
+        viewController.tabBarItem.image = UIImage(named: imageName)
         addChildViewController(navi)
     }
     
     // MARK: - 家号按钮点击事件
     @objc private func clickPlusBtn () {
-        print(__FUNCTION__)
+//        print(__FUNCTION__)
     }
 
 }

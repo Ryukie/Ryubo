@@ -1,18 +1,43 @@
 //
-//  RYHomeController.swift
+//  RYBasicVisitorTVC.swift
 //  Ryubo
 //
-//  Created by 王荣庆 on 16/1/30.
+//  Created by 王荣庆 on 16/2/3.
 //  Copyright © 2016年 Ryukie. All rights reserved.
 //
 
 import UIKit
 
-class RYHomeController: RYBasicVisitorTVC {
+class RYBasicVisitorTVC: UITableViewController {
 
+    //定义用户是否登录的标示
+//    var userLogin = true
+    var userLogin = false
+    //loadView
+    //1. -苹果专门为 手写代码准备的 一旦实现该方法 sb / xib 会自动失效
+    //2. 准备视图层次结构 在UIViewController 中 会将view 准备出来
+    override func loadView() {
+        super.loadView()
+        if userLogin {
+//            let v = UIView()
+//            v.backgroundColor = UIColor.greenColor()
+//            self.view = v
+        }else {
+//            let v = UIView()
+//            v.backgroundColor = UIColor.redColor()
+//            self.view = v
+        }
+        
+        
+    }
+    //会在 viewwillLayoutsubViews方法中 设置view的大小
+    override func viewWillLayoutSubviews() {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
