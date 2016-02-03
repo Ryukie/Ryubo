@@ -9,13 +9,14 @@
 import UIKit
 
 class RYTabBar: UITabBar {
-
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+    override func layoutSubviews() {
+        super.layoutSubviews()
+//        print(__FUNCTION__)
+        //添加四个标签中间一个自定义加号按钮
+        addTabrBarBtns()
     }
-    */
+    func addTabrBarBtns () {
+        
+    }
 
 }

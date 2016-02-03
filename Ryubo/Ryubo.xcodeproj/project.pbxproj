@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		4A5B88B31C5CA03B0043572D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88B21C5CA03B0043572D /* AppDelegate.swift */; };
 		4A5B88BA1C5CA03B0043572D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A5B88B91C5CA03B0043572D /* Assets.xcassets */; };
+		4A5B88D61C5CADF10043572D /* RYTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88D51C5CADF10043572D /* RYTabBarController.swift */; };
+		4A5B88D81C5CAE5D0043572D /* RYTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88D71C5CAE5D0043572D /* RYTabBar.swift */; };
+		4A5B88DA1C5CB42B0043572D /* RYDiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88D91C5CB42A0043572D /* RYDiscoverController.swift */; };
+		4A5B88DC1C5CB4400043572D /* RYHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88DB1C5CB4400043572D /* RYHomeController.swift */; };
+		4A5B88DE1C5CB4520043572D /* RYMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88DD1C5CB4520043572D /* RYMessageController.swift */; };
+		4A5B88E01C5CB4690043572D /* RYProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88DF1C5CB4690043572D /* RYProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +22,12 @@
 		4A5B88B21C5CA03B0043572D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A5B88B91C5CA03B0043572D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A5B88BE1C5CA03B0043572D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A5B88D51C5CADF10043572D /* RYTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYTabBarController.swift; sourceTree = "<group>"; };
+		4A5B88D71C5CAE5D0043572D /* RYTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYTabBar.swift; sourceTree = "<group>"; };
+		4A5B88D91C5CB42A0043572D /* RYDiscoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYDiscoverController.swift; sourceTree = "<group>"; };
+		4A5B88DB1C5CB4400043572D /* RYHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYHomeController.swift; sourceTree = "<group>"; };
+		4A5B88DD1C5CB4520043572D /* RYMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYMessageController.swift; sourceTree = "<group>"; };
+		4A5B88DF1C5CB4690043572D /* RYProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,10 +61,120 @@
 			isa = PBXGroup;
 			children = (
 				4A5B88B21C5CA03B0043572D /* AppDelegate.swift */,
+				4A5B88C41C5CA7D20043572D /* Classes */,
 				4A5B88B91C5CA03B0043572D /* Assets.xcassets */,
 				4A5B88BE1C5CA03B0043572D /* Info.plist */,
 			);
 			path = Ryubo;
+			sourceTree = "<group>";
+		};
+		4A5B88C41C5CA7D20043572D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4A5B88C51C5CA7D20043572D /* Model */,
+				4A5B88C61C5CA7D20043572D /* Tools */,
+				4A5B88C71C5CA7D20043572D /* View */,
+				4A5B88D01C5CA7D20043572D /* ViewModel */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		4A5B88C51C5CA7D20043572D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A5B88C61C5CA7D20043572D /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		4A5B88C71C5CA7D20043572D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A5B88C81C5CA7D20043572D /* Compose */,
+				4A5B88C91C5CA7D20043572D /* Discover */,
+				4A5B88CA1C5CA7D20043572D /* Home */,
+				4A5B88CB1C5CA7D20043572D /* Main */,
+				4A5B88CC1C5CA7D20043572D /* Message */,
+				4A5B88CD1C5CA7D20043572D /* OAuth */,
+				4A5B88CE1C5CA7D20043572D /* Profile */,
+				4A5B88CF1C5CA7D20043572D /* Welcome */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A5B88C81C5CA7D20043572D /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Compose;
+			sourceTree = "<group>";
+		};
+		4A5B88C91C5CA7D20043572D /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				4A5B88D91C5CB42A0043572D /* RYDiscoverController.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		4A5B88CA1C5CA7D20043572D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4A5B88DB1C5CB4400043572D /* RYHomeController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4A5B88CB1C5CA7D20043572D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4A5B88D51C5CADF10043572D /* RYTabBarController.swift */,
+				4A5B88D71C5CAE5D0043572D /* RYTabBar.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4A5B88CC1C5CA7D20043572D /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				4A5B88DD1C5CB4520043572D /* RYMessageController.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		4A5B88CD1C5CA7D20043572D /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
+		4A5B88CE1C5CA7D20043572D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4A5B88DF1C5CB4690043572D /* RYProfileController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		4A5B88CF1C5CA7D20043572D /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		4A5B88D01C5CA7D20043572D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -81,6 +203,7 @@
 		4A5B88A71C5CA03B0043572D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = RY;
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Ryukie;
@@ -125,7 +248,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A5B88DC1C5CB4400043572D /* RYHomeController.swift in Sources */,
+				4A5B88D81C5CAE5D0043572D /* RYTabBar.swift in Sources */,
+				4A5B88E01C5CB4690043572D /* RYProfileController.swift in Sources */,
+				4A5B88DE1C5CB4520043572D /* RYMessageController.swift in Sources */,
+				4A5B88D61C5CADF10043572D /* RYTabBarController.swift in Sources */,
 				4A5B88B31C5CA03B0043572D /* AppDelegate.swift in Sources */,
+				4A5B88DA1C5CB42B0043572D /* RYDiscoverController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
