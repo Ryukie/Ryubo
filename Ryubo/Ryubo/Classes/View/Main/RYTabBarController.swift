@@ -21,6 +21,7 @@ class RYTabBarController: UITabBarController {
         let tabBar = RYTabBar()
         self.setValue(tabBar, forKey: "tabBar")
     }
+    
      func addNaviControllers() {
         addNaviControllers(RYHomeController(), titleName: "主页", imageName: "tabbar_home")
         addNaviControllers(RYMessageController(), titleName: "消息", imageName: "tabbar_message_center")
@@ -30,10 +31,11 @@ class RYTabBarController: UITabBarController {
     
     // MARK: - 为每个模块控制器嵌套一个导航控制器并添加到标签控制器内
     func addNaviControllers (viewController:UIViewController,titleName:String,imageName:String) {
+        //设置tabBar 的填充颜色
+        self.tabBar.tintColor = UIColor.orangeColor()
         let navi = UINavigationController(rootViewController:viewController)
         //统一设置标签和导航的文字
 //        navi.title = titleName
-        
         //设置不同的title 和 标签文字
         navi.tabBarItem.title = titleName
         navi.navigationItem.title = "Ryukie`sWeibo"
