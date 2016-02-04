@@ -9,6 +9,19 @@
 import UIKit
 
 class RYTabBar: UITabBar {
+    
+    //重写init(frame) 系统会默认 当前类的对象 只能通过手写代码的方式创建
+    //如果程序员通过xib 创建对象 程序会崩溃
+    //表示对象是通过xib创建
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(plusBtn)
+    }
+// MARK: - 这个是为了保证通过代码创建,通过xib的会报错   这段Xcode 会提醒添加的
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
 //        print(__FUNCTION__)
@@ -50,7 +63,7 @@ class RYTabBar: UITabBar {
         //设置图片
         button.setImage(UIImage(named: "tabbar_compose_icon_add"), forState: .Normal)
         button.setImage(UIImage(named: "tabbar_compose_icon_add_highlighted"), forState: .Highlighted)
-        self.addSubview(button)
+//        self.addSubview(button)
         return button
     }()
 

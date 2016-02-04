@@ -32,7 +32,7 @@ class RYBasicVisitorTVC: UITableViewController {
     }
     // MARK: - 加载访客视图
     private func setupVisitorView () {
-        print(__FUNCTION__)
+//        print(__FUNCTION__)
         view = RYVisitorView()
     }
     //会在 viewwillLayoutsubViews方法中 设置view的大小
