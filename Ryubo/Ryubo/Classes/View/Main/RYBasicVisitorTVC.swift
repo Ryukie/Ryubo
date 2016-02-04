@@ -7,9 +7,11 @@
 //
 
 import UIKit
-
-class RYBasicVisitorTVC: UITableViewController {
-
+//OC中 经典的面试题
+//OC中有多继承吗? 如果没有 用什么替代 协议
+//在OC中没有实现必选的协议方法 报警告 在swift中 没有实现 '必选' 的协议方法  直接报error
+class RYBasicVisitorTVC: UITableViewController,RYVisitorViewDelegate {
+    
     //定义用户是否登录的标示
 //    var userLogin = true
     var userLogin = false
@@ -23,11 +25,12 @@ class RYBasicVisitorTVC: UITableViewController {
     //3. 在super.loadView之前 view没有被创建出来(nil) 追踪view 会造成递归调用
     override func loadView() {
         userLogin ? super.loadView() : setupVisitorView()
-
     }
     // MARK: - 加载访客视图
     private func setupVisitorView () {
         visitorView = RYVisitorView()
+        // MARK: - 设置代理属性
+        visitorView?.delegate = self
         view = visitorView
     }
     //会在 viewwillLayoutsubViews方法中 设置view的大小
@@ -58,60 +61,12 @@ class RYBasicVisitorTVC: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
+// MARK: - 实现代理方法
+    func userWillLogin() {
+        print(__FUNCTION__)
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func userWillRegister() {
+        print(__FUNCTION__)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

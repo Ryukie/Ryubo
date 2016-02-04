@@ -9,7 +9,32 @@
 import UIKit
 import SnapKit //导入SnapKit命名空间
 
+
+//1.protocol:swift中 没有 '@'
+//2.遵守根协议 <NSObject>
+//3.如果不遵守 NSObjectProtocol<基协议> 就无法使用 weak 关键字
+//4.声明可选的协议方法 需要使用 optional关键字 是 OC中的关键字 需要在声明的协议前 加上 '@objc'
+@objc protocol RYVisitorViewDelegate: NSObjectProtocol {
+    //协议方法
+    optional func userWillRegister()
+//    optional func userWillLogin()
+    func userWillLogin()
+}
+
+
 class RYVisitorView: UIView {
+// MARK: - 声明代理属性
+    //声明代理 swift属性 默认的属性关键字 就是 strong
+    //声明弱引用的属性 需要 weak
+    weak var delegate:RYVisitorViewDelegate?
+// MARK: - 代理方法
+    @objc private func clickLoginBT () {
+        delegate?.userWillLogin()
+    }
+    @objc private func clicKRegisterBT () {
+        delegate?.userWillRegister?()
+    }
+    
     
     func setVisitorViewWithInfo(imageName:String?,titleText:String) {
         if let img = imageName {
@@ -100,6 +125,9 @@ class RYVisitorView: UIView {
             make.top.left.right.equalTo(self)
             make.bottom.equalTo(bt_toRegister.snp_bottom)
         }
+// MARK: - 添加监听事件
+        bt_toLogin.addTarget(self, action: "clickLoginBT", forControlEvents: .TouchUpInside)
+        bt_toRegister.addTarget(self, action: "clicKRegisterBT", forControlEvents: .TouchUpInside)
     }
     
 // MARK: - 懒加载控件
@@ -131,7 +159,6 @@ class RYVisitorView: UIView {
         b.setBackgroundImage(image.resizableImageWithCapInsets(edg), forState: .Normal)
         return b
     }()
-    
     //注册按钮
     lazy var bt_toRegister:UIButton = {
         let b = UIButton()
@@ -148,4 +175,5 @@ class RYVisitorView: UIView {
     }()
     //背景
     lazy var iv_backView: UIImageView = UIImageView(image: UIImage(named: "visitordiscover_feed_mask_smallicon"))
+    
 }
