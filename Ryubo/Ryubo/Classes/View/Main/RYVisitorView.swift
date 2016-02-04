@@ -18,8 +18,21 @@ class RYVisitorView: UIView {
             bringSubviewToFront(iv_circleIcon)
         }else {
             //说明在主页
+            startCircleAnimation()
         }
         lb_notiText.text = titleText
+    }
+    
+    private func startCircleAnimation () {
+        //基础动画
+        let baseAni = CABasicAnimation(keyPath: "transform.rotation")
+        baseAni.repeatCount = MAXFLOAT
+        baseAni.toValue = 2 * M_PI
+        baseAni.duration = 10
+        //设置动画完成/ 页面失去活跃状态  不移除图层
+        baseAni.removedOnCompletion = false
+        //添加动画
+        iv_circleIcon.layer.addAnimation(baseAni, forKey: nil)
     }
     
     override init(frame: CGRect) {
