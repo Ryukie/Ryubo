@@ -16,6 +16,7 @@
 		4A5B88DE1C5CB4520043572D /* RYMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88DD1C5CB4520043572D /* RYMessageController.swift */; };
 		4A5B88E01C5CB4690043572D /* RYProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5B88DF1C5CB4690043572D /* RYProfileController.swift */; };
 		4A6EAB781C61F2AA00A08B4B /* RYBasicVisitorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6EAB771C61F2AA00A08B4B /* RYBasicVisitorTVC.swift */; };
+		4A6EAB7A1C61FFD300A08B4B /* RYVisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6EAB791C61FFD300A08B4B /* RYVisitorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4A5B88DD1C5CB4520043572D /* RYMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYMessageController.swift; sourceTree = "<group>"; };
 		4A5B88DF1C5CB4690043572D /* RYProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYProfileController.swift; sourceTree = "<group>"; };
 		4A6EAB771C61F2AA00A08B4B /* RYBasicVisitorTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYBasicVisitorTVC.swift; sourceTree = "<group>"; };
+		4A6EAB791C61FFD300A08B4B /* RYVisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYVisitorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				4A5B88D51C5CADF10043572D /* RYTabBarController.swift */,
 				4A5B88D71C5CAE5D0043572D /* RYTabBar.swift */,
 				4A6EAB771C61F2AA00A08B4B /* RYBasicVisitorTVC.swift */,
+				4A6EAB791C61FFD300A08B4B /* RYVisitorView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A5B88DC1C5CB4400043572D /* RYHomeController.swift in Sources */,
+				4A6EAB7A1C61FFD300A08B4B /* RYVisitorView.swift in Sources */,
 				4A5B88D81C5CAE5D0043572D /* RYTabBar.swift in Sources */,
 				4A5B88E01C5CB4690043572D /* RYProfileController.swift in Sources */,
 				4A5B88DE1C5CB4520043572D /* RYMessageController.swift in Sources */,
