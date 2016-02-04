@@ -8,11 +8,11 @@
 
 import UIKit
 
-class RYMessageController: UITableViewController {
+class RYMessageController: RYBasicVisitorTVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        visitorView?.setVisitorViewWithInfo("visitordiscover_image_message", titleText: "赶快注册登录和朋友们嗨起来!")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

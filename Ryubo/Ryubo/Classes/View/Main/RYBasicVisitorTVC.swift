@@ -13,27 +13,22 @@ class RYBasicVisitorTVC: UITableViewController {
     //定义用户是否登录的标示
 //    var userLogin = true
     var userLogin = false
+    
+// MARK: - 为了自定义不同的访客视图需要将访客视图设置为属性
+    var visitorView:RYVisitorView?
+    
     //loadView
     //1. -苹果专门为 手写代码准备的 一旦实现该方法 sb / xib 会自动失效
     //2. 准备视图层次结构 在UIViewController 中 会将view 准备出来
     //3. 在super.loadView之前 view没有被创建出来(nil) 追踪view 会造成递归调用
     override func loadView() {
-//        super.loadView()
         userLogin ? super.loadView() : setupVisitorView()
-//        if userLogin {
-////            let v = UIView()
-////            v.backgroundColor = UIColor.greenColor()
-////            self.view = v
-//        }else {
-////            let v = UIView()
-////            v.backgroundColor = UIColor.redColor()
-////            self.view = v
-//        }
+
     }
     // MARK: - 加载访客视图
     private func setupVisitorView () {
-//        print(__FUNCTION__)
-        view = RYVisitorView()
+        visitorView = RYVisitorView()
+        view = visitorView
     }
     //会在 viewwillLayoutsubViews方法中 设置view的大小
     override func viewWillLayoutSubviews() {
@@ -52,18 +47,15 @@ class RYBasicVisitorTVC: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 0
     }
 

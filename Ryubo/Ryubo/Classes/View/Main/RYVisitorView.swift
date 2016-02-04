@@ -11,6 +11,17 @@ import SnapKit //导入SnapKit命名空间
 
 class RYVisitorView: UIView {
     
+    func setVisitorViewWithInfo(imageName:String?,titleText:String) {
+        if let img = imageName {
+            iv_circleIcon.image = UIImage(named: img)
+            iv_bigHouse.hidden = true
+            bringSubviewToFront(iv_circleIcon)
+        }else {
+            //说明在主页
+        }
+        lb_notiText.text = titleText
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadUI()
@@ -21,8 +32,13 @@ class RYVisitorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     private func loadUI () {
-        self.backgroundColor = UIColor.whiteColor()
+        //灰度颜色
+        self.backgroundColor = UIColor(white: 0.93, alpha: 1)
+//        self.backgroundColor = UIColor.whiteColor()
         addSubview(iv_circleIcon)
+        //遮住环形
+        addSubview(iv_backView)
+        
         addSubview(iv_bigHouse)
         addSubview(bt_toLogin)
         addSubview(bt_toRegister)
@@ -67,7 +83,10 @@ class RYVisitorView: UIView {
             make.top.equalTo(lb_notiText.snp_bottom).offset(16)
             make.width.equalTo(100)
         }
-        
+        iv_backView.snp_makeConstraints { (make) -> Void in
+            make.top.left.right.equalTo(self)
+            make.bottom.equalTo(bt_toRegister.snp_bottom)
+        }
     }
     
 // MARK: - 懒加载控件
@@ -114,4 +133,6 @@ class RYVisitorView: UIView {
         b.setBackgroundImage(image.resizableImageWithCapInsets(edg), forState: .Normal)
         return b
     }()
+    //背景
+    lazy var iv_backView: UIImageView = UIImageView(image: UIImage(named: "visitordiscover_feed_mask_smallicon"))
 }

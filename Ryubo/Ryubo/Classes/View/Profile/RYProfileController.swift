@@ -8,11 +8,11 @@
 
 import UIKit
 
-class RYProfileController: UITableViewController {
+class RYProfileController: RYBasicVisitorTVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        visitorView?.setVisitorViewWithInfo("visitordiscover_image_profile", titleText: "注册登录,在寒冷的冬日里为自己织微博吧")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

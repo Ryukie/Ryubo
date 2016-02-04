@@ -12,7 +12,7 @@ class RYHomeController: RYBasicVisitorTVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        visitorView?.setVisitorViewWithInfo(nil, titleText: "关注一些人，你将打开新世界的大门")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
