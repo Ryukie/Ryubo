@@ -14,11 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        setupGlobalNaviColor()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.backgroundColor = UIColor.blueColor()
         window?.rootViewController = RYTabBarController()
         window?.makeKeyAndVisible()
         return true
+    }
+    func setupGlobalNaviColor () {
+        UINavigationBar.appearance().tintColor = UIColor.orangeColor()
     }
 
     func applicationWillResignActive(application: UIApplication) {
