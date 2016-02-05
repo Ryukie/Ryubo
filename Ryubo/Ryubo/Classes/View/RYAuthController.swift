@@ -16,6 +16,7 @@ class RYAuthController: UIViewController {
 // MARK: - 用WEBView替换跟视图
     override func loadView() {
         view = authView
+        authView.delegate = self
     }
     
     override func viewDidLoad() {
@@ -64,10 +65,29 @@ extension RYAuthController:UIWebViewDelegate {
     //通常协议方法 返回值 为 bool类型  返回 yes 通常控件可以正常运行
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         
+        //返回true 让web加载
+        //返回false 拦截
         
-        print(request.URL)
-        
+        //无法获取URL字符串就不加载
+        guard let URLString = request.URL?.absoluteString else {
+            return false
+        }
+        //从请求中获取code授权码
+        if URLString.containsString("code=") {
+            print(URLString)
+            //获取URL中的参数  ->>> 即 URL  ? 后面的部分
+            guard let query = request.URL?.query else {
+                return false
+            }
+            let coder = "code="
+            //将query转化为字符串
+            //方法一: 转化为OC NSString 的方法
+//            let code = (query as NSString).substringFromIndex(coder.characters.count)
+            //方法二: Swift 的字符串处理方法
+            let code = query.substringFromIndex(coder.endIndex)
+            print(code,query)
+            return false
+        }
         return true
     }
-    
 }
