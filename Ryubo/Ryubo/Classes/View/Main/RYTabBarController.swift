@@ -33,21 +33,15 @@ class RYTabBarController: UITabBarController {
     
     // MARK: - 为每个模块控制器嵌套一个导航控制器并添加到标签控制器内
     private func addNaviControllers (viewController:UIViewController,titleName:String,imageName:String) {
-        //设置tabBar 的填充颜色
-        self.tabBar.tintColor = UIColor.orangeColor()
         let navi = UINavigationController(rootViewController:viewController)
         //统一设置标签和导航的文字
         viewController.title = titleName
-        //设置不同的title 和 标签文字
-//        viewController.tabBarItem.title = titleName
-//        viewController.navigationItem.title = "Ryukie`sWeibo"
         viewController.tabBarItem.image = UIImage(named: imageName)
         addChildViewController(navi)
     }
     
     // MARK: - 家号按钮点击事件
     @objc private func clickPlusBtn () {
-//        print(__FUNCTION__)
     }
 
 }

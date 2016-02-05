@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func setupGlobalNaviColor () {
         UINavigationBar.appearance().tintColor = UIColor.orangeColor()
+        UITabBar.appearance().tintColor = UIColor.orangeColor()
     }
 
     func applicationWillResignActive(application: UIApplication) {

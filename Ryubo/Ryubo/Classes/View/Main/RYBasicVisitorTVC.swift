@@ -32,6 +32,9 @@ class RYBasicVisitorTVC: UITableViewController,RYVisitorViewDelegate {
         // MARK: - 设置代理属性
         visitorView?.delegate = self
         view = visitorView
+// MARK: - 设置导航条Items
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .Plain, target: self, action: "userWillLogin")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .Plain, target: self, action: "userWillRegister")
     }
     //会在 viewwillLayoutsubViews方法中 设置view的大小
     override func viewWillLayoutSubviews() {
@@ -40,12 +43,6 @@ class RYBasicVisitorTVC: UITableViewController,RYVisitorViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
