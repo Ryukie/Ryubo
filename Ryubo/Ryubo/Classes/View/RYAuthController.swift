@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import AFNetworking
 
 class RYAuthController: UIViewController {
 
@@ -28,7 +29,7 @@ class RYAuthController: UIViewController {
     }
     private func loadAuthPage () {
         //1. 获取url
-        let urlString = "https://api.weibo.com/oauth2/authorize?" + "client_id=" + "4034367702" + "&redirect_uri=" + "http://www.baidu.com"
+        let urlString = "https://api.weibo.com/oauth2/authorize?" + "client_id=" + app_key + "&redirect_uri=" + redirect_URL
         //可选的URL
         let URL = NSURL(string: urlString)!
         //获取request
@@ -72,9 +73,10 @@ extension RYAuthController:UIWebViewDelegate {
         guard let URLString = request.URL?.absoluteString else {
             return false
         }
+// MARK: - 获取授权code
         //从请求中获取code授权码
         if URLString.containsString("code=") {
-            print(URLString)
+//            print(URLString)
             //获取URL中的参数  ->>> 即 URL  ? 后面的部分
             guard let query = request.URL?.query else {
                 return false
@@ -85,9 +87,41 @@ extension RYAuthController:UIWebViewDelegate {
 //            let code = (query as NSString).substringFromIndex(coder.characters.count)
             //方法二: Swift 的字符串处理方法
             let code = query.substringFromIndex(coder.endIndex)
-            print(code,query)
+//            print(code,query)
+            
+// MARK: - 获取授权token
+            getAccessToken(code)
             return false
         }
         return true
     }
+    
+    private func getAccessToken(code:String) {
+        let URLString = "https://api.weibo.com/oauth2/access_token"
+        let parameters = [
+            "client_id":app_key,
+            "client_secret": app_scret,
+            "grant_type":"authorization_code",
+            "code": code,
+            "redirect_uri": redirect_URL
+        ]
+//        let manager = AFHTTPSessionManager()
+        let manager = RYNetworkTool.sharedNetTool
+        //设置解析纯文本JSON 数据的反序列化器支持
+//        manager.responseSerializer.acceptableContentTypes?.insert("text/plain")
+        //用下面这个方法会报错
+//        manager.POST(URLString, parameters: parameters, constructingBodyWithBlock: nil, progress: nil, success: { (_, result) -> Void in
+//            print(result)
+//            }) { (_, error) -> Void in
+//                print(error)
+//        }
+        //用这个方法才对
+        manager.POST(URLString, parameters: parameters, progress: nil, success: { (_ , result) -> Void in
+            print(result)
+            }) { (_ , error) -> Void in
+                print(error)
+        }
+        
+    }
+    
 }
