@@ -50,4 +50,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
+let app_key = "4034367702"
+let app_scret = "dc124878d20ce54c9b962ca22b3154cd"
