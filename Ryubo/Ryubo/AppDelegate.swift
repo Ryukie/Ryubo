@@ -15,12 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        print(RYUserAccount.loadAccount())
+//        print(RYUserAccount.loadAccount())
         
         setupGlobalNaviColor()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.backgroundColor = UIColor.blueColor()
-        window?.rootViewController = RYTabBarController()
+//        window?.rootViewController = RYTabBarController()
+        window?.rootViewController = RYWelcomeController()
         window?.makeKeyAndVisible()
         return true
     }

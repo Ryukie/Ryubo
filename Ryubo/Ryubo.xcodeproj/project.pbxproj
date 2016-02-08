@@ -22,6 +22,7 @@
 		4A9E011A1C64DF7F0045AC09 /* RYNetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E01191C64DF7F0045AC09 /* RYNetworkTool.swift */; };
 		4AD248A71C6883BC003F110A /* RYUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A61C6883BC003F110A /* RYUserAccount.swift */; };
 		4AD248A91C68A04D003F110A /* RYAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */; };
+		4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */; };
 		F2C2D4B5108C5FBBF952793B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8166AB1A428C446AE172A0 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		4A9E01191C64DF7F0045AC09 /* RYNetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYNetworkTool.swift; sourceTree = "<group>"; };
 		4AD248A61C6883BC003F110A /* RYUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYUserAccount.swift; sourceTree = "<group>"; };
 		4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYAccountViewModel.swift; sourceTree = "<group>"; };
+		4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYWelcomeController.swift; sourceTree = "<group>"; };
 		6798C9D5691F9A278F7381A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7C3328FF88D4489EA9BFE773 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +130,7 @@
 		4A5B88C71C5CA7D20043572D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A5B88CF1C5CA7D20043572D /* Welcome */,
 				4A9E01141C6478570045AC09 /* AuthView */,
 				4A5B88CB1C5CA7D20043572D /* Main */,
 				4A5B88C81C5CA7D20043572D /* Compose */,
@@ -136,7 +139,6 @@
 				4A5B88CC1C5CA7D20043572D /* Message */,
 				4A5B88CD1C5CA7D20043572D /* OAuth */,
 				4A5B88CE1C5CA7D20043572D /* Profile */,
-				4A5B88CF1C5CA7D20043572D /* Welcome */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -201,6 +203,7 @@
 		4A5B88CF1C5CA7D20043572D /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9E01181C64D6BA0045AC09 /* RYGlobal.swift in Sources */,
+				4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */,
 				4A5B88DC1C5CB4400043572D /* RYHomeController.swift in Sources */,
 				4A6EAB7A1C61FFD300A08B4B /* RYVisitorView.swift in Sources */,
 				4A5B88D81C5CAE5D0043572D /* RYTabBar.swift in Sources */,

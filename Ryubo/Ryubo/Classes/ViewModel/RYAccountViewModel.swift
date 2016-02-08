@@ -25,6 +25,11 @@ class RYAccountViewModel: NSObject {
         return userAccount?.access_token
     }
     
+    //用户昵称
+    var userName : String? {
+        return userAccount?.name
+    }
+    
     func getAccessToken(code:String , finished:(isLogin:Bool)->()) {
         let URLString = "https://api.weibo.com/oauth2/access_token"
         let parameters = [
