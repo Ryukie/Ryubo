@@ -13,17 +13,26 @@ class RYWelcomeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpUI()
     }
     override func loadView() {
         view = iv_backImageView
     }
-    override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() { //默认情况什么都不做
+//        setUpUI()
+        //千万别放这...开始放这了动画更新frame的时候控制台报错
+    }
+    override func viewDidLayoutSubviews() {
+//        setUpUI()
+        //放在这里也报错
+    }
+    private func setUpUI () {
         self.view.addSubview(iv_headIcon)
         self.view.addSubview(lb_welcomeWords)
         //设置头像位置
         iv_headIcon.snp_makeConstraints { (make) -> Void in
-            make.centerX.equalTo(iv_backImageView.snp_centerX)
-            make.centerY.equalTo(iv_backImageView.snp_centerY).offset(-100)
+            make.centerX.equalTo(self.view.snp_centerX)
+            make.centerY.equalTo(self.view.snp_centerY)
         }
         lb_welcomeWords.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(iv_headIcon.snp_bottom).offset(10)
@@ -31,7 +40,41 @@ class RYWelcomeController: UIViewController {
         }
         iv_headIcon.layer.cornerRadius = 42.5
         iv_headIcon.layer.masksToBounds = true
-//        print(iv_headIcon.frame)
+        
+        lb_welcomeWords.alpha = 0
+        //        print(iv_headIcon.frame)
+    }
+    //动画效果不推荐在viewDidLoad/loadView中执行动画
+    //推荐在ViewDidAppear中执行动画效果
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        showAnimetion()
+    }
+    private func showAnimetion () {
+        //在动画闭包中修改 头像的地步约束
+        //更新某一条已经添加过的约束  如果该约束不存在 会自动添加该约束
+        
+        //1.usingSpringWithDamping: 弹簧系数  0.1 ~ 1  越小 越弹
+        //2.initialSpringVelocity 加速度
+        //options:动画可选项  OC按位枚举 swift: 数组
+        
+        //弹簧系数设置准则 (弹簧系数 * 10 ~= 加速度)
+        
+        //使用自动布局 + 动画闭包 ====> 强制刷新视图
+        let offset = -100
+        UIView.animateWithDuration(1.5, delay: 0, usingSpringWithDamping: 0.98, initialSpringVelocity: 9.8, options: [], animations: { () -> Void in
+            
+            self.iv_headIcon.snp_updateConstraints(closure: { (make) -> Void in
+                make.centerY.equalTo(self.view.snp_centerY).offset(offset)
+            })
+            //强制刷新视图
+            self.view.layoutIfNeeded()
+            }) { (_ ) -> Void in
+//                print("动画完毕")
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                self.lb_welcomeWords.alpha = 1
+            })
+        }
     }
     
 // MARK: - 懒加载控件
