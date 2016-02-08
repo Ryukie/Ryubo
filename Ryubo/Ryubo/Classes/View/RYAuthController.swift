@@ -136,14 +136,24 @@ extension RYAuthController:UIWebViewDelegate {
             let uid = dict["uid"]as! String
             
             //设置用户数据
-            self.getUserInfo(access_Token, userId: uid)
+            self.loadUserInfo(access_Token, userId: uid)
             
             }) { (_ , error) -> Void in
                 print(error)
         }
         
     }
-    private func getUserInfo(access_token:String , userId:String){
-        print(access_token,userId)
+    private func loadUserInfo(access_token:String , userId:String){
+//        print(access_token,userId)
+        //用户数据接口
+        let urlString = "https://api.weibo.com/2/users/show.json"
+        //需要传递的参数
+        let parameters = ["access_token": access_token, "uid": userId]
+        let manager = RYNetworkTool.sharedNetTool
+        manager.GET(urlString, parameters: parameters, progress: nil, success: { (_, result) -> Void in
+            print(result)
+            }) { (_ , error) -> Void in
+                print(error)
+        }
     }
 }
