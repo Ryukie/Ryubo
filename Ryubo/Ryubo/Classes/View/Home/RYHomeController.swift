@@ -31,7 +31,7 @@ class RYHomeController: RYBasicVisitorTVC {
         SVProgressHUD.showInfoWithStatus("正在加载网络数据...")
         manager.GET(urlString, parameters: nil, progress: nil, success: { (task, result) -> Void in
             SVProgressHUD.dismiss()
-            print(result)
+//            print(result)
             }) { (task, error) -> Void in
                 SVProgressHUD.showInfoWithStatus("请检查网络...")
                 print(error)

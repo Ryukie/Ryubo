@@ -164,7 +164,7 @@ extension RYAuthController:UIWebViewDelegate {
             account.name = name
             account.avatar_large = avatar_large
             print(account)
-            
+            account.saveAccount()
             }) { (_ , error) -> Void in
                 print(error)
         }
