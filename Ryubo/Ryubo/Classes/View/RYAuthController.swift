@@ -39,6 +39,13 @@ class RYAuthController: UIViewController {
     private func setupNaviBar () {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .Plain, target: self, action: "clickCloseBtn")
         // MARK: - 全局导航控制器的颜色最好提前设置 在AppDelegate中设置
+        
+        //设置默认测试账号
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "TestAC", style: .Plain, target: self, action: "defaultTestAccount")
+    }
+    @objc private func defaultTestAccount() {
+        let jsString = "document.getElementById('userId').value = '13407157710', document.getElementById('passwd').value = 'wrq39zhong' "
+        authView.stringByEvaluatingJavaScriptFromString(jsString)
     }
     @objc private func clickCloseBtn () {
 //        print(__FUNCTION__)
