@@ -124,8 +124,6 @@ extension RYAuthController:UIWebViewDelegate {
 //        }
         //用这个方法才对
         manager.POST(URLString, parameters: parameters, progress: nil, success: { (_ , result) -> Void in
-//            print(result)
-            
             //将 Anyobject对象转换为 字典格式数据
             guard let dict = result as? [String : AnyObject] else {
                 print("数据格式不合法")
@@ -134,24 +132,39 @@ extension RYAuthController:UIWebViewDelegate {
             //对象转字典成功后
             let access_Token = dict["access_token"] as! String
             let uid = dict["uid"]as! String
-            
+            let account = RYUserAccount(dict: ["access_token":access_Token,"uid":uid])
             //设置用户数据
-            self.loadUserInfo(access_Token, userId: uid)
+//            self.loadUserInfo(access_Token, userId: uid)
+            self.loadUserInfo(account)
             
             }) { (_ , error) -> Void in
                 print(error)
         }
-        
     }
-    private func loadUserInfo(access_token:String , userId:String){
-//        print(access_token,userId)
+    private func loadUserInfo(account:RYUserAccount){
+//    private func loadUserInfo(access_token:String , userId:String){
         //用户数据接口
         let urlString = "https://api.weibo.com/2/users/show.json"
         //需要传递的参数
-        let parameters = ["access_token": access_token, "uid": userId]
+        //OC  {"nullobject" : [NSNull null]}
+// MARK: - 程序员保证这个地方一定有值,否则参数哪里会报错
+        let parameters = ["access_token": account.access_token!, "uid": account.uid!]
         let manager = RYNetworkTool.sharedNetTool
         manager.GET(urlString, parameters: parameters, progress: nil, success: { (_, result) -> Void in
-            print(result)
+//            print(result)
+// MARK: - 将用户数据转化为字典
+            guard let dict = result as? [String:AnyObject] else {
+                print("数据格式不和法")
+                return
+            }
+            
+            let name = dict["name"] as! String //OC NSString 转String
+            let avatar_large = dict["avatar_large"] as! String
+            //我们需要的用户信息就全部获取到
+            account.name = name
+            account.avatar_large = avatar_large
+            print(account)
+            
             }) { (_ , error) -> Void in
                 print(error)
         }
