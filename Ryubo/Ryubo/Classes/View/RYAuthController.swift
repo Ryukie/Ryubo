@@ -124,11 +124,26 @@ extension RYAuthController:UIWebViewDelegate {
 //        }
         //用这个方法才对
         manager.POST(URLString, parameters: parameters, progress: nil, success: { (_ , result) -> Void in
-            print(result)
+//            print(result)
+            
+            //将 Anyobject对象转换为 字典格式数据
+            guard let dict = result as? [String : AnyObject] else {
+                print("数据格式不合法")
+                return
+            }
+            //对象转字典成功后
+            let access_Token = dict["access_token"] as! String
+            let uid = dict["uid"]as! String
+            
+            //设置用户数据
+            self.getUserInfo(access_Token, userId: uid)
+            
             }) { (_ , error) -> Void in
                 print(error)
         }
         
     }
-    
+    private func getUserInfo(access_token:String , userId:String){
+        print(access_token,userId)
+    }
 }
