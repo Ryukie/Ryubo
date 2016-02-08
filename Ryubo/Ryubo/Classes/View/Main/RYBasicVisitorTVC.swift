@@ -15,7 +15,8 @@ class RYBasicVisitorTVC: UITableViewController,RYVisitorViewDelegate {
     //定义用户是否登录的标示
 //    var userLogin = true
 //    var userLogin = false
-    var userLogin = RYUserAccount.loadAccount() != nil
+//    var userLogin = RYUserAccount.loadAccount() != nil
+    var userLogin = RYAccountViewModel().userLogin
 
     
 // MARK: - 为了自定义不同的访客视图需要将访客视图设置为属性
