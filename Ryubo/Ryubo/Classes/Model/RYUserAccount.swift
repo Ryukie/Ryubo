@@ -12,7 +12,14 @@ class RYUserAccount: NSObject,NSCoding {
     //用于调用access_token，接口获取授权后的access token。
     var access_token: String?
     //access_token的生命周期，单位是秒数
-    var expires_in: NSTimeInterval = 0
+    var expires_in: NSTimeInterval = 0 {
+        didSet {
+            expires_date = NSDate(timeIntervalSinceNow: expires_in)
+        }
+    }
+    //token 过期日期  "expires_date": 2021-01-10 09:29:13 +0000
+    //开发者 过期日期是 5年  普通用户的过期日期 是 3天
+    var expires_date: NSDate?
     //当前授权用户的UID。
     var uid: String?
     //用户名称
@@ -31,7 +38,8 @@ class RYUserAccount: NSObject,NSCoding {
     //重写描述信息
     override var description:String {
         //使用kvc方式 获取对象 的字典信息
-        let keys = ["access_token","expires_in","uid","name","avatar_large"]
+//        let keys = ["access_token","expires_in","uid","name","avatar_large"]
+        let keys = ["access_token","expires_in","uid","name","avatar_large","expires_date"]
         let dict = self.dictionaryWithValuesForKeys(keys)
         return dict.description
     }
@@ -45,6 +53,8 @@ class RYUserAccount: NSObject,NSCoding {
         uid = aDecoder.decodeObjectForKey("uid") as? String
         name = aDecoder.decodeObjectForKey("name") as? String
         avatar_large = aDecoder.decodeObjectForKey("avatar_large") as? String
+        expires_date = aDecoder.decodeObjectForKey("expires_date") as? NSDate
+
     }
     //归档操作
     func encodeWithCoder(aCoder: NSCoder) {
@@ -53,6 +63,7 @@ class RYUserAccount: NSObject,NSCoding {
         aCoder.encodeObject(uid, forKey: "uid")
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(avatar_large, forKey: "avatar_large")
+        aCoder.encodeObject(expires_date, forKey: "expires_date")
     }
     
 // MARK: - 保存对象
@@ -76,8 +87,18 @@ class RYUserAccount: NSObject,NSCoding {
 //    func loadAccount () -> RYUserAccount? {
         let path = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).last! as NSString).stringByAppendingPathComponent("account.plist")
         if let account = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? RYUserAccount {
-            return account
+//            return account
+            //并且 token 没有过期 最后才会返回一个 用户账户对象
+            // NSDate() 获取当前日期
+            print(account)
+            print(account.expires_date)
+            print(NSData())
+            
+            if account.expires_date?.compare(NSDate()) == NSComparisonResult.OrderedDescending {
+                return account
+            }
         }
+
         return nil
     }
 }

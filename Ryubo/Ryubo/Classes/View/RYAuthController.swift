@@ -48,7 +48,6 @@ class RYAuthController: UIViewController {
         authView.stringByEvaluatingJavaScriptFromString(jsString)
     }
     @objc private func clickCloseBtn () {
-//        print(__FUNCTION__)
         dismissViewControllerAnimated(true, completion: nil)
     }
 
@@ -83,7 +82,6 @@ extension RYAuthController:UIWebViewDelegate {
 // MARK: - 获取授权code
         //从请求中获取code授权码
         if URLString.containsString("code=") {
-//            print(URLString)
             //获取URL中的参数  ->>> 即 URL  ? 后面的部分
             guard let query = request.URL?.query else {
                 return false
@@ -112,16 +110,7 @@ extension RYAuthController:UIWebViewDelegate {
             "code": code,
             "redirect_uri": redirect_URL
         ]
-//        let manager = AFHTTPSessionManager()
         let manager = RYNetworkTool.sharedNetTool
-        //设置解析纯文本JSON 数据的反序列化器支持
-//        manager.responseSerializer.acceptableContentTypes?.insert("text/plain")
-        //用下面这个方法会报错
-//        manager.POST(URLString, parameters: parameters, constructingBodyWithBlock: nil, progress: nil, success: { (_, result) -> Void in
-//            print(result)
-//            }) { (_, error) -> Void in
-//                print(error)
-//        }
         //用这个方法才对
         manager.POST(URLString, parameters: parameters, progress: nil, success: { (_ , result) -> Void in
             //将 Anyobject对象转换为 字典格式数据
@@ -130,19 +119,14 @@ extension RYAuthController:UIWebViewDelegate {
                 return
             }
             //对象转字典成功后
-            let access_Token = dict["access_token"] as! String
-            let uid = dict["uid"]as! String
-            let account = RYUserAccount(dict: ["access_token":access_Token,"uid":uid])
+            let account = RYUserAccount(dict: dict)
             //设置用户数据
-//            self.loadUserInfo(access_Token, userId: uid)
             self.loadUserInfo(account)
-            
             }) { (_ , error) -> Void in
                 print(error)
         }
     }
     private func loadUserInfo(account:RYUserAccount){
-//    private func loadUserInfo(access_token:String , userId:String){
         //用户数据接口
         let urlString = "https://api.weibo.com/2/users/show.json"
         //需要传递的参数
