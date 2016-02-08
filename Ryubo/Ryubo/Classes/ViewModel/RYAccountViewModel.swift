@@ -20,7 +20,12 @@ class RYAccountViewModel: NSObject {
         return userAccount?.access_token != nil //swift不存在非0即真注意
     }
     
-    func getAccessToken(code:String) {
+    //从缓存获取token
+    var token : String? {
+        return userAccount?.access_token
+    }
+    
+    func getAccessToken(code:String , finished:(isLogin:Bool)->()) {
         let URLString = "https://api.weibo.com/oauth2/access_token"
         let parameters = [
             "client_id":app_key,
@@ -35,17 +40,22 @@ class RYAccountViewModel: NSObject {
             //将 Anyobject对象转换为 字典格式数据
             guard let dict = result as? [String : AnyObject] else {
                 print("数据格式不合法")
+                //执行失败的回调
+                finished(isLogin: false)
                 return
             }
+            //执行成功的回调
+            finished(isLogin: true)
             //对象转字典成功后
             let account = RYUserAccount(dict: dict)
             //设置用户数据
-            self.loadUserInfo(account)
+            self.loadUserInfo(account,finished: finished)
             }) { (_ , error) -> Void in
+                finished(isLogin: false)
                 print(error)
         }
     }
-    private func loadUserInfo(account:RYUserAccount){
+    private func loadUserInfo(account:RYUserAccount,finished:(isLogin:Bool)->()){
         //用户数据接口
         let urlString = "https://api.weibo.com/2/users/show.json"
         //需要传递的参数
@@ -58,9 +68,12 @@ class RYAccountViewModel: NSObject {
             // MARK: - 将用户数据转化为字典
             guard let dict = result as? [String:AnyObject] else {
                 print("数据格式不和法")
+                //执行失败的回调
+                finished(isLogin: false)
                 return
             }
-            
+            //执行成功的回调
+            finished(isLogin: true)
             let name = dict["name"] as! String //OC NSString 转String
             let avatar_large = dict["avatar_large"] as! String
             //我们需要的用户信息就全部获取到
@@ -70,6 +83,7 @@ class RYAccountViewModel: NSObject {
             account.saveAccount()
             }) { (_ , error) -> Void in
                 print(error)
+                finished(isLogin: false)
         }
     }
     
