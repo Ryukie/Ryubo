@@ -137,7 +137,6 @@
 				4A5B88C91C5CA7D20043572D /* Discover */,
 				4A5B88CA1C5CA7D20043572D /* Home */,
 				4A5B88CC1C5CA7D20043572D /* Message */,
-				4A5B88CD1C5CA7D20043572D /* OAuth */,
 				4A5B88CE1C5CA7D20043572D /* Profile */,
 			);
 			path = View;
@@ -183,13 +182,6 @@
 				4A5B88DD1C5CB4520043572D /* RYMessageController.swift */,
 			);
 			path = Message;
-			sourceTree = "<group>";
-		};
-		4A5B88CD1C5CA7D20043572D /* OAuth */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = OAuth;
 			sourceTree = "<group>";
 		};
 		4A5B88CE1C5CA7D20043572D /* Profile */ = {

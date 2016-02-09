@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 class RYWelcomeController: UIViewController {
 
@@ -33,6 +34,7 @@ class RYWelcomeController: UIViewController {
         iv_headIcon.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view.snp_centerX)
             make.centerY.equalTo(self.view.snp_centerY)
+            make.size.equalTo(CGSizeMake(85, 85))
         }
         lb_welcomeWords.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(iv_headIcon.snp_bottom).offset(10)
@@ -43,6 +45,9 @@ class RYWelcomeController: UIViewController {
         
         lb_welcomeWords.alpha = 0
         //        print(iv_headIcon.frame)
+        
+        //显示用户头像
+        iv_headIcon.sd_setImageWithURL(RYAccountViewModel().userHeadIconURL, placeholderImage: UIImage(named: "avatar_default_big"))
     }
     //动画效果不推荐在viewDidLoad/loadView中执行动画
     //推荐在ViewDidAppear中执行动画效果
@@ -62,11 +67,16 @@ class RYWelcomeController: UIViewController {
         
         //使用自动布局 + 动画闭包 ====> 强制刷新视图
         let offset = -100
+        
+        self.iv_headIcon.snp_updateConstraints(closure: { (make) -> Void in
+            make.centerY.equalTo(self.view.snp_centerY).offset(offset)
+        })
         UIView.animateWithDuration(1.5, delay: 0, usingSpringWithDamping: 0.98, initialSpringVelocity: 9.8, options: [], animations: { () -> Void in
             
-            self.iv_headIcon.snp_updateConstraints(closure: { (make) -> Void in
-                make.centerY.equalTo(self.view.snp_centerY).offset(offset)
-            })
+//            self.iv_headIcon.snp_updateConstraints(closure: { (make) -> Void in
+//                make.centerY.equalTo(self.view.snp_centerY).offset(offset)
+//            })
+            
             //强制刷新视图
             self.view.layoutIfNeeded()
             }) { (_ ) -> Void in
@@ -82,6 +92,8 @@ class RYWelcomeController: UIViewController {
     private lazy var iv_backImageView : UIImageView = UIImageView(image: UIImage(named: "ad_background"))
     //用户头像
     private lazy var iv_headIcon : UIImageView = UIImageView(image: UIImage(named: "avatar_default_big"))
+//    private lazy var iv_headIcon : UIImageView = UIImageView(image: UIImage(named: ""))
+
     //欢迎语
     private lazy var lb_welcomeWords : UILabel = {
         let lb = UILabel()
