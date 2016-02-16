@@ -76,10 +76,19 @@ class RYWelcomeController: UIViewController {
             //强制刷新视图
             self.view.layoutIfNeeded()
             }) { (_ ) -> Void in
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
-                self.lb_welcomeWords.alpha = 1
-                self.showMainWeiboView()
-            })
+                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    self.lb_welcomeWords.alpha = 1
+                    }, completion: { (_ ) -> Void in
+                        NSThread.sleepForTimeInterval(1.0)
+                        self.showMainWeiboView()
+                })
+                
+                //下面这种会闪
+                
+//            UIView.animateWithDuration(0.25, animations: { () -> Void in
+//                self.lb_welcomeWords.alpha = 1
+//                self.showMainWeiboView()
+//            })
         }
     }
     

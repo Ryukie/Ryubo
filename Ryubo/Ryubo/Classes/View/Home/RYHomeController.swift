@@ -47,7 +47,21 @@ class RYHomeController: RYBasicVisitorTVC {
         }
         let parameters = ["access_token":token]
         manager.GET(dataURLString, parameters: parameters, progress: nil , success: { (_ , result) -> Void in
-                print(result)
+//                            print(result)
+            //将数据转化为字典结构
+            guard let dict = result as? [String:AnyObject] else {
+                print("数据结构错误")
+                return
+            }
+            guard let array = dict["statuses"] as? [[String : AnyObject]] else{
+                print("数据结构错误")
+                return
+            }
+            //获取必选的 字典数组
+            //便利数组 做字典转模型
+            for item in array {
+                print(item)
+            }
             }) { (_ , error ) -> Void in
                 print(error)
         }
