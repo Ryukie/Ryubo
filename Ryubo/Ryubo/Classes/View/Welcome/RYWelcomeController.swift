@@ -83,8 +83,15 @@ class RYWelcomeController: UIViewController {
 //                print("动画完毕")
             UIView.animateWithDuration(0.25, animations: { () -> Void in
                 self.lb_welcomeWords.alpha = 1
+                self.showMainWeiboView()
             })
         }
+    }
+    
+// MARK: - 动画完毕的时候发出通知,切换根控制器
+    private func showMainWeiboView () {
+        //发出通知
+        NSNotificationCenter.defaultCenter().postNotificationName(didLoginChangeToWeiboView, object: nil)
     }
     
 // MARK: - 懒加载控件
@@ -98,7 +105,7 @@ class RYWelcomeController: UIViewController {
     private lazy var lb_welcomeWords : UILabel = {
         let lb = UILabel()
         lb.text = RYAccountViewModel().userName! + " 欢迎回来"
-        lb.textColor = UIColor.blackColor()
+        lb.textColor = UIColor.grayColor()
         lb.textAlignment = .Center
         lb.font = UIFont.systemFontOfSize(16)
         lb.sizeToFit()

@@ -106,6 +106,8 @@ extension RYAuthController:UIWebViewDelegate {
                 //走到这里一定登录成功
                 SVProgressHUD.showSuccessWithStatus("登录成功")
                 self.dismissViewControllerAnimated(true, completion: nil)
+                //发送跳转通知
+                NSNotificationCenter.defaultCenter().postNotificationName(didLoginChangeToWeiboView, object: nil)
             })
             return false
         }

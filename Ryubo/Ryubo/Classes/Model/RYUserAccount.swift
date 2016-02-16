@@ -90,9 +90,9 @@ class RYUserAccount: NSObject,NSCoding {
 //            return account
             //并且 token 没有过期 最后才会返回一个 用户账户对象
             // NSDate() 获取当前日期
-            print(account)
-            print(account.expires_date)
-            print(NSData())
+//            print(account)
+//            print(account.expires_date)
+//            print(NSData())
             
             if account.expires_date?.compare(NSDate()) == NSComparisonResult.OrderedDescending {
                 return account

@@ -18,6 +18,7 @@ class RYAccountViewModel: NSObject {
     //用户是否登录的标记
     var userLogin:Bool {
         return userAccount?.access_token != nil //swift不存在非0即真注意
+//        return false
     }
     
     //从缓存获取token

@@ -14,20 +14,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-//        print(RYUserAccount.loadAccount())
-        
         setupGlobalNaviColor()
+        registerNotiCenter()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.backgroundColor = UIColor.blueColor()
-//        window?.rootViewController = RYTabBarController()
-        window?.rootViewController = RYWelcomeController()
+        window?.rootViewController = setRootViewController()
         window?.makeKeyAndVisible()
         return true
     }
-    func setupGlobalNaviColor () {
+// MARK: - 设置全局渲染色
+    private func setupGlobalNaviColor () {
         UINavigationBar.appearance().tintColor = UIColor.orangeColor()
         UITabBar.appearance().tintColor = UIColor.orangeColor()
+    }
+    
+    private func setRootViewController () -> UIViewController {
+        return RYAccountViewModel().userLogin ? RYWelcomeController() : RYTabBarController()
+    }
+// MARK: - 注册通知中心
+    private func registerNotiCenter () {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeRootViewDidReciveNoti", name: didLoginChangeToWeiboView, object: nil)
+    }
+// MARK: - 通知调用的方法,切换视图
+    @objc private func changeRootViewDidReciveNoti () {
+        print(__FUNCTION__)
+    }
+// MARK: - 移除通知,规范
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -54,7 +68,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-//let app_key = "4034367702"
-//let app_scret = "dc124878d20ce54c9b962ca22b3154cd"
-//let redirect_URL = "http://www.baidu.com"
-//let codeInURL = "17f81165d8b74790ff1e2d6c58a35975"
