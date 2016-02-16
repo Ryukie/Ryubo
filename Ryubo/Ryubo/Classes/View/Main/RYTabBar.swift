@@ -56,13 +56,13 @@ class RYTabBar: UITabBar {
     
     // MARK: - 懒加载加号按钮
     lazy var plusBtn:UIButton = {//不要在此处添加点击事件  放在控制器里添加  将加号设置为属性让控制器可以拿到
-        let button = UIButton()
+        let button = UIButton(backgroundImageName: "tabbar_compose_button", imageName: "tabbar_compose_icon_add")
         //设置背景图片
-        button.setBackgroundImage(UIImage(named: "tabbar_compose_button"), forState: .Normal)
-        button.setBackgroundImage(UIImage(named: "tabbar_compose_button_highlighted"), forState: .Highlighted)
+//        button.setBackgroundImage(UIImage(named: "tabbar_compose_button"), forState: .Normal)
+//        button.setBackgroundImage(UIImage(named: "tabbar_compose_button_highlighted"), forState: .Highlighted)
         //设置图片
-        button.setImage(UIImage(named: "tabbar_compose_icon_add"), forState: .Normal)
-        button.setImage(UIImage(named: "tabbar_compose_icon_add_highlighted"), forState: .Highlighted)
+//        button.setImage(UIImage(named: "tabbar_compose_icon_add"), forState: .Normal)
+//        button.setImage(UIImage(named: "tabbar_compose_icon_add_highlighted"), forState: .Highlighted)
 //        self.addSubview(button)
         return button
     }()

@@ -72,15 +72,10 @@ class RYWelcomeController: UIViewController {
             make.centerY.equalTo(self.view.snp_centerY).offset(offset)
         })
         UIView.animateWithDuration(1.5, delay: 0, usingSpringWithDamping: 0.98, initialSpringVelocity: 9.8, options: [], animations: { () -> Void in
-            
-//            self.iv_headIcon.snp_updateConstraints(closure: { (make) -> Void in
-//                make.centerY.equalTo(self.view.snp_centerY).offset(offset)
-//            })
-            
+                        
             //强制刷新视图
             self.view.layoutIfNeeded()
             }) { (_ ) -> Void in
-//                print("动画完毕")
             UIView.animateWithDuration(0.25, animations: { () -> Void in
                 self.lb_welcomeWords.alpha = 1
                 self.showMainWeiboView()
@@ -99,17 +94,7 @@ class RYWelcomeController: UIViewController {
     private lazy var iv_backImageView : UIImageView = UIImageView(image: UIImage(named: "ad_background"))
     //用户头像
     private lazy var iv_headIcon : UIImageView = UIImageView(image: UIImage(named: "avatar_default_big"))
-//    private lazy var iv_headIcon : UIImageView = UIImageView(image: UIImage(named: ""))
-
     //欢迎语
-    private lazy var lb_welcomeWords : UILabel = {
-        let lb = UILabel()
-        lb.text = RYAccountViewModel().userName! + " 欢迎回来"
-        lb.textColor = UIColor.grayColor()
-        lb.textAlignment = .Center
-        lb.font = UIFont.systemFontOfSize(16)
-        lb.sizeToFit()
-        return lb
-    }()
+    private lazy var lb_welcomeWords : UILabel = UILabel(text: RYAccountViewModel().userName! + " 欢迎回来", fontSize: 16, textColor: UIColor.grayColor())
     
 }

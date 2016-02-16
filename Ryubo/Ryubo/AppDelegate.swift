@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: - 通知调用的方法,切换视图
     @objc private func changeRootViewDidReciveNoti () {
 //        print(__FUNCTION__)
+        window?.rootViewController = RYTabBarController()
     }
 // MARK: - 移除通知,规范
     deinit {

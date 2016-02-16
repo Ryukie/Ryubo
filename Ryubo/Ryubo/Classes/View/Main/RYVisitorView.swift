@@ -109,6 +109,7 @@ class RYVisitorView: UIView {
         lb_notiText.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(iv_circleIcon)
             make.top.equalTo(iv_circleIcon.snp_bottom).offset(16)
+            make.height.equalTo(40)
             make.width.equalTo(225)
         }
         bt_toLogin.snp_makeConstraints { (make) -> Void in
@@ -136,41 +137,19 @@ class RYVisitorView: UIView {
     //大房子图片
     lazy var iv_bigHouse:UIImageView = UIImageView(image: UIImage(named: "visitordiscover_feed_image_house"))
     //提示文案
-    lazy var lb_notiText:UILabel = {
-        let l = UILabel()
-        l.font = UIFont.systemFontOfSize(14)
-        l.text = "注册登陆开启新世界的大门哦~"
-        l.textColor = UIColor.darkGrayColor()
-        //对齐方式
-        l.textAlignment = .Center
-        l.numberOfLines = 0
-        //设置label大小
-        l.sizeToFit()
-        return l
-    }()
+    //通过类方法实现
+//    lazy var lb_notiText:UILabel = UILabel.label("注册登陆开启新世界的大门哦~", fontSize: 14, textColor: UIColor.darkGrayColor())
+    //通过便利构造函数
+    lazy var lb_notiText:UILabel = UILabel(text: "注册登陆开启新世界的大门哦~", fontSize: 14, textColor: UIColor.darkGrayColor())
+
     //登陆按钮
     lazy var bt_toLogin:UIButton = {
-        let b = UIButton()
-        b.setTitle("Login", forState: .Normal)
-        b.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
-        b.titleLabel?.font = UIFont.systemFontOfSize(18)
-        let image = UIImage(named: "common_button_white_disable")!
-        let edg:UIEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        b.setBackgroundImage(image.resizableImageWithCapInsets(edg), forState: .Normal)
+        let b = UIButton(backgroundImageName: "common_button_white_disable", titleText: "Login", textFont: 18, textColor: UIColor.darkGrayColor())
         return b
     }()
     //注册按钮
     lazy var bt_toRegister:UIButton = {
-        let b = UIButton()
-        b.setTitle("Register", forState: .Normal)
-        b.setTitleColor(UIColor.orangeColor(), forState: .Normal)
-        b.titleLabel?.font = UIFont.systemFontOfSize(18)
-        
-        let image = UIImage(named: "common_button_white_disable")!
-//        let w = Int(image.size.width * 0.5)
-//        let h = Int(image.size.height * 0.5)
-        let edg:UIEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        b.setBackgroundImage(image.resizableImageWithCapInsets(edg), forState: .Normal)
+        let b = UIButton(backgroundImageName: "common_button_white_disable", titleText: "Register", textFont: 18, textColor: UIColor.orangeColor())
         return b
     }()
     //背景
