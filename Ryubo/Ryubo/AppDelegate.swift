@@ -29,16 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setRootViewController () -> UIViewController {
-        return RYAccountViewModel().userLogin ? RYWelcomeController() : RYTabBarController()
+        return RYAccountViewModel.sharedAccountViewModel.userLogin ? RYWelcomeController() : RYTabBarController()
     }
 // MARK: - 注册通知中心
     private func registerNotiCenter () {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeRootViewDidReciveNoti", name: didLoginChangeToWeiboView, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeRootViewDidReciveNoti:", name: didLoginChangeToWeiboView, object: nil)
     }
 // MARK: - 通知调用的方法,切换视图
-    @objc private func changeRootViewDidReciveNoti () {
+    @objc private func changeRootViewDidReciveNoti (noti:NSNotification) {
 //        print(__FUNCTION__)
-        window?.rootViewController = RYTabBarController()
+        // MARK: - 需要实现登陆成功的话先切换到欢迎界面,需要判断
+        window?.rootViewController = (noti.object != nil ? RYTabBarController() : RYWelcomeController())
     }
 // MARK: - 移除通知,规范
     deinit {

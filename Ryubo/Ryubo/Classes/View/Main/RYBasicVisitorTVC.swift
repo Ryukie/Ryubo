@@ -16,7 +16,7 @@ class RYBasicVisitorTVC: UITableViewController,RYVisitorViewDelegate {
 //    var userLogin = true
 //    var userLogin = false
 //    var userLogin = RYUserAccount.loadAccount() != nil
-    var userLogin = RYAccountViewModel().userLogin
+    var userLogin = RYAccountViewModel.sharedAccountViewModel.userLogin //通过是否取到token来判断是否登陆成功
 
     
 // MARK: - 为了自定义不同的访客视图需要将访客视图设置为属性
@@ -27,6 +27,7 @@ class RYBasicVisitorTVC: UITableViewController,RYVisitorViewDelegate {
     //2. 准备视图层次结构 在UIViewController 中 会将view 准备出来
     //3. 在super.loadView之前 view没有被创建出来(nil) 追踪view 会造成递归调用
     override func loadView() {
+//        print(RYAccountViewModel.sharedAccountViewModel.userAccount)
         userLogin ? super.loadView() : setupVisitorView()
     }
     // MARK: - 加载访客视图

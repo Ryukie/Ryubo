@@ -10,15 +10,12 @@ import UIKit
 import SVProgressHUD
 
 class RYStatusViewModel: NSObject {
-    
-    
-    
     // MARK: - 加载首页数据
     func loadHomeData(withSetStatuses:([RYStatus])->()) {
         let dataURLString = "https://api.weibo.com/2/statuses/home_timeline.json"
         //获取网络请求管理对象
         let manager = RYNetworkTool.sharedNetTool
-        guard let token = RYAccountViewModel().token else {
+        guard let token = RYAccountViewModel.sharedAccountViewModel.token else {
             print("用户未登录")
             SVProgressHUD.showErrorWithStatus("请登录")
             return

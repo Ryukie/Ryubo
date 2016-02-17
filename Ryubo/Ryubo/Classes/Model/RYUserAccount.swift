@@ -78,7 +78,7 @@ class RYUserAccount: NSObject,NSCoding {
         //拼接路径 在XCode 7.0正式版中 被搞丢了
         //stringByAppendingbyPathCommant
         let path = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).last! as NSString).stringByAppendingPathComponent("account.plist")
-        print(path)
+//        print(path)
         //将对象保存到沙盒路径中
         NSKeyedArchiver.archiveRootObject(self, toFile: path)
     }
@@ -93,7 +93,7 @@ class RYUserAccount: NSObject,NSCoding {
 //            print(account)
 //            print(account.expires_date)
 //            print(NSData())
-            
+            //通过判断升降序   来判断时间是否过期
             if account.expires_date?.compare(NSDate()) == NSComparisonResult.OrderedDescending {
                 return account
             }

@@ -47,7 +47,7 @@ class RYWelcomeController: UIViewController {
         //        print(iv_headIcon.frame)
         
         //显示用户头像
-        iv_headIcon.sd_setImageWithURL(RYAccountViewModel().userHeadIconURL, placeholderImage: UIImage(named: "avatar_default_big"))
+        iv_headIcon.sd_setImageWithURL(RYAccountViewModel.sharedAccountViewModel.userHeadIconURL, placeholderImage: UIImage(named: "avatar_default_big"))
     }
     //动画效果不推荐在viewDidLoad/loadView中执行动画
     //推荐在ViewDidAppear中执行动画效果
@@ -95,7 +95,7 @@ class RYWelcomeController: UIViewController {
 // MARK: - 动画完毕的时候发出通知,切换根控制器
     private func showMainWeiboView () {
         //发出通知
-        NSNotificationCenter.defaultCenter().postNotificationName(didLoginChangeToWeiboView, object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(didLoginChangeToWeiboView, object: "FromOAuth")
     }
     
 // MARK: - 懒加载控件
@@ -104,6 +104,6 @@ class RYWelcomeController: UIViewController {
     //用户头像
     private lazy var iv_headIcon : UIImageView = UIImageView(image: UIImage(named: "avatar_default_big"))
     //欢迎语
-    private lazy var lb_welcomeWords : UILabel = UILabel(text: RYAccountViewModel().userName! + " 欢迎回来", fontSize: 16, textColor: UIColor.grayColor())
+    private lazy var lb_welcomeWords : UILabel = UILabel(text: RYAccountViewModel.sharedAccountViewModel.userName! + " 欢迎回来", fontSize: 16, textColor: UIColor.grayColor())
     
 }

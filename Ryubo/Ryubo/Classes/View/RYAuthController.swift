@@ -11,7 +11,7 @@ import SVProgressHUD
 import AFNetworking
 
 class RYAuthController: UIViewController {
-
+    
     //用啦替换Views的webView
     let authView = UIWebView()
 // MARK: - 用WEBView替换跟视图
@@ -50,7 +50,17 @@ class RYAuthController: UIViewController {
     @objc private func clickCloseBtn () {
         dismissViewControllerAnimated(true, completion: nil)
     }
-
+// MARK: - 网络不加的时候切出登录授权页面圈圈还在转
+    deinit {
+//        print(__FUNCTION__)
+//        SVProgressHUD.dismiss()
+        //在这里执行比在视图即将消失的时候有一定延时
+    }
+    override func viewWillDisappear(animated: Bool) {
+//        print(__FUNCTION__)
+        SVProgressHUD.dismiss()
+    }
+    
 }
 
 
@@ -69,6 +79,7 @@ extension RYAuthController:UIWebViewDelegate {
     }
     
     //非常重要的协议方法
+    //每次加载页面都会重新发起一个请求
     //通常协议方法 返回值 为 bool类型  返回 yes 通常控件可以正常运行
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         
@@ -96,7 +107,7 @@ extension RYAuthController:UIWebViewDelegate {
             
 // MARK: - 获取授权token
 //            getAccessToken(code)
-            RYAccountViewModel().getAccessToken(code, finished: { (isLogin) -> () in
+            RYAccountViewModel.sharedAccountViewModel.getAccessToken(code, finished: { (isLogin) -> () in
                 if isLogin == false {
                     print("用户登录失败")
                     //HUD 提示用户 登录失败
@@ -115,5 +126,5 @@ extension RYAuthController:UIWebViewDelegate {
         }
         return true
     }
-
+    
 }

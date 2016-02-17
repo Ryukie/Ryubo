@@ -17,7 +17,11 @@ class RYHomeController: RYBasicVisitorTVC {
     private lazy var statuses = [RYStatus]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        visitorView?.setVisitorViewWithInfo(nil, titleText: "关注一些人，你将打开新世界的大门")
+//        print(userLogin)
+        guard userLogin == true else {
+            visitorView?.setVisitorViewWithInfo(nil, titleText: "关注一些人，你将打开新世界的大门")
+            return
+        }
         prepareTableView()
         RYStatusViewModel().loadHomeData { (tempArr) -> () in
             self.statuses = tempArr
