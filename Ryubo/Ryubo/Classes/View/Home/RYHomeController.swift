@@ -32,10 +32,18 @@ class RYHomeController: RYBasicVisitorTVC {
     //准备tableView
     private func prepareTableView() {
         self.tableView.registerClass(RYHomeCell.self, forCellReuseIdentifier: HomeCellId)
-        // MARK: - 初步设置行高
         self.tableView.rowHeight = 200
+        autoRowHeight()
     }
     
+    private func autoRowHeight () {
+        //1.设置行高为自动计算行高
+        //2.设置预估行高
+        //3.给tableView的cell的容器视图设置一个 自上而下的约束
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        //设置预估行高
+        self.tableView.estimatedRowHeight = 300
+    }
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -47,8 +55,7 @@ class RYHomeController: RYBasicVisitorTVC {
         //手写代码 必须手动注册cell
         let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath) as! RYHomeCell
         cell.status = statuses[indexPath.row]
+//        print(cell.contentView.frame)
         return cell
     }
-
-
 }

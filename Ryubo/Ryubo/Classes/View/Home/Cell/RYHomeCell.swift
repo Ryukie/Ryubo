@@ -18,6 +18,7 @@ class RYHomeCell: UITableViewCell {
     //重写构造方法
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setUpSubviews()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -26,12 +27,10 @@ class RYHomeCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        setUpSubviews()
+//        setUpSubviews()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -39,7 +38,7 @@ class RYHomeCell: UITableViewCell {
         
     }
     //原创微博使用的view
-   private lazy var originalWeiboView : RYOriginalWeibo = RYOriginalWeibo()
+    private lazy var originalWeiboView : RYOriginalWeibo = RYOriginalWeibo()
     //底部转发评论赞视图
     private lazy var bottomView : RYBottomView = RYBottomView()
 }
@@ -52,14 +51,17 @@ extension RYHomeCell {
         contentView.addSubview(originalWeiboView)
         contentView.addSubview(bottomView)
         originalWeiboView.snp_makeConstraints { (make) -> Void in
-            make.top.left.right.equalTo(self)
+            make.top.left.right.equalTo(contentView)
         }
         bottomView.snp_makeConstraints { (make) -> Void in
-            make.left.right.equalTo(self)
+            make.left.right.equalTo(contentView)
             make.top.equalTo(originalWeiboView.snp_bottom)
             make.height.equalTo(35)
         }
+        //给contenView设置约束条件
+        contentView.snp_makeConstraints { (make) -> Void in
+            make.left.right.top.equalTo(self)
+            make.bottom.equalTo(bottomView.snp_bottom)
+        }
     }
-
-    
 }

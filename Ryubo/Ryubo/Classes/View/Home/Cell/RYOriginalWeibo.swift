@@ -33,11 +33,6 @@ class RYOriginalWeibo: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
     //懒加载所有的子视图
     private lazy var iv_headIcon: UIImageView = UIImageView(image: UIImage(named: "avatar_default_big"))
     private lazy var lb_name: UILabel = UILabel(text: "上铺老王", fontSize: 14, textColor: col_orange)
@@ -111,7 +106,6 @@ extension RYOriginalWeibo {
         }
         
 // MARK: - 设置自动设置行高
-        //设置一个非常关键的属性 就可以实现 自动设置VIew高度
         self.snp_makeConstraints { (make) -> Void in
             make.bottom.equalTo(lb_content.snp_bottom).offset(margin)
         }
