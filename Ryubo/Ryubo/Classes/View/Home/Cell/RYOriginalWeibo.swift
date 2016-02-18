@@ -55,6 +55,7 @@ class RYOriginalWeibo: UIView {
     private lazy var lb_content:UILabel = UILabel(text: "你成功的引起了我的注意", fontSize: 14, textColor: UIColor.darkGrayColor())
 }
 
+
 // MARK: - 布局子控件
 extension RYOriginalWeibo {
     

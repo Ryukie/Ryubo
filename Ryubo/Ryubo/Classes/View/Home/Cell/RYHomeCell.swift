@@ -53,13 +53,11 @@ extension RYHomeCell {
         contentView.addSubview(bottomView)
         originalWeiboView.snp_makeConstraints { (make) -> Void in
             make.top.left.right.equalTo(self)
-//            make.height.equalTo(80)
         }
         bottomView.snp_makeConstraints { (make) -> Void in
             make.left.right.equalTo(self)
             make.top.equalTo(originalWeiboView.snp_bottom)
             make.height.equalTo(35)
-//            make.bottom.equalTo(self).offset(-margin)
         }
     }
 
