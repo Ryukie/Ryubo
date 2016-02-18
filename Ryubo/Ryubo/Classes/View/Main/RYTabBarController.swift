@@ -14,7 +14,7 @@ class RYTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self)
+//        print(self)
 //        self.view.backgroundColor = UIColor.redColor()
         replaceTabBar()
         addNaviControllers()

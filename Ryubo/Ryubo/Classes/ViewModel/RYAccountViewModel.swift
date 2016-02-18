@@ -92,11 +92,11 @@ class RYAccountViewModel: NSObject {
             //我们需要的用户信息就全部获取到
             account.name = name
             account.avatar_large = avatar_large
-            print(account)
+//            print(account)
             account.saveAccount()
 // MARK: - 需要更新用户属性否则切换视图的时候还是显示的是未登录的首页
             self.userAccount = account
-            print(self.userLogin)
+//            print(self.userLogin)
             
             }) { (_ , error) -> Void in
                 print(error)
