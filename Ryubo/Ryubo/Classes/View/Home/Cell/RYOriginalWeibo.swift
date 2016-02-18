@@ -65,6 +65,7 @@ extension RYOriginalWeibo {
         addSubview(iv_verified)
         addSubview(lb_content)
         lb_content.preferredMaxLayoutWidth = scrWidth - 2*margin
+        lb_content.textAlignment = .Left
         addSubview(lb_name)
         addSubview(lb_source)
         addSubview(lb_time)
@@ -106,6 +107,12 @@ extension RYOriginalWeibo {
         lb_content.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(iv_headIcon.snp_left)
             make.top.equalTo(iv_headIcon.snp_bottom).offset(margin)
+        }
+        
+// MARK: - 设置自动设置行高
+        //设置一个非常关键的属性 就可以实现 自动设置VIew高度
+        self.snp_makeConstraints { (make) -> Void in
+            make.bottom.equalTo(lb_content.snp_bottom).offset(margin)
         }
         
     }

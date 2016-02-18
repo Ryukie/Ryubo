@@ -40,6 +40,8 @@ class RYHomeCell: UITableViewCell {
     }
     //原创微博使用的view
    private lazy var originalWeiboView : RYOriginalWeibo = RYOriginalWeibo()
+    //底部转发评论赞视图
+    private lazy var bottomView : RYBottomView = RYBottomView()
 }
 // MARK: - 界面设置
 extension RYHomeCell {
@@ -48,11 +50,16 @@ extension RYHomeCell {
         self.backgroundColor = UIColor.blueColor()
         //加载原创微博的view
         contentView.addSubview(originalWeiboView)
-        
+        contentView.addSubview(bottomView)
         originalWeiboView.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(self).offset(margin)
+            make.top.left.right.equalTo(self)
+//            make.height.equalTo(80)
+        }
+        bottomView.snp_makeConstraints { (make) -> Void in
             make.left.right.equalTo(self)
-            make.height.equalTo(80)
+            make.top.equalTo(originalWeiboView.snp_bottom)
+            make.height.equalTo(35)
+//            make.bottom.equalTo(self).offset(-margin)
         }
     }
 

@@ -33,7 +33,7 @@ class RYHomeController: RYBasicVisitorTVC {
     private func prepareTableView() {
         self.tableView.registerClass(RYHomeCell.self, forCellReuseIdentifier: HomeCellId)
         // MARK: - 初步设置行高
-        self.tableView.rowHeight = 100
+        self.tableView.rowHeight = 200
     }
     
     // MARK: - Table view data source

@@ -144,12 +144,12 @@ class RYVisitorView: UIView {
 
     //登陆按钮
     lazy var bt_toLogin:UIButton = {
-        let b = UIButton(backgroundImageName: "common_button_white_disable", titleText: "Login", textFont: 18, textColor: UIColor.darkGrayColor())
+        let b = UIButton(backgroundImageName: "common_button_white_disable", titleText: "Login", textFont: 18, textColor: UIColor.darkGrayColor(),imageName: nil)
         return b
     }()
     //注册按钮
     lazy var bt_toRegister:UIButton = {
-        let b = UIButton(backgroundImageName: "common_button_white_disable", titleText: "Register", textFont: 18, textColor: UIColor.orangeColor())
+        let b = UIButton(backgroundImageName: "common_button_white_disable", titleText: "Register", textFont: 18, textColor: UIColor.orangeColor(),imageName: nil)
         return b
     }()
     //背景

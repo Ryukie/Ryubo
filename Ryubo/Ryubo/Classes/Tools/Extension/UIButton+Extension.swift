@@ -21,20 +21,26 @@ extension UIButton {
         sizeToFit()
     }
     /**
-    *  含有背景图即文案-登录注册按钮
+    *  含有背景图及文案-登录注册按钮
     */
-    convenience init (backgroundImageName:String,titleText:String,textFont:CGFloat,textColor:UIColor) {
+    convenience init (backgroundImageName:String?,titleText:String,textFont:CGFloat,textColor:UIColor,imageName:String?) {
         self.init()
         
-        let image = UIImage(named: backgroundImageName)!
-        let edg:UIEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        setBackgroundImage(image.resizableImageWithCapInsets(edg), forState: .Normal)
+        if backgroundImageName != nil {
+            let image = UIImage(named: backgroundImageName!)!
+            let edg:UIEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+            setBackgroundImage(image.resizableImageWithCapInsets(edg), forState: .Normal)
+        }
+        if imageName != nil {
+            setImage(UIImage(named: imageName!), forState: .Normal)
+        }
         setTitle(titleText, forState: .Normal)
         setTitleColor(textColor, forState: .Normal)
         titleLabel?.font = UIFont.systemFontOfSize(textFont)
         titleLabel?.textAlignment = .Center
         sizeToFit()
     }
+
     
     
     
