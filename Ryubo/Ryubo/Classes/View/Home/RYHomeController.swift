@@ -31,7 +31,7 @@ class RYHomeController: RYBasicVisitorTVC {
     
     //准备tableView
     private func prepareTableView() {
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: HomeCellId)
+        self.tableView.registerClass(RYHomeCell.self, forCellReuseIdentifier: HomeCellId)
     }
     
     // MARK: - Table view data source
@@ -46,6 +46,7 @@ class RYHomeController: RYBasicVisitorTVC {
         let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath)
         //显示文案
         cell.textLabel?.text = self.statuses[indexPath.row].user?.name
+//        print(cell)
         return cell
     }
 
