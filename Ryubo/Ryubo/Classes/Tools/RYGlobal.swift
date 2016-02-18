@@ -23,3 +23,8 @@ let netErrorText = "网络君正在睡觉中,请稍后再试..."
 
 ///自动布局margin
 let margin : CGFloat = 10.0
+///颜色
+let col_darkGray = UIColor.darkGrayColor()
+let col_lightGray = UIColor.lightGrayColor()
+let col_white = UIColor.whiteColor()
+let col_orange = UIColor.orangeColor()

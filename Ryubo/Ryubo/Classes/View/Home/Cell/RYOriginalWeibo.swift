@@ -28,20 +28,77 @@ class RYOriginalWeibo: UIView {
         setAutoLayoutForSubViews()
     }
     
-    private lazy var lb_UPerName : UILabel = UILabel(text: "上铺老王", fontSize: 14, textColor: UIColor.darkGrayColor())
+    //懒加载所有的子视图
+    private lazy var iv_headIcon: UIImageView = UIImageView(image: UIImage(named: "avatar_default_big"))
+    private lazy var lb_name: UILabel = UILabel(text: "上铺老王", fontSize: 14, textColor: col_orange)
+    //用户等级
+    private lazy var iv_mbRank: UIImageView = UIImageView(image: UIImage(named: "common_icon_membership"))
+    
+    //微博时间
+    private lazy var lb_time:UILabel = UILabel(text: "22:22", fontSize: 10, textColor: UIColor.lightGrayColor())
+    
+    //微博来源
+    private lazy var lb_source:UILabel = UILabel(text: "摔坏一角的iPhone7sPlus", fontSize: 10, textColor: UIColor.lightGrayColor())
+    //微博认证类型
+    private lazy var iv_verified: UIImageView = UIImageView(image: UIImage(named: "avatar_vip"))
+    //微博正文
+    private lazy var lb_content:UILabel = UILabel(text: "你成功的引起了我的注意", fontSize: 14, textColor: UIColor.darkGrayColor())
 }
-// MARK: - 设置子控件
+
+// MARK: - 布局子控件
 extension RYOriginalWeibo {
     
     private func setUpSubView () {
         self.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        addSubview(lb_UPerName)
+        addSubview(iv_headIcon)
+        addSubview(iv_mbRank)
+        addSubview(iv_verified)
+        addSubview(lb_content)
+        addSubview(lb_name)
+        addSubview(lb_source)
+        addSubview(lb_time)
+        
+        //设置约束
+        iv_headIcon.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(self.snp_top).offset(margin)
+            make.left.equalTo(self.snp_left).offset(margin)
+            make.size.equalTo(CGSize(width: 35, height: 35))
+            
+        }
+        
+        lb_name.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(iv_headIcon.snp_top)
+            make.left.equalTo(iv_headIcon.snp_right).offset(margin)
+        }
+        
+        iv_mbRank.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(lb_name.snp_top)
+            make.left.equalTo(lb_name.snp_right).offset(margin)
+        }
+        
+        lb_time.snp_makeConstraints { (make) -> Void in
+            make.left.equalTo(iv_headIcon.snp_right).offset(margin)
+            make.bottom.equalTo(iv_headIcon.snp_bottom)
+            
+        }
+        
+        lb_source.snp_makeConstraints { (make) -> Void in
+            make.left.equalTo(lb_time.snp_right).offset(margin)
+            make.bottom.equalTo(lb_time.snp_bottom)
+        }
+        
+        iv_verified.snp_makeConstraints { (make) -> Void in
+            make.centerX.equalTo(iv_headIcon.snp_right)
+            make.centerY.equalTo(iv_headIcon.snp_bottom)
+        }
+        
+        lb_content.snp_makeConstraints { (make) -> Void in
+            make.left.equalTo(iv_headIcon.snp_left)
+            make.top.equalTo(iv_headIcon.snp_bottom).offset(margin)
+        }
+        
     }
     private func setAutoLayoutForSubViews () {
-        lb_UPerName.snp_makeConstraints { (make) -> Void in
-            make.centerY.equalTo(self)
-            make.left.equalTo(self.snp_left)
-            make.width.equalTo(100)
-        }
+        
     }
 }
