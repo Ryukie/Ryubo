@@ -9,6 +9,12 @@
 import UIKit
 
 class RYHomeCell: UITableViewCell {
+    var status : RYStatus? {
+        didSet {
+            //一旦设置了微博数据模型就为View赋值
+            originalWeiboView.status = status
+        }
+    }
     //重写构造方法
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

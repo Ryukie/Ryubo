@@ -45,7 +45,8 @@ class RYHomeController: RYBasicVisitorTVC {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //手写代码 必须手动注册cell
-        let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath) as! RYHomeCell
+        cell.status = statuses[indexPath.row]
         //显示文案
 //        cell.textLabel?.text = self.statuses[indexPath.row].user?.name
 //        print(cell)

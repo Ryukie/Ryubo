@@ -12,7 +12,17 @@ import SnapKit
 class RYOriginalWeibo: UIView {
 
     //weibo数据模型
-    var status : RYStatus?
+    var status : RYStatus? {
+        didSet {
+            iv_headIcon.sd_setImageWithURL(status?.user?.headImageURL, placeholderImage: UIImage(named: "avatar_default_big"))
+            lb_name.text = status?.user?.name
+            iv_mbRank.image = status?.user?.mbrank_image
+            iv_verified.image = status?.user?.verified_type_image
+            lb_time.text = status?.created_at
+            lb_source.text = status?.source
+            lb_content.text = status?.text
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +35,7 @@ class RYOriginalWeibo: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setAutoLayoutForSubViews()
+        
     }
     
     //懒加载所有的子视图
@@ -54,6 +64,7 @@ extension RYOriginalWeibo {
         addSubview(iv_mbRank)
         addSubview(iv_verified)
         addSubview(lb_content)
+        lb_content.preferredMaxLayoutWidth = scrWidth - 2*margin
         addSubview(lb_name)
         addSubview(lb_source)
         addSubview(lb_time)
@@ -96,9 +107,6 @@ extension RYOriginalWeibo {
             make.left.equalTo(iv_headIcon.snp_left)
             make.top.equalTo(iv_headIcon.snp_bottom).offset(margin)
         }
-        
-    }
-    private func setAutoLayoutForSubViews () {
         
     }
 }

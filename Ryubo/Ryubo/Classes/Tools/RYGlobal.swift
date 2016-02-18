@@ -28,3 +28,9 @@ let col_darkGray = UIColor.darkGrayColor()
 let col_lightGray = UIColor.lightGrayColor()
 let col_white = UIColor.whiteColor()
 let col_orange = UIColor.orangeColor()
+
+/**
+*  屏幕尺寸
+*/
+let scrWidth = UIScreen.mainScreen().bounds.size.width
+let scrHeight = UIScreen.mainScreen().bounds.size.height
