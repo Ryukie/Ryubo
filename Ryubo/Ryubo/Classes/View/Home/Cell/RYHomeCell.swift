@@ -13,7 +13,7 @@ class RYHomeCell: UITableViewCell {
         didSet {
             
             setUpSubviews()
-            
+//            layoutIfNeeded()
             //一旦设置了微博数据模型就为View赋值
             originalWeiboView.status = status
 //            print(__FUNCTION__)
@@ -67,7 +67,7 @@ extension RYHomeCell {
         
 //        print(isOriginalPic)
         
-        self.backgroundColor = UIColor.blueColor()
+        self.backgroundColor = col_white95Gray
         contentView.addSubview(originalWeiboView)
         //判断是否存在原创微博配图
         //加载配图视图
@@ -83,9 +83,9 @@ extension RYHomeCell {
         //不使用更新约束的话  重用的时候会产生多余的约束
         if isOriginalPic==false {
             picsView.snp_remakeConstraints(closure: { (make) -> Void in
-                make.left.right.equalTo(contentView)
+                make.left.equalTo(contentView)
                 make.top.equalTo(originalWeiboView.snp_bottom)
-                make.height.equalTo(0)
+                make.size.equalTo(CGSizeZero)
             })
             
             bottomView.snp_remakeConstraints(closure: { (make) -> Void in
@@ -95,9 +95,9 @@ extension RYHomeCell {
             })
         }else {
             picsView.snp_remakeConstraints(closure: { (make) -> Void in
-                make.left.right.equalTo(contentView)
+                make.left.equalTo(contentView)
                 make.top.equalTo(originalWeiboView.snp_bottom)
-                make.height.equalTo(500)
+                make.size.equalTo(CGSize(width: 100, height: 100))
             })
             
             bottomView.snp_remakeConstraints { (make) -> Void in

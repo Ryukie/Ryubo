@@ -24,24 +24,22 @@ class RYPicsView: UICollectionView {
         }
     }
     private var ivs_pic : [UIImageView]?
+    
     private func creatAImageView (picURL:NSURL) -> UIImageView {
         let iv = UIImageView()
         return iv
     }
+    
     private var flowLayout : UICollectionViewFlowLayout?
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         flowLayout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
         flowLayout!.minimumInteritemSpacing = picCellMargin
         flowLayout!.minimumLineSpacing = picCellMargin
-        let insert = UIEdgeInsets(top: picCellMargin, left: picCellMargin, bottom: picCellMargin, right: picCellMargin)
-        flowLayout?.sectionInset = insert
-//        flowLayout!.itemSize = CGSizeZero
         super.init(frame: frame, collectionViewLayout: flowLayout!)
         scrollEnabled = false
         backgroundColor = col_white95Gray
         dataSource = self
-        
         registerClass(RYPictureCell.self, forCellWithReuseIdentifier: itemID)
     }
 
@@ -56,35 +54,38 @@ extension RYPicsView {
         // 1 -> 等比例"全屏"
         // 2~4 -> 四宫格
         // 5~9 -> 九宫格
-//        print(picURLs?.count)
-        if picURLs?.count == 1 {
+        let num  = picURLs?.count ?? 0
+        if num == 1 {
             setOnePicView()
-//            setNinePicView()
+            return
         }
-        if (picURLs?.count>=2 && picURLs?.count<=4) {
+        if num == 4 {
             setFourPicView()
-//            setNinePicView()
+            return
         }
-        if (picURLs?.count>=5 && picURLs?.count<=9) {
-            setNinePicView()
+        let width = (scrWidth - picCellMargin*4)/3
+        let row = CGFloat((num-1)/3 + 1)
+        flowLayout!.itemSize = CGSize(width:width, height: width)
+        self.snp_updateConstraints { (make) -> Void in
+            make.size.equalTo(CGSize(width: scrWidth, height: width*row + picCellMargin*(row-1)))
         }
+        
     }
     private func setOnePicView () {
-//        print(__FUNCTION__)
-        flowLayout!.itemSize = CGSizeMake(180, 120)//长 < 宽
-//        flowLayout?.itemSize = CGSizeMake(120, 180)//长 < 宽
+        flowLayout!.itemSize = CGSize(width:180, height: 120)//长 < 宽
+        self.snp_updateConstraints { (make) -> Void in
+            make.size.equalTo(CGSize(width: scrWidth, height: 120))
+        }
     }
     private func setFourPicView () {
-//        print(__FUNCTION__)
         let width = (scrWidth - picCellMargin*3)/2
-        flowLayout!.itemSize = CGSizeMake(width,width)
+        flowLayout!.itemSize = CGSize(width:width, height: width)
+        self.snp_updateConstraints { (make) -> Void in
+            make.size.equalTo(CGSize(width: scrWidth, height: width*2 + picCellMargin*3))
+        }
     }
     private func setNinePicView () {
-//        print(__FUNCTION__)
-        let width = (scrWidth - picCellMargin*4)/3
-        flowLayout!.itemSize = CGSizeMake(width, width)
     }
-    
 }
 // MARK: - 数据源方法
 extension RYPicsView:UICollectionViewDataSource {
@@ -94,8 +95,8 @@ extension RYPicsView:UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let item = collectionView.dequeueReusableCellWithReuseIdentifier(itemID, forIndexPath: indexPath) as! RYPictureCell
         item.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        item.imageURL = picURLs![indexPath.item]
         return item
     }
-    
 }
 

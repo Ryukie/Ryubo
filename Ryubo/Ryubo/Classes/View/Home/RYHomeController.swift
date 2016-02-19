@@ -58,7 +58,6 @@ class RYHomeController: RYBasicVisitorTVC {
         //手写代码 必须手动注册cell
         let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath) as! RYHomeCell
         cell.status = statuses[indexPath.row]
-//        print(cell.contentView.frame)
         return cell
     }
 }
