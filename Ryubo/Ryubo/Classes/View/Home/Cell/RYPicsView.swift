@@ -46,6 +46,7 @@ class RYPicsView: UICollectionView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 // MARK: - 布局子空间
 extension RYPicsView {
@@ -89,6 +90,10 @@ extension RYPicsView {
 }
 // MARK: - 数据源方法
 extension RYPicsView:UICollectionViewDataSource {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        collectionView.collectionViewLayout.invalidateLayout()
+        return 1
+    }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return picURLs?.count ?? 0
     }
