@@ -8,7 +8,7 @@
 
 import UIKit
 import AFNetworking
-
+import SVProgressHUD
 
 private let HomeCellId = "HomeCell"
 
@@ -23,7 +23,9 @@ class RYHomeController: RYBasicVisitorTVC {
             return
         }
         prepareTableView()
+        SVProgressHUD.show()
         RYStatusViewModel().loadHomeData { (tempArr) -> () in
+            SVProgressHUD.dismiss()
             self.statuses = tempArr
             self.tableView.reloadData()
         }
