@@ -34,3 +34,8 @@ let col_orange = UIColor.orangeColor()
 */
 let scrWidth = UIScreen.mainScreen().bounds.size.width
 let scrHeight = UIScreen.mainScreen().bounds.size.height
+
+/**
+*  图片配图间距
+*/
+let picCellMargin : CGFloat = 5

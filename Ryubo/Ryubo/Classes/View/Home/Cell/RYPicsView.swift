@@ -8,7 +8,8 @@
 
 import UIKit
 
-class RYPicsView: UIView {
+class RYPicsView: UICollectionView {
+    private let itemID = "picView"
     var picURLs : [NSURL]? {
         didSet {
             picNum = picURLs?.count
@@ -29,11 +30,25 @@ class RYPicsView: UIView {
     }
     private var picNum : NSNumber?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        let layout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
+        layout.minimumInteritemSpacing = picCellMargin
+        layout.minimumLineSpacing = picCellMargin
+        layout.itemSize = CGSizeMake(50, 50)
+        super.init(frame: frame, collectionViewLayout: layout)
+        scrollEnabled = false
         backgroundColor = col_orange
         layoutImageViews()
+        dataSource = self
+        
+        registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: itemID)
     }
+    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        backgroundColor = col_orange
+//        layoutImageViews()
+//    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -73,3 +88,16 @@ extension RYPicsView {
     }
     
 }
+// MARK: - 数据源方法
+extension RYPicsView:UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return picNum?.integerValue ?? 0
+    }
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let item = collectionView.dequeueReusableCellWithReuseIdentifier(itemID, forIndexPath: indexPath)
+        item.backgroundColor = col_darkGray
+        return item
+    }
+    
+}
+
