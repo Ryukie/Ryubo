@@ -55,7 +55,7 @@ class RYOriginalWeibo: UIView {
 extension RYOriginalWeibo {
     
     private func setUpSubView () {
-        self.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        self.backgroundColor = col_white95Gray
         addSubview(iv_headIcon)
         addSubview(iv_mbRank)
         addSubview(iv_verified)

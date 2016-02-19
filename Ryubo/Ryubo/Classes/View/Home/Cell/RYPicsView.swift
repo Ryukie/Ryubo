@@ -19,9 +19,8 @@ class RYPicsView: UICollectionView {
                     ivs_pic?.append(iv)
                 }
             }
-            
             layoutImageViews()
-            
+            self.reloadData()
         }
     }
     private var ivs_pic : [UIImageView]?
@@ -29,38 +28,26 @@ class RYPicsView: UICollectionView {
         let iv = UIImageView()
         return iv
     }
-//    private var picNum : NSNumber? {
-//        return picURLs?.count
-//    }
+    private var flowLayout : UICollectionViewFlowLayout?
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        let layout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
-        layout.minimumInteritemSpacing = picCellMargin
-        layout.minimumLineSpacing = picCellMargin
-        layout.itemSize = CGSizeMake(50, 50)
-        super.init(frame: frame, collectionViewLayout: layout)
+        flowLayout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
+        flowLayout!.minimumInteritemSpacing = picCellMargin
+        flowLayout!.minimumLineSpacing = picCellMargin
+        let insert = UIEdgeInsets(top: picCellMargin, left: picCellMargin, bottom: picCellMargin, right: picCellMargin)
+        flowLayout?.sectionInset = insert
+//        flowLayout!.itemSize = CGSizeZero
+        super.init(frame: frame, collectionViewLayout: flowLayout!)
         scrollEnabled = false
-        backgroundColor = col_orange
-//        layoutImageViews()
+        backgroundColor = col_white95Gray
         dataSource = self
         
-        registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: itemID)
+        registerClass(RYPictureCell.self, forCellWithReuseIdentifier: itemID)
     }
-    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        backgroundColor = col_orange
-//        layoutImageViews()
-//    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-// MARK: - 懒加载控件
-    
-    
-    
 }
 // MARK: - 布局子空间
 extension RYPicsView {
@@ -72,22 +59,30 @@ extension RYPicsView {
 //        print(picURLs?.count)
         if picURLs?.count == 1 {
             setOnePicView()
+//            setNinePicView()
         }
         if (picURLs?.count>=2 && picURLs?.count<=4) {
             setFourPicView()
+//            setNinePicView()
         }
         if (picURLs?.count>=5 && picURLs?.count<=9) {
             setNinePicView()
         }
     }
     private func setOnePicView () {
-        print(__FUNCTION__)
+//        print(__FUNCTION__)
+        flowLayout!.itemSize = CGSizeMake(180, 120)//长 < 宽
+//        flowLayout?.itemSize = CGSizeMake(120, 180)//长 < 宽
     }
     private func setFourPicView () {
-        print(__FUNCTION__)
+//        print(__FUNCTION__)
+        let width = (scrWidth - picCellMargin*3)/2
+        flowLayout!.itemSize = CGSizeMake(width,width)
     }
     private func setNinePicView () {
-        print(__FUNCTION__)
+//        print(__FUNCTION__)
+        let width = (scrWidth - picCellMargin*4)/3
+        flowLayout!.itemSize = CGSizeMake(width, width)
     }
     
 }
@@ -97,7 +92,7 @@ extension RYPicsView:UICollectionViewDataSource {
         return picURLs?.count ?? 0
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let item = collectionView.dequeueReusableCellWithReuseIdentifier(itemID, forIndexPath: indexPath)
+        let item = collectionView.dequeueReusableCellWithReuseIdentifier(itemID, forIndexPath: indexPath) as! RYPictureCell
         item.backgroundColor = UIColor(white: 0.95, alpha: 1)
         return item
     }

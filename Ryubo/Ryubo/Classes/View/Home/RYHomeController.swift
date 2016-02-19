@@ -27,6 +27,7 @@ class RYHomeController: RYBasicVisitorTVC {
             self.statuses = tempArr
             self.tableView.reloadData()
         }
+        self.tableView.allowsSelection = false
     }
     
     //准备tableView
