@@ -11,7 +11,8 @@ import UIKit
 class RYAccountViewModel: NSObject {
     static let sharedAccountViewModel : RYAccountViewModel = RYAccountViewModel()
     var userAccount:RYUserAccount?
-    override init() {
+// MARK: - 构造函数私有化   保证不会通过构造函数创建新的对象
+    private override init() {
         userAccount = RYUserAccount.loadAccount()
         super.init()
     }

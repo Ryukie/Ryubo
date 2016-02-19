@@ -30,7 +30,6 @@ class RYStatus: NSObject {
                     let picURL = NSURL(string:URLString!)
                     picURLs?.append(picURL!)
                 }
-                print(picURLs)
             }
         }
     }
@@ -56,6 +55,15 @@ class RYStatus: NSObject {
                 return
             }
         }
+//        if key == "pic_urls" {
+//            if let dict = value as? [[String : String]] {
+//                print(dict)
+////                for item in dict {
+//////                    pic_urls?.append(item)
+////                }
+//            }
+//            return
+//        }
         //不是User的数据的话按默认方式KVC
         super.setValue(value, forKey: key)
     }
@@ -64,7 +72,7 @@ class RYStatus: NSObject {
     //重写对象的描述信息
     override var description: String {
         //使用kvc方式 获取对象 的字典信息
-        let keys = ["created_at","id","text","source"]
+        let keys = ["created_at","id","text","source","picURLs"]
         let dict = self.dictionaryWithValuesForKeys(keys)
         return dict.description
     }

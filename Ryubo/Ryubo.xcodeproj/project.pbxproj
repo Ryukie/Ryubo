@@ -19,6 +19,7 @@
 		4A6EAB7A1C61FFD300A08B4B /* RYVisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6EAB791C61FFD300A08B4B /* RYVisitorView.swift */; };
 		4A7919231C749E870045DD08 /* RYAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7919221C749E870045DD08 /* RYAuthController.swift */; };
 		4A7919281C749EC60045DD08 /* RYHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7919271C749EC60045DD08 /* RYHomeCell.swift */; };
+		4A7BC8541C76BDE800519D65 /* RYPicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7BC8531C76BDE800519D65 /* RYPicsView.swift */; };
 		4A965E741C75A56500DB1FBC /* RYOriginalWeibo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A965E731C75A56500DB1FBC /* RYOriginalWeibo.swift */; };
 		4A965E761C75C72F00DB1FBC /* RYBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A965E751C75C72F00DB1FBC /* RYBottomView.swift */; };
 		4A965F021C736A45005E14E1 /* RYStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A965F011C736A45005E14E1 /* RYStatusViewModel.swift */; };
@@ -50,6 +51,7 @@
 		4A6EAB791C61FFD300A08B4B /* RYVisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYVisitorView.swift; sourceTree = "<group>"; };
 		4A7919221C749E870045DD08 /* RYAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYAuthController.swift; sourceTree = "<group>"; };
 		4A7919271C749EC60045DD08 /* RYHomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYHomeCell.swift; sourceTree = "<group>"; };
+		4A7BC8531C76BDE800519D65 /* RYPicsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYPicsView.swift; sourceTree = "<group>"; };
 		4A965E731C75A56500DB1FBC /* RYOriginalWeibo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYOriginalWeibo.swift; sourceTree = "<group>"; };
 		4A965E751C75C72F00DB1FBC /* RYBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYBottomView.swift; sourceTree = "<group>"; };
 		4A965F011C736A45005E14E1 /* RYStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYStatusViewModel.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				4A7919271C749EC60045DD08 /* RYHomeCell.swift */,
 				4A965E731C75A56500DB1FBC /* RYOriginalWeibo.swift */,
 				4A965E751C75C72F00DB1FBC /* RYBottomView.swift */,
+				4A7BC8531C76BDE800519D65 /* RYPicsView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A7BC8541C76BDE800519D65 /* RYPicsView.swift in Sources */,
 				4A9E01181C64D6BA0045AC09 /* RYGlobal.swift in Sources */,
 				4A965F061C737185005E14E1 /* RYUser.swift in Sources */,
 				4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */,
