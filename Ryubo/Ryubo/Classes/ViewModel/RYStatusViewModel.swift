@@ -22,7 +22,7 @@ class RYStatusViewModel: NSObject {
         }
         let parameters = ["access_token":token]
         manager.GET(dataURLString, parameters: parameters, progress: nil , success: { (_ , result) -> Void in
-            //                            print(result)
+//            print(result)
             //将数据转化为字典结构
             guard let dict = result as? [String:AnyObject] else {
 //                print("数据结构错误")

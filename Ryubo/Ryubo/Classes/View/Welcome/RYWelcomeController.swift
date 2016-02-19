@@ -68,6 +68,8 @@ class RYWelcomeController: UIViewController {
         //使用自动布局 + 动画闭包 ====> 强制刷新视图
         let offset = -100
         
+        
+        //更新写在闭包外面动画依旧可以执行  这里只是收集了约束的变化并没有更新布局
         self.iv_headIcon.snp_updateConstraints(closure: { (make) -> Void in
             make.centerY.equalTo(self.view.snp_centerY).offset(offset)
         })

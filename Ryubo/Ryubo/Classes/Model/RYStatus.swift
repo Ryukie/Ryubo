@@ -20,7 +20,22 @@ class RYStatus: NSObject {
     //微博来源
     var source: String?
     //配图数组
-    var pic_urls: [[String : String]]?
+    var pic_urls: [[String : String]]? {
+        didSet {
+            //遍历数组转化为URL并保存到URL数组中
+            if let URLStrings = pic_urls where URLStrings.count != 0 {
+                picURLs = [NSURL]()
+                for item in URLStrings {
+                    let URLString = item["thumbnail_pic"]
+                    let picURL = NSURL(string:URLString!)
+                    picURLs?.append(picURL!)
+                }
+                print(picURLs)
+            }
+        }
+    }
+    //配图URLs
+    var picURLs : [NSURL]?
     //用户
     var user : RYUser?
     

@@ -93,6 +93,7 @@ class RYUserAccount: NSObject,NSCoding {
 //            print(account)
 //            print(account.expires_date)
 //            print(NSData())
+            
             //通过判断升降序   来判断时间是否过期
             if account.expires_date?.compare(NSDate()) == NSComparisonResult.OrderedDescending {
                 return account

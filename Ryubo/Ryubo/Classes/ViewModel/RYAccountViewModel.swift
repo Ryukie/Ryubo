@@ -34,8 +34,10 @@ class RYAccountViewModel: NSObject {
     
     //用户头像
     var userHeadIconURL : NSURL? {
-//        return NSURL(string: (userAccount?.avatar_large)!)
-        return NSURL(string: userAccount?.avatar_large ?? "")
+        if let urlString = userAccount?.avatar_large {
+            return NSURL(string: urlString)
+        }
+        return nil
     }
     
     func getAccessToken(code:String , finished:(isLogin:Bool)->()) {

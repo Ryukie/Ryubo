@@ -48,7 +48,7 @@
 		4A5B88DF1C5CB4690043572D /* RYProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYProfileController.swift; sourceTree = "<group>"; };
 		4A6EAB771C61F2AA00A08B4B /* RYBasicVisitorTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYBasicVisitorTVC.swift; sourceTree = "<group>"; };
 		4A6EAB791C61FFD300A08B4B /* RYVisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYVisitorView.swift; sourceTree = "<group>"; };
-		4A7919221C749E870045DD08 /* RYAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYAuthController.swift; path = OAuth/RYAuthController.swift; sourceTree = "<group>"; };
+		4A7919221C749E870045DD08 /* RYAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYAuthController.swift; sourceTree = "<group>"; };
 		4A7919271C749EC60045DD08 /* RYHomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYHomeCell.swift; sourceTree = "<group>"; };
 		4A965E731C75A56500DB1FBC /* RYOriginalWeibo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYOriginalWeibo.swift; sourceTree = "<group>"; };
 		4A965E751C75C72F00DB1FBC /* RYBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYBottomView.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 			children = (
 				4A7919221C749E870045DD08 /* RYAuthController.swift */,
 			);
-			name = AuthView;
+			path = AuthView;
 			sourceTree = "<group>";
 		};
 		4AED05E91C73455A00C9C7D8 /* Extension */ = {
