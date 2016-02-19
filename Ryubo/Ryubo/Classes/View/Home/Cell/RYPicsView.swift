@@ -13,10 +13,8 @@ class RYPicsView: UICollectionView {
     var picURLs : [NSURL]? {
         didSet {
             //根据图片个数决定有多少个imageView
-//            print(picURLs)
             if picURLs?.count != 0 {
                 for item in picURLs! {
-//                    print(item)
                     let iv = creatAImageView(item)
                     ivs_pic?.append(iv)
                 }
@@ -71,7 +69,7 @@ extension RYPicsView {
         // 1 -> 等比例"全屏"
         // 2~4 -> 四宫格
         // 5~9 -> 九宫格
-        print(picURLs?.count)
+//        print(picURLs?.count)
         if picURLs?.count == 1 {
             setOnePicView()
         }

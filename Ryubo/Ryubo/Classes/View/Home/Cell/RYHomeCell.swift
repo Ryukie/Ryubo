@@ -59,6 +59,7 @@ class RYHomeCell: UITableViewCell {
     //配图视图
     private lazy var picsView : RYPicsView = RYPicsView()
 }
+
 // MARK: - 界面设置
 extension RYHomeCell {
     // MARK: - 添加子控件
@@ -69,32 +70,43 @@ extension RYHomeCell {
         self.backgroundColor = UIColor.blueColor()
         contentView.addSubview(originalWeiboView)
         //判断是否存在原创微博配图
-        if isOriginalPic == true {
-            //加载配图视图
-            contentView.addSubview(picsView)
-            //设置自动布局
-            picsView.snp_makeConstraints(closure: { (make) -> Void in
-                make.left.right.equalTo(contentView)
-                make.top.equalTo(originalWeiboView.snp_bottom)
-                make.height.equalTo(300)
-            })
-        }
+        //加载配图视图
+        contentView.addSubview(picsView)
+        
         
         contentView.addSubview(bottomView)
-        
         originalWeiboView.snp_makeConstraints { (make) -> Void in
             make.top.left.right.equalTo(contentView)
         }
         
-        bottomView.snp_makeConstraints { (make) -> Void in
-            make.left.right.equalTo(contentView)
-            if isOriginalPic==false {
+        
+        //不使用更新约束的话  重用的时候会产生多余的约束
+        if isOriginalPic==false {
+            picsView.snp_remakeConstraints(closure: { (make) -> Void in
+                make.left.right.equalTo(contentView)
                 make.top.equalTo(originalWeiboView.snp_bottom)
-            } else {
+                make.height.equalTo(0)
+            })
+            
+            bottomView.snp_remakeConstraints(closure: { (make) -> Void in
+                make.left.right.equalTo(contentView)
+                make.height.equalTo(35)
+                make.top.equalTo(originalWeiboView.snp_bottom)
+            })
+        }else {
+            picsView.snp_remakeConstraints(closure: { (make) -> Void in
+                make.left.right.equalTo(contentView)
+                make.top.equalTo(originalWeiboView.snp_bottom)
+                make.height.equalTo(300)
+            })
+            
+            bottomView.snp_remakeConstraints { (make) -> Void in
+                make.left.right.equalTo(contentView)
+                make.height.equalTo(35)
                 make.top.equalTo(picsView.snp_bottom)
             }
-            make.height.equalTo(35)
         }
+
         //给contenView设置约束条件
         contentView.snp_makeConstraints { (make) -> Void in
             make.left.right.top.equalTo(self)
