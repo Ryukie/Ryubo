@@ -12,15 +12,18 @@ class RYPicsView: UICollectionView {
     private let itemID = "picView"
     var picURLs : [NSURL]? {
         didSet {
-            picNum = picURLs?.count
             //根据图片个数决定有多少个imageView
-            if picNum != 0 {
+//            print(picURLs)
+            if picURLs?.count != 0 {
                 for item in picURLs! {
 //                    print(item)
                     let iv = creatAImageView(item)
                     ivs_pic?.append(iv)
                 }
             }
+            
+            layoutImageViews()
+            
         }
     }
     private var ivs_pic : [UIImageView]?
@@ -28,7 +31,9 @@ class RYPicsView: UICollectionView {
         let iv = UIImageView()
         return iv
     }
-    private var picNum : NSNumber?
+//    private var picNum : NSNumber? {
+//        return picURLs?.count
+//    }
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let layout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
@@ -38,7 +43,7 @@ class RYPicsView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: layout)
         scrollEnabled = false
         backgroundColor = col_orange
-        layoutImageViews()
+//        layoutImageViews()
         dataSource = self
         
         registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: itemID)
@@ -66,16 +71,16 @@ extension RYPicsView {
         // 1 -> 等比例"全屏"
         // 2~4 -> 四宫格
         // 5~9 -> 九宫格
-        if picNum == 1 {
+        print(picURLs?.count)
+        if picURLs?.count == 1 {
             setOnePicView()
         }
-        if (picNum?.intValue>=2 || picNum?.intValue<=4) {
+        if (picURLs?.count>=2 && picURLs?.count<=4) {
             setFourPicView()
         }
-        if (picNum?.intValue>=5 || picNum?.intValue<=9) {
+        if (picURLs?.count>=5 && picURLs?.count<=9) {
             setNinePicView()
         }
-        
     }
     private func setOnePicView () {
         print(__FUNCTION__)
@@ -91,11 +96,11 @@ extension RYPicsView {
 // MARK: - 数据源方法
 extension RYPicsView:UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return picNum?.integerValue ?? 0
+        return picURLs?.count ?? 0
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let item = collectionView.dequeueReusableCellWithReuseIdentifier(itemID, forIndexPath: indexPath)
-        item.backgroundColor = col_darkGray
+        item.backgroundColor = UIColor(white: 0.95, alpha: 1)
         return item
     }
     

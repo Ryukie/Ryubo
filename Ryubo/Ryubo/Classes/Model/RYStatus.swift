@@ -37,6 +37,9 @@ class RYStatus: NSObject {
     var picURLs : [NSURL]?
     //用户
     var user : RYUser?
+    //转发的微博模型 key : retweeted_status
+//    var retweeted_status : [[String : AnyObject]]?
+    
     
     init(dict:[String : AnyObject]) {
         super.init()

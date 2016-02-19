@@ -11,18 +11,29 @@ import UIKit
 class RYHomeCell: UITableViewCell {
     var status : RYStatus? {
         didSet {
+            
+            setUpSubviews()
+            
             //一旦设置了微博数据模型就为View赋值
-//            print(status)
             originalWeiboView.status = status
+//            print(__FUNCTION__)
             if status?.pic_urls?.count != 0 {
                 picsView.picURLs = status?.picURLs
             }
         }
     }
+    private var isOriginalPic:Bool {
+//        print(__FUNCTION__)
+        if status?.pic_urls?.count != 0 {
+            return true
+        }
+        return false
+    }
+    
     //重写构造方法
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpSubviews()
+//        setUpSubviews()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,17 +63,20 @@ class RYHomeCell: UITableViewCell {
 extension RYHomeCell {
     // MARK: - 添加子控件
     private func setUpSubviews () {
+        
+//        print(isOriginalPic)
+        
         self.backgroundColor = UIColor.blueColor()
         contentView.addSubview(originalWeiboView)
-        //判断是否存在微博配图
-        if status?.picURLs?.count != 0 {
+        //判断是否存在原创微博配图
+        if isOriginalPic == true {
             //加载配图视图
             contentView.addSubview(picsView)
             //设置自动布局
             picsView.snp_makeConstraints(closure: { (make) -> Void in
                 make.left.right.equalTo(contentView)
                 make.top.equalTo(originalWeiboView.snp_bottom)
-                make.height.equalTo(100)
+                make.height.equalTo(300)
             })
         }
         
@@ -74,7 +88,7 @@ extension RYHomeCell {
         
         bottomView.snp_makeConstraints { (make) -> Void in
             make.left.right.equalTo(contentView)
-            if status?.picURLs?.count == 0 {
+            if isOriginalPic==false {
                 make.top.equalTo(originalWeiboView.snp_bottom)
             } else {
                 make.top.equalTo(picsView.snp_bottom)
