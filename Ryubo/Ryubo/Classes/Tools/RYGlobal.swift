@@ -17,7 +17,6 @@ let codeInURL = "17f81165d8b74790ff1e2d6c58a35975"
 //切换到登陆后微博视图的通知
 let didLoginChangeToWeiboView = "FireInTheHole"
 
-
 //定义全局通用的错误提示
 let netErrorText = "网络君正在睡觉中,请稍后再试..."
 
