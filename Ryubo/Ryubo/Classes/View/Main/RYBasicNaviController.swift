@@ -27,8 +27,9 @@ class RYBasicNaviController: UINavigationController,UIGestureRecognizerDelegate 
         super.pushViewController(viewController, animated: true)
     }
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+//        print(childViewControllers.count)
         //YEStrue (the default) to tell the gesture recognizer to proceed with interpreting touches, NOfalse to prevent it from attempting to recognize its gesture.
-        return childViewControllers.count > 0
+        return childViewControllers.count > 1
     }
     
 }
