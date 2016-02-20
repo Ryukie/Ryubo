@@ -39,7 +39,7 @@ class RYStatus: NSObject {
     var user : RYUser?
     //转发的微博模型 key : retweeted_status
 //    var retweeted_status : [[String : AnyObject]]?
-    
+    var retweeted_status : RYStatus?
     
     init(dict:[String : AnyObject]) {
         super.init()
@@ -58,15 +58,13 @@ class RYStatus: NSObject {
                 return
             }
         }
-//        if key == "pic_urls" {
-//            if let dict = value as? [[String : String]] {
-//                print(dict)
-////                for item in dict {
-//////                    pic_urls?.append(item)
-////                }
-//            }
-//            return
-//        }
+        //处理 转发微博
+        if key == "retweeted_status" {
+            if let dict = value as? [String : AnyObject] {
+                retweeted_status = RYStatus(dict: dict)
+            }
+            return
+        }
         //不是User的数据的话按默认方式KVC
         super.setValue(value, forKey: key)
     }
@@ -75,7 +73,7 @@ class RYStatus: NSObject {
     //重写对象的描述信息
     override var description: String {
         //使用kvc方式 获取对象 的字典信息
-        let keys = ["created_at","id","text","source","picURLs"]
+        let keys = ["created_at","id","text","source","picURLs","retweeted_status"]
         let dict = self.dictionaryWithValuesForKeys(keys)
         return dict.description
     }

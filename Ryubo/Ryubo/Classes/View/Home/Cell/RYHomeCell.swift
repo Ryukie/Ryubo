@@ -11,9 +11,7 @@ import UIKit
 class RYHomeCell: UITableViewCell {
     var status : RYStatus? {
         didSet {
-            
             setUpSubviews()
-//            layoutIfNeeded()
             //一旦设置了微博数据模型就为View赋值
             originalWeiboView.status = status
 //            print(__FUNCTION__)

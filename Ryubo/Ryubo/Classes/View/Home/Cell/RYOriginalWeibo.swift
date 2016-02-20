@@ -14,6 +14,8 @@ class RYOriginalWeibo: UIView {
     //weibo数据模型
     var status : RYStatus? {
         didSet {
+//            print(__FUNCTION__)
+            setRetweetView()
             iv_headIcon.sd_setImageWithURL(status?.user?.headImageURL, placeholderImage: UIImage(named: "avatar_default_big"))
             lb_name.text = status?.user?.name
             iv_mbRank.image = status?.user?.mbrank_image
@@ -25,6 +27,7 @@ class RYOriginalWeibo: UIView {
     }
     
     override init(frame: CGRect) {
+//        print(__FUNCTION__)
         super.init(frame: frame)
         setUpSubView()
     }
@@ -48,6 +51,13 @@ class RYOriginalWeibo: UIView {
     private lazy var iv_verified: UIImageView = UIImageView(image: UIImage(named: "avatar_vip"))
     //微博正文
     private lazy var lb_content:UILabel = UILabel(text: "你成功的引起了我的注意", fontSize: 14, textColor: UIColor.darkGrayColor())
+    //转发视图
+    private lazy var v_retweet:RYRetweetView = RYRetweetView()
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        setRetweetView()
+//    }
+    var cons : Constraint?
 }
 
 
@@ -103,11 +113,27 @@ extension RYOriginalWeibo {
             make.left.equalTo(iv_headIcon.snp_left)
             make.top.equalTo(iv_headIcon.snp_bottom).offset(margin)
         }
-        
 // MARK: - 设置自动设置行高
-        self.snp_makeConstraints { (make) -> Void in
-            make.bottom.equalTo(lb_content.snp_bottom).offset(margin)
-        }
         
+        self.snp_makeConstraints { (make) -> Void in
+            cons =  make.bottom.equalTo(lb_content.snp_bottom).offset(margin).constraint
+        }
+        setRetweetView()
+    }
+    
+// MARK: - 根据是否是转发微博来添加转发视图
+    private func setRetweetView () {
+        if status?.retweeted_status != nil {
+            addSubview(v_retweet)
+            v_retweet.snp_makeConstraints(closure: { (make) -> Void in
+                make.top.equalTo(lb_content.snp_bottom)
+                make.left.right.equalTo(self)
+            })
+            //先卸载之前的约束
+            self.snp_updateConstraints { (make) -> Void in
+                cons!.uninstall()
+                make.bottom.equalTo(v_retweet.snp_bottom)
+            }
+        }
     }
 }

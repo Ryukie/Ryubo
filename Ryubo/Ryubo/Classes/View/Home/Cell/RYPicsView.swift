@@ -36,6 +36,8 @@ class RYPicsView: UICollectionView {
         flowLayout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
         flowLayout!.minimumInteritemSpacing = picCellMargin
         flowLayout!.minimumLineSpacing = picCellMargin
+        let insert = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        flowLayout?.sectionInset = insert
         super.init(frame: frame, collectionViewLayout: flowLayout!)
         scrollEnabled = false
         backgroundColor = col_white95Gray
