@@ -26,7 +26,7 @@ class RYPictureCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-// MARK: - 懒加载图片
+// MARK: - 懒加载控件
     private lazy var iconView: UIImageView = {
         let iv = UIImageView()
         //视图内容显示模式 默认显示 是 ContentModeScaleToFill   ==> 缩放进行填充  比例一致的图片使用这种样式显示
@@ -37,7 +37,7 @@ class RYPictureCell: UICollectionViewCell {
         iv.clipsToBounds = true
         return iv
     }()
-//MARK: 设置视图
+//MARK: - 设置视图
     private func setupUI() {
         contentView.addSubview(iconView)
         //        iconView.image = UIImage(named: "Brave Shine")

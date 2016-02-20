@@ -48,7 +48,8 @@ class RYPicsView: UICollectionView {
     }
 
 }
-// MARK: - 布局子空间
+//========================================================
+// MARK: - 布局子控件
 extension RYPicsView {
     private func layoutImageViews () {
         //根据图片数量决定使用何种图片布局
@@ -88,6 +89,7 @@ extension RYPicsView {
     private func setNinePicView () {
     }
 }
+//========================================================
 // MARK: - 数据源方法
 extension RYPicsView:UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

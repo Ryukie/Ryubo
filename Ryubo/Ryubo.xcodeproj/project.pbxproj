@@ -31,6 +31,9 @@
 		4AD248A71C6883BC003F110A /* RYUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A61C6883BC003F110A /* RYUserAccount.swift */; };
 		4AD248A91C68A04D003F110A /* RYAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */; };
 		4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */; };
+		4ADA071B1C77FAA300A960E4 /* RYCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA071A1C77FAA300A960E4 /* RYCommentVC.swift */; };
+		4ADA071D1C77FBAE00A960E4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */; };
+		4ADA07211C77FFF800A960E4 /* RYRetweetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA07201C77FFF800A960E4 /* RYRetweetVC.swift */; };
 		4AED05EB1C73456900C9C7D8 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AED05EA1C73456900C9C7D8 /* UILabel+Extension.swift */; };
 		4AED05ED1C734A1400C9C7D8 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AED05EC1C734A1400C9C7D8 /* UIButton+Extension.swift */; };
 		F2C2D4B5108C5FBBF952793B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8166AB1A428C446AE172A0 /* Pods.framework */; };
@@ -64,6 +67,9 @@
 		4AD248A61C6883BC003F110A /* RYUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYUserAccount.swift; sourceTree = "<group>"; };
 		4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYAccountViewModel.swift; sourceTree = "<group>"; };
 		4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYWelcomeController.swift; sourceTree = "<group>"; };
+		4ADA071A1C77FAA300A960E4 /* RYCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYCommentVC.swift; sourceTree = "<group>"; };
+		4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		4ADA07201C77FFF800A960E4 /* RYRetweetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRetweetVC.swift; sourceTree = "<group>"; };
 		4AED05EA1C73456900C9C7D8 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		4AED05EC1C734A1400C9C7D8 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		6798C9D5691F9A278F7381A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +191,8 @@
 			children = (
 				4A7919241C749E9D0045DD08 /* Cell */,
 				4A5B88DB1C5CB4400043572D /* RYHomeController.swift */,
+				4ADA071A1C77FAA300A960E4 /* RYCommentVC.swift */,
+				4ADA07201C77FFF800A960E4 /* RYRetweetVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -258,6 +266,7 @@
 			children = (
 				4AED05EA1C73456900C9C7D8 /* UILabel+Extension.swift */,
 				4AED05EC1C734A1400C9C7D8 /* UIButton+Extension.swift */,
+				4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -398,12 +407,14 @@
 				4A965F061C737185005E14E1 /* RYUser.swift in Sources */,
 				4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */,
 				4A5B88DC1C5CB4400043572D /* RYHomeController.swift in Sources */,
+				4ADA071B1C77FAA300A960E4 /* RYCommentVC.swift in Sources */,
 				4A7919231C749E870045DD08 /* RYAuthController.swift in Sources */,
 				4A965E761C75C72F00DB1FBC /* RYBottomView.swift in Sources */,
 				4AED05ED1C734A1400C9C7D8 /* UIButton+Extension.swift in Sources */,
 				4A7919281C749EC60045DD08 /* RYHomeCell.swift in Sources */,
 				4A6EAB7A1C61FFD300A08B4B /* RYVisitorView.swift in Sources */,
 				4A7BC8561C77616F00519D65 /* RYPictureCell.swift in Sources */,
+				4ADA071D1C77FBAE00A960E4 /* UIView+Extension.swift in Sources */,
 				4A5B88D81C5CAE5D0043572D /* RYTabBar.swift in Sources */,
 				4A5B88E01C5CB4690043572D /* RYProfileController.swift in Sources */,
 				4A5B88DE1C5CB4520043572D /* RYMessageController.swift in Sources */,
@@ -415,6 +426,7 @@
 				4A5B88D61C5CADF10043572D /* RYTabBarController.swift in Sources */,
 				4A9E011A1C64DF7F0045AC09 /* RYNetworkTool.swift in Sources */,
 				4A965E741C75A56500DB1FBC /* RYOriginalWeibo.swift in Sources */,
+				4ADA07211C77FFF800A960E4 /* RYRetweetVC.swift in Sources */,
 				4A5B88B31C5CA03B0043572D /* AppDelegate.swift in Sources */,
 				4A5B88DA1C5CB42B0043572D /* RYDiscoverController.swift in Sources */,
 				4AD248A91C68A04D003F110A /* RYAccountViewModel.swift in Sources */,

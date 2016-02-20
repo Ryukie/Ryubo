@@ -53,7 +53,6 @@ class RYOriginalWeibo: UIView {
 
 // MARK: - 布局子控件
 extension RYOriginalWeibo {
-    
     private func setUpSubView () {
         self.backgroundColor = col_white95Gray
         addSubview(iv_headIcon)

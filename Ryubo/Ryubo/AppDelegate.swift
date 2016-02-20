@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AFNetworking
+//import AFNetworkActivityIndicatorManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = UIColor.blueColor()
         window?.rootViewController = setRootViewController()
         window?.makeKeyAndVisible()
+        AFNetworkActivityIndicatorManager.sharedManager().enabled = true
         return true
     }
 // MARK: - 设置全局渲染色
