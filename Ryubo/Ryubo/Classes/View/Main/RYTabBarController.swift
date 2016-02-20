@@ -36,7 +36,7 @@ class RYTabBarController: UITabBarController {
     
     // MARK: - 为每个模块控制器嵌套一个导航控制器并添加到标签控制器内
     private func addNaviControllers (viewController:UIViewController,titleName:String,imageName:String) {
-        let navi = UINavigationController(rootViewController:viewController)
+        let navi = RYBasicNaviController(rootViewController:viewController)
         //统一设置标签和导航的文字
         viewController.title = titleName
         viewController.tabBarItem.image = UIImage(named: imageName)

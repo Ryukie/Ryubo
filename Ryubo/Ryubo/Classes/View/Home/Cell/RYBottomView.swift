@@ -37,10 +37,15 @@ class RYBottomView: UIView {
         //可以通过闭包/通知/代理等方法实现
         //这里通过遍历响应者链条来获取navi
         //这种方式用的很多可以代替很多情况下的协议代理
-        getNaviFromResponderChain()?.pushViewController(RYCommentVC(), animated: true)
+        let vc = RYCommentVC()
+        //在push之前隐藏底部导航栏
+//        vc.hidesBottomBarWhenPushed = true
+        getNaviFromResponderChain()?.pushViewController(vc, animated: true)
     }
     @objc private func clickBtRetweet () {
-        getNaviFromResponderChain()?.pushViewController(RYRetweetVC(), animated: true)
+        let vc = RYRetweetVC()
+//        vc.hidesBottomBarWhenPushed = true
+        getNaviFromResponderChain()?.pushViewController(vc, animated: true)
     }
     @objc private func clickBtLike () {
         print("I`m lovin it!")
