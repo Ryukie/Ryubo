@@ -31,6 +31,7 @@ class RYPictureCell: UICollectionViewCell {
         let iv = UIImageView()
         //视图内容显示模式 默认显示 是 ContentModeScaleToFill   ==> 缩放进行填充  比例一致的图片使用这种样式显示
         //.ScaleAspectFit 图片显示上下可能会留白  基本不会使用这样显示样式
+//        UICollectionReusableView
         //ScaleAspectFill 视图会被剪裁  但是 图片显示不会失真  并且不会留白
         iv.contentMode = .ScaleAspectFill
         //手写代码 不会自动设置剪裁

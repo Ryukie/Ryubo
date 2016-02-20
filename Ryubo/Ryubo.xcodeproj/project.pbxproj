@@ -35,6 +35,7 @@
 		4ADA071D1C77FBAE00A960E4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */; };
 		4ADA07211C77FFF800A960E4 /* RYRetweetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA07201C77FFF800A960E4 /* RYRetweetVC.swift */; };
 		4ADA07231C7803F200A960E4 /* RYBasicNaviController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA07221C7803F200A960E4 /* RYBasicNaviController.swift */; };
+		4ADA07251C780E8E00A960E4 /* RYRetweetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA07241C780E8E00A960E4 /* RYRetweetHeader.swift */; };
 		4AED05EB1C73456900C9C7D8 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AED05EA1C73456900C9C7D8 /* UILabel+Extension.swift */; };
 		4AED05ED1C734A1400C9C7D8 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AED05EC1C734A1400C9C7D8 /* UIButton+Extension.swift */; };
 		F2C2D4B5108C5FBBF952793B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8166AB1A428C446AE172A0 /* Pods.framework */; };
@@ -72,6 +73,7 @@
 		4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		4ADA07201C77FFF800A960E4 /* RYRetweetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRetweetVC.swift; sourceTree = "<group>"; };
 		4ADA07221C7803F200A960E4 /* RYBasicNaviController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYBasicNaviController.swift; sourceTree = "<group>"; };
+		4ADA07241C780E8E00A960E4 /* RYRetweetHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRetweetHeader.swift; sourceTree = "<group>"; };
 		4AED05EA1C73456900C9C7D8 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		4AED05EC1C734A1400C9C7D8 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		6798C9D5691F9A278F7381A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				4A965E751C75C72F00DB1FBC /* RYBottomView.swift */,
 				4A7BC8531C76BDE800519D65 /* RYPicsView.swift */,
 				4A7BC8551C77616F00519D65 /* RYPictureCell.swift */,
+				4ADA07241C780E8E00A960E4 /* RYRetweetHeader.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */,
 				4A5B88DC1C5CB4400043572D /* RYHomeController.swift in Sources */,
 				4ADA071B1C77FAA300A960E4 /* RYCommentVC.swift in Sources */,
+				4ADA07251C780E8E00A960E4 /* RYRetweetHeader.swift in Sources */,
 				4A7919231C749E870045DD08 /* RYAuthController.swift in Sources */,
 				4ADA07231C7803F200A960E4 /* RYBasicNaviController.swift in Sources */,
 				4A965E761C75C72F00DB1FBC /* RYBottomView.swift in Sources */,

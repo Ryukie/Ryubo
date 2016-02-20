@@ -8,8 +8,11 @@
 
 import UIKit
 
-class RYPicsView: UICollectionView {
+class RYPicsView: UICollectionView,UICollectionViewDelegateFlowLayout {
     private let itemID = "picView"
+    private let headerID = "header"
+    //headerView
+    var headerView : RYRetweetHeader?
     var picURLs : [NSURL]? {
         didSet {
             //根据图片个数决定有多少个imageView
@@ -36,17 +39,25 @@ class RYPicsView: UICollectionView {
         flowLayout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
         flowLayout!.minimumInteritemSpacing = picCellMargin
         flowLayout!.minimumLineSpacing = picCellMargin
+        
         super.init(frame: frame, collectionViewLayout: flowLayout!)
         scrollEnabled = false
         backgroundColor = col_white95Gray
         dataSource = self
+        //不设置代理设置头的方法不会执行
+        delegate = self
+        //直接设置头的size
+        //        flowLayout?.headerReferenceSize = CGSize(width: scrWidth, height: 100)
+        
         registerClass(RYPictureCell.self, forCellWithReuseIdentifier: itemID)
+        //想要添加Header 和 Footer 需要注册 header/footer 的 view
+        //Header view and footer view in UICollectionView must extends UICollectionReusableView class.
+        registerClass(RYRetweetHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
+        
     }
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 //========================================================
 // MARK: - 布局子控件
@@ -71,6 +82,8 @@ extension RYPicsView {
         self.snp_updateConstraints { (make) -> Void in
             make.size.equalTo(CGSize(width: scrWidth, height: width*row + picCellMargin*(row-1)))
         }
+    }
+    private func setRetweetHeader () {
         
     }
     private func setOnePicView () {
@@ -105,5 +118,32 @@ extension RYPicsView:UICollectionViewDataSource {
         item.imageURL = picURLs![indexPath.item]
         return item
     }
+    
+
+}
+//========================================================
+// MARK: - 显示header和footer的回调方法
+extension RYPicsView {
+     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+            let v = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerID, forIndexPath: indexPath)
+//            v.snp_makeConstraints { (make) -> Void in
+//                make.left.right.top.equalTo(self)
+//        }
+        v.backgroundColor = col_darkGray
+        headerView = v as? RYRetweetHeader
+            return v
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        headerView?.snp_makeConstraints(closure: { (make) -> Void in
+            make.width.equalTo(scrWidth)
+        })
+//        headerView?.bounds.size
+        return (headerView?.bounds.size)!
+//        return CGSize(width: scrWidth, height: 200)
+//        let size:CGSize = (description as NSString).boundingRectWithSize(CGSizeMake(CGRectGetWidth(collectionView.bounds) - 20.0, 180.0), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont(name: "Helvetica Neue", size: 14.0)!], context: nil).size
+//        return CGSizeMake(CGRectGetWidth(collectionView.bounds), ceil(size.height))
+    }
+    
 }
 
