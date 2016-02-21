@@ -10,11 +10,10 @@ import UIKit
 import SnapKit
 
 class RYHomeCell: UITableViewCell {
-    var bottomViewTopCon : Constraint?
     var status : RYStatus? {
         didSet {
             originalWeiboView.status = status
-            setUpSubviews()
+            setUI()
         }
     }
     private var isOriginalPic:Bool {
@@ -29,6 +28,9 @@ class RYHomeCell: UITableViewCell {
     //重写构造方法
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        initUI()
+    }
+    private func initUI () {
         self.backgroundColor = col_white95Gray
         contentView.addSubview(originalWeiboView)
         contentView.addSubview(bottomView)
@@ -52,7 +54,6 @@ class RYHomeCell: UITableViewCell {
             make.bottom.equalTo(bottomView.snp_bottom)
         }
     }
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -72,23 +73,18 @@ class RYHomeCell: UITableViewCell {
     //配图视图
     private lazy var picsView : RYPicsView = RYPicsView()
     private lazy var retweetView : RYRetweetView = RYRetweetView()
+    var bottomViewTopCon : Constraint?
 }
 
 // MARK: - 界面设置
 extension RYHomeCell {
     // MARK: - 添加子控件
-    private func setUpSubviews () {
+    private func setUI () {
         bottomViewTopCon?.uninstall()
         if status?.retweeted_status != nil  {
-//            addSubview(retweetView)
-//            contentView.addSubview(retweetView)
             retweetView.status = status?.retweeted_status
             retweetView.backgroundColor = col_retweetCol
             retweetView.hidden = false
-//            retweetView.snp_makeConstraints(closure: { (make) -> Void in
-//                make.top.equalTo(originalWeiboView.snp_bottom)
-//                make.left.right.equalTo(originalWeiboView)
-//            })
             bottomView.snp_updateConstraints(closure: { (make) -> Void in
                 bottomViewTopCon =  make.top.equalTo(retweetView.snp_bottom).constraint
             })

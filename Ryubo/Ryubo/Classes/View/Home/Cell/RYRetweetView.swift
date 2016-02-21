@@ -10,10 +10,9 @@ import UIKit
 import SnapKit
 
 class RYRetweetView: UIView {
-    var con : Constraint?
     var status : RYStatus? {
         didSet {
-            setupUI()
+            setUI()
             lb_test.text = status?.text
             lb_test.textAlignment = .Left
             lb_test.preferredMaxLayoutWidth = scrWidth - 2*margin
@@ -22,6 +21,9 @@ class RYRetweetView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(white: 0.9, alpha: 1)
+        initUI()
+    }
+    private func initUI () {
         addSubview(lb_test)
         //设置约束
         lb_test.snp_makeConstraints { (make) -> Void in
@@ -36,14 +38,13 @@ class RYRetweetView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    private var lb_test:UILabel = UILabel(text: "转发微博", fontSize: 14, textColor: col_darkGray)
     //配图视图
-    private lazy var picsView : RYPicsView = RYPicsView()
-    private func setupUI () {
+    private func setUI () {
         //更新约束
         con?.uninstall()
         if status?.picURLs?.count != 0 {
             addSubview(picsView)
+            picsView.backgroundColor = col_retweetCol
             picsView.picURLs = status?.picURLs
             picsView.snp_makeConstraints(closure: { (make) -> Void in
                 make.top.equalTo(lb_test.snp_bottom).offset(margin)
@@ -58,4 +59,7 @@ class RYRetweetView: UIView {
             })
         }
     }
+    var con : Constraint?
+    private lazy var picsView : RYPicsView = RYPicsView()
+    private var lb_test:UILabel = UILabel(text: "转发微博", fontSize: 14, textColor: col_darkGray)
 }

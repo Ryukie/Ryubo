@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 class RYOriginalWeibo: UIView {
-
     //weibo数据模型
     var status : RYStatus? {
         didSet {
@@ -27,7 +26,7 @@ class RYOriginalWeibo: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpSubView()
+        initUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,10 +38,8 @@ class RYOriginalWeibo: UIView {
     private lazy var lb_name: UILabel = UILabel(text: "上铺老王", fontSize: 14, textColor: col_orange)
     //用户等级
     private lazy var iv_mbRank: UIImageView = UIImageView(image: UIImage(named: "common_icon_membership"))
-    
     //微博时间
     private lazy var lb_time:UILabel = UILabel(text: "22:22", fontSize: 10, textColor: UIColor.lightGrayColor())
-    
     //微博来源
     private lazy var lb_source:UILabel = UILabel(text: "摔坏一角的iPhone7sPlus", fontSize: 10, textColor: UIColor.lightGrayColor())
     //微博认证类型
@@ -58,7 +55,7 @@ class RYOriginalWeibo: UIView {
 
 // MARK: - 布局子控件
 extension RYOriginalWeibo {
-    private func setUpSubView () {
+    private func initUI () {
         self.backgroundColor = col_white95Gray
         addSubview(iv_headIcon)
         addSubview(iv_mbRank)
@@ -69,7 +66,7 @@ extension RYOriginalWeibo {
         addSubview(lb_name)
         addSubview(lb_source)
         addSubview(lb_time)
-        
+        addSubview(picsView)
         //设置约束
         iv_headIcon.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self.snp_top).offset(margin)
@@ -77,7 +74,6 @@ extension RYOriginalWeibo {
             make.size.equalTo(CGSize(width: 35, height: 35))
             
         }
-        
         lb_name.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(iv_headIcon.snp_top)
             make.left.equalTo(iv_headIcon.snp_right).offset(margin)
@@ -87,29 +83,23 @@ extension RYOriginalWeibo {
             make.top.equalTo(lb_name.snp_top)
             make.left.equalTo(lb_name.snp_right).offset(margin)
         }
-        
         lb_time.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(iv_headIcon.snp_right).offset(margin)
             make.bottom.equalTo(iv_headIcon.snp_bottom)
             
         }
-        
         lb_source.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(lb_time.snp_right).offset(margin)
             make.bottom.equalTo(lb_time.snp_bottom)
         }
-        
         iv_verified.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(iv_headIcon.snp_right)
             make.centerY.equalTo(iv_headIcon.snp_bottom)
         }
-        
         lb_content.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(iv_headIcon.snp_left)
             make.top.equalTo(iv_headIcon.snp_bottom).offset(margin)
         }
-        
-        addSubview(picsView)
         picsView.snp_makeConstraints(closure: { (make) -> Void in
             make.left.equalTo(iv_headIcon.snp_left)
             make.top.equalTo(lb_content.snp_bottom).offset(margin)
@@ -117,27 +107,21 @@ extension RYOriginalWeibo {
         
 // MARK: - 设置自动设置行高
         self.snp_updateConstraints { (make) -> Void in
-//            cons =  make.bottom.equalTo(lb_content.snp_bottom).constraint
             cons =  make.bottom.equalTo(picsView.snp_bottom).constraint
         }
     }
 
     private func setPicView () {
         cons?.uninstall()
+        picsView.picURLs = status?.picURLs
         if status?.picURLs?.count != 0 {
             //加载配图视图
-//            addSubview(picsView)
-            picsView.picURLs = status?.picURLs
             picsView.backgroundColor = col_white95Gray
-//            picsView.snp_makeConstraints(closure: { (make) -> Void in
-//                make.left.equalTo(iv_headIcon.snp_left)
-//                make.top.equalTo(lb_content.snp_bottom).offset(margin)
-//            })
+
             self.snp_updateConstraints { (make) -> Void in
                 cons =  make.bottom.equalTo(picsView.snp_bottom).constraint
             }
         } else {
-//        } else if status?.retweeted_status != nil {
             self.snp_updateConstraints { (make) -> Void in
                 cons =  make.bottom.equalTo(lb_content.snp_bottom).constraint
             }

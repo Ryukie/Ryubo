@@ -16,8 +16,6 @@ class RYPicsView: UICollectionView {
             self.reloadData()
         }
     }
-    private var flowLayout : UICollectionViewFlowLayout?
-    
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         flowLayout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
         flowLayout!.minimumInteritemSpacing = picCellMargin
@@ -29,21 +27,24 @@ class RYPicsView: UICollectionView {
         dataSource = self
         registerClass(RYPictureCell.self, forCellWithReuseIdentifier: itemID)
     }
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    private var flowLayout : UICollectionViewFlowLayout?
 }
 //========================================================
 // MARK: - 布局子控件
 extension RYPicsView {
     private func layoutItems () {
         //根据图片数量决定使用何种图片布局
-        // 1 -> 等比例"全屏"
-        // 2~4 -> 四宫格
-        // 5~9 -> 九宫格
         let num  = picURLs?.count ?? 0
+        //没有配图视图
+        if num == 0 {
+            self.snp_updateConstraints { (make) -> Void in
+                make.size.equalTo(CGSizeZero)
+            }
+            return
+        }
         if num == 1 {
             setOnePicView()
             return
@@ -58,7 +59,6 @@ extension RYPicsView {
         self.snp_updateConstraints { (make) -> Void in
             make.size.equalTo(CGSize(width: scrWidth, height: width*row + picCellMargin*(row-1)))
         }
-        
     }
     private func setOnePicView () {
         flowLayout!.itemSize = CGSize(width:180, height: 120)//长 < 宽
@@ -72,8 +72,6 @@ extension RYPicsView {
         self.snp_updateConstraints { (make) -> Void in
             make.size.equalTo(CGSize(width: scrWidth*0.681, height: width*2 + picCellMargin*3))
         }
-    }
-    private func setNinePicView () {
     }
 }
 //========================================================
