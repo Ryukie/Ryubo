@@ -33,7 +33,7 @@ class RYHomeController: RYBasicVisitorTVC {
     //准备tableView
     private func prepareTableView() {
         self.tableView.registerClass(RYHomeCell.self, forCellReuseIdentifier: HomeCellId)
-        self.tableView.rowHeight = 200
+        self.tableView.rowHeight = 44
         autoRowHeight()
     }
     

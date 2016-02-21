@@ -12,31 +12,17 @@ class RYPicsView: UICollectionView {
     private let itemID = "picView"
     var picURLs : [NSURL]? {
         didSet {
-//            //根据图片个数决定有多少个imageView
-//            if picURLs?.count != 0 {
-//                for item in picURLs! {
-//                    let iv = creatAImageView(item)
-//                    ivs_pic?.append(iv)
-//                }
-//            }
             layoutItems()
             self.reloadData()
         }
     }
-//    private var ivs_pic : [UIImageView]?
-//    
-//    private func creatAImageView (picURL:NSURL) -> UIImageView {
-//        let iv = UIImageView()
-//        return iv
-//    }
-    
     private var flowLayout : UICollectionViewFlowLayout?
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         flowLayout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
         flowLayout!.minimumInteritemSpacing = picCellMargin
         flowLayout!.minimumLineSpacing = picCellMargin
-        let insert = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        let insert = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         flowLayout?.sectionInset = insert
         super.init(frame: frame, collectionViewLayout: flowLayout!)
         scrollEnabled = false
@@ -81,10 +67,10 @@ extension RYPicsView {
         }
     }
     private func setFourPicView () {
-        let width = (scrWidth - picCellMargin*3)/2
+        let width = (scrWidth*0.681 - picCellMargin*3)/2
         flowLayout!.itemSize = CGSize(width:width, height: width)
         self.snp_updateConstraints { (make) -> Void in
-            make.size.equalTo(CGSize(width: scrWidth, height: width*2 + picCellMargin*3))
+            make.size.equalTo(CGSize(width: scrWidth*0.681, height: width*2 + picCellMargin*3))
         }
     }
     private func setNinePicView () {

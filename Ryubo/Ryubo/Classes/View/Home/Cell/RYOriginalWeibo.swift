@@ -14,7 +14,7 @@ class RYOriginalWeibo: UIView {
     //weibo数据模型
     var status : RYStatus? {
         didSet {
-            setRetweetView()
+            setPicView()
             iv_headIcon.sd_setImageWithURL(status?.user?.headImageURL, placeholderImage: UIImage(named: "avatar_default_big"))
             lb_name.text = status?.user?.name
             iv_mbRank.image = status?.user?.mbrank_image
@@ -51,6 +51,7 @@ class RYOriginalWeibo: UIView {
     private lazy var lb_content:UILabel = UILabel(text: "你成功的引起了我的注意", fontSize: 14, textColor: UIColor.darkGrayColor())
     //转发视图
     private lazy var v_retweet:RYRetweetView = RYRetweetView()
+    private lazy var picsView : RYPicsView = RYPicsView()
     var cons : Constraint?
 }
 
@@ -107,27 +108,38 @@ extension RYOriginalWeibo {
             make.left.equalTo(iv_headIcon.snp_left)
             make.top.equalTo(iv_headIcon.snp_bottom).offset(margin)
         }
-// MARK: - 设置自动设置行高
         
-        self.snp_makeConstraints { (make) -> Void in
-            cons =  make.bottom.equalTo(lb_content.snp_bottom).offset(margin).constraint
+        addSubview(picsView)
+        picsView.snp_makeConstraints(closure: { (make) -> Void in
+            make.left.equalTo(iv_headIcon.snp_left)
+            make.top.equalTo(lb_content.snp_bottom).offset(margin)
+        })
+        
+// MARK: - 设置自动设置行高
+        self.snp_updateConstraints { (make) -> Void in
+//            cons =  make.bottom.equalTo(lb_content.snp_bottom).constraint
+            cons =  make.bottom.equalTo(picsView.snp_bottom).constraint
         }
-        setRetweetView()
     }
-    
-// MARK: - 根据是否是转发微博来添加转发视图
-    private func setRetweetView () {
-        if status?.retweeted_status != nil {
-            addSubview(v_retweet)
-            v_retweet.status = status
-            v_retweet.snp_makeConstraints(closure: { (make) -> Void in
-                make.top.equalTo(lb_content.snp_bottom)
-                make.left.right.equalTo(self)
-            })
-            //先卸载之前的约束
+
+    private func setPicView () {
+        cons?.uninstall()
+        if status?.picURLs?.count != 0 {
+            //加载配图视图
+//            addSubview(picsView)
+            picsView.picURLs = status?.picURLs
+            picsView.backgroundColor = col_white95Gray
+//            picsView.snp_makeConstraints(closure: { (make) -> Void in
+//                make.left.equalTo(iv_headIcon.snp_left)
+//                make.top.equalTo(lb_content.snp_bottom).offset(margin)
+//            })
             self.snp_updateConstraints { (make) -> Void in
-                cons!.uninstall()
-                make.bottom.equalTo(v_retweet.snp_bottom)
+                cons =  make.bottom.equalTo(picsView.snp_bottom).constraint
+            }
+        } else {
+//        } else if status?.retweeted_status != nil {
+            self.snp_updateConstraints { (make) -> Void in
+                cons =  make.bottom.equalTo(lb_content.snp_bottom).constraint
             }
         }
     }

@@ -7,22 +7,14 @@
 //
 
 import UIKit
+import SnapKit
 
 class RYHomeCell: UITableViewCell {
+    var bottomViewTopCon : Constraint?
     var status : RYStatus? {
         didSet {
+            originalWeiboView.status = status
             setUpSubviews()
-            //一旦设置了微博数据模型就为View赋值
-            if status?.pic_urls?.count != 0 {
-                originalWeiboView.status = status
-                picsView.picURLs = status?.picURLs
-                picsView.backgroundColor = col_white95Gray
-            }
-            else if (status?.retweeted_status != nil && status?.retweeted_status?.pic_urls?.count != 0) {
-                originalWeiboView.status = status?.retweeted_status
-                picsView.picURLs = status?.retweeted_status?.picURLs
-                picsView.backgroundColor = col_retweetCol
-            }
         }
     }
     private var isOriginalPic:Bool {
@@ -37,7 +29,28 @@ class RYHomeCell: UITableViewCell {
     //重写构造方法
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        setUpSubviews()
+        self.backgroundColor = col_white95Gray
+        contentView.addSubview(originalWeiboView)
+        contentView.addSubview(bottomView)
+        contentView.addSubview(retweetView)
+        originalWeiboView.snp_makeConstraints { (make) -> Void in
+            make.top.left.right.equalTo(contentView)
+        }
+        bottomView.snp_makeConstraints { (make) -> Void in
+            make.left.right.equalTo(contentView)
+            make.height.equalTo(35)
+            bottomViewTopCon = make.top.equalTo(retweetView.snp_bottom).constraint
+        }
+        retweetView.snp_makeConstraints(closure: { (make) -> Void in
+            make.top.equalTo(originalWeiboView.snp_bottom)
+            make.left.right.equalTo(originalWeiboView)
+        })
+        
+        //给contenView设置约束条件
+        contentView.snp_makeConstraints { (make) -> Void in
+            make.left.right.top.equalTo(self)
+            make.bottom.equalTo(bottomView.snp_bottom)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -46,10 +59,6 @@ class RYHomeCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        setUpSubviews()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -62,59 +71,32 @@ class RYHomeCell: UITableViewCell {
     private lazy var bottomView : RYBottomView = RYBottomView()
     //配图视图
     private lazy var picsView : RYPicsView = RYPicsView()
+    private lazy var retweetView : RYRetweetView = RYRetweetView()
 }
 
 // MARK: - 界面设置
 extension RYHomeCell {
     // MARK: - 添加子控件
     private func setUpSubviews () {
-//        print(isOriginalPic)
-        self.backgroundColor = col_white95Gray
-        contentView.addSubview(originalWeiboView)
-        //判断是否存在原创微博配图
-        //加载配图视图
-        contentView.addSubview(picsView)
-        
-        
-        contentView.addSubview(bottomView)
-        originalWeiboView.snp_makeConstraints { (make) -> Void in
-            make.top.left.right.equalTo(contentView)
-        }
-        
-        
-        //不使用更新约束的话  重用的时候会产生多余的约束
-        if isOriginalPic==false {
-            picsView.snp_remakeConstraints(closure: { (make) -> Void in
-                make.left.equalTo(contentView)
-                make.top.equalTo(originalWeiboView.snp_bottom)
-                make.size.equalTo(CGSizeZero)
-            })
-            
-            bottomView.snp_remakeConstraints(closure: { (make) -> Void in
-                make.left.right.equalTo(contentView)
-                make.height.equalTo(35)
-                make.top.equalTo(originalWeiboView.snp_bottom)
+        bottomViewTopCon?.uninstall()
+        if status?.retweeted_status != nil  {
+//            addSubview(retweetView)
+//            contentView.addSubview(retweetView)
+            retweetView.status = status?.retweeted_status
+            retweetView.backgroundColor = col_retweetCol
+            retweetView.hidden = false
+//            retweetView.snp_makeConstraints(closure: { (make) -> Void in
+//                make.top.equalTo(originalWeiboView.snp_bottom)
+//                make.left.right.equalTo(originalWeiboView)
+//            })
+            bottomView.snp_updateConstraints(closure: { (make) -> Void in
+                bottomViewTopCon =  make.top.equalTo(retweetView.snp_bottom).constraint
             })
         }else {
-            picsView.snp_remakeConstraints(closure: { (make) -> Void in
-                make.left.equalTo(contentView)
-                make.top.equalTo(originalWeiboView.snp_bottom)
-                make.size.equalTo(CGSize(width: 100, height: 100))
-            })
-            
-            bottomView.snp_remakeConstraints { (make) -> Void in
-                make.left.right.equalTo(contentView)
-                make.height.equalTo(35)
-                make.top.equalTo(picsView.snp_bottom)
+            retweetView.hidden = true
+            bottomView.snp_updateConstraints { (make) -> Void in
+                bottomViewTopCon = make.top.equalTo(originalWeiboView.snp_bottom).constraint
             }
         }
-
-        //给contenView设置约束条件
-        contentView.snp_makeConstraints { (make) -> Void in
-            make.left.right.top.equalTo(self)
-            make.bottom.equalTo(bottomView.snp_bottom)
-        }
-//        self.layoutIfNeeded()
     }
-    
 }
