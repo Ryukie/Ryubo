@@ -61,7 +61,7 @@ class RYHomeController: RYBasicVisitorTVC {
             }
             //请求数据一定成功
             //刷新列表
-            NSThread.sleepForTimeInterval(2)
+//            NSThread.sleepForTimeInterval(2)
             self.tableView.reloadData()
             
         }
