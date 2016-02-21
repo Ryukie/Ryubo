@@ -20,8 +20,8 @@ class RYPicsView: UICollectionView {
         flowLayout = UICollectionViewFlowLayout()//一定要有个非空的布局对象
         flowLayout!.minimumInteritemSpacing = picCellMargin
         flowLayout!.minimumLineSpacing = picCellMargin
-        let insert = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        flowLayout?.sectionInset = insert
+//        let insert = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 5)
+//        flowLayout?.sectionInset = insert
         super.init(frame: frame, collectionViewLayout: flowLayout!)
         scrollEnabled = false
         dataSource = self
@@ -53,11 +53,11 @@ extension RYPicsView {
             setFourPicView()
             return
         }
-        let width = (scrWidth - picCellMargin*4)/3
+        let width = (scrWidth - picCellMargin*2 - margin*2)/3
         let row = CGFloat((num-1)/3 + 1)
         flowLayout!.itemSize = CGSize(width:width, height: width)
         self.snp_updateConstraints { (make) -> Void in
-            make.size.equalTo(CGSize(width: scrWidth, height: width*row + picCellMargin*(row-1)))
+            make.size.equalTo(CGSize(width: width*3 + 2*picCellMargin, height: width*row + picCellMargin*(row-1)))
         }
     }
     private func setOnePicView () {
@@ -67,10 +67,10 @@ extension RYPicsView {
         }
     }
     private func setFourPicView () {
-        let width = (scrWidth*0.681 - picCellMargin*3)/2
+        let width = (scrWidth*0.681 - picCellMargin - margin*2)/2
         flowLayout!.itemSize = CGSize(width:width, height: width)
         self.snp_updateConstraints { (make) -> Void in
-            make.size.equalTo(CGSize(width: scrWidth*0.681, height: width*2 + picCellMargin*3))
+            make.size.equalTo(CGSize(width: 2*width + picCellMargin, height: width*2 + picCellMargin))
         }
     }
 }
