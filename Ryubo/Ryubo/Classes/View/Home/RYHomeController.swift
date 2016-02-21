@@ -38,7 +38,7 @@ class RYHomeController: RYBasicVisitorTVC {
         refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
     }
     @objc private func loadData() {
-        RYStatusViewModel.sharedRYStatusViewModel.loadHomeData { (tempArr) -> () in
+        RYStatusViewModel.sharedRYStatusViewModel.loadHomeData{ (tempArr) -> () in
             SVProgressHUD.dismiss()
             //停止刷新数据
             self.refreshControl?.endRefreshing()
@@ -59,12 +59,12 @@ class RYHomeController: RYBasicVisitorTVC {
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.statuses.count
+        return RYStatusViewModel.sharedRYStatusViewModel.statuses.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //手写代码 必须手动注册cell
         let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath) as! RYHomeCell
-        cell.status = statuses[indexPath.row]
+        cell.status = RYStatusViewModel.sharedRYStatusViewModel.statuses[indexPath.row]
         return cell
     }
 }

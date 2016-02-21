@@ -10,12 +10,13 @@ import UIKit
 import SVProgressHUD
 
 class RYStatusViewModel: NSObject {
+    var statuses = [RYStatus]()
     static let sharedRYStatusViewModel : RYStatusViewModel = RYStatusViewModel()
     private override init() {
         super.init()
     }
     // MARK: - 加载首页数据
-    func loadHomeData(withSetStatuses:([RYStatus])->()) {
+    func loadHomeData(withSetStatuses:([RYStatus]) -> ()) {
         let dataURLString = "https://api.weibo.com/2/statuses/home_timeline.json"
         //获取网络请求管理对象
         let manager = RYNetworkTool.sharedNetTool
@@ -24,19 +25,24 @@ class RYStatusViewModel: NSObject {
             SVProgressHUD.showErrorWithStatus("请登录")
             return
         }
-        let parameters = ["access_token":token]
+        var parameters = ["access_token":token]
+        //下拉刷新 需要给服务器传递 since_id
+            let since_id = self.statuses.first?.id ?? 0
+            if since_id > 0 {
+                //将开始点加入参数列表
+                parameters["since_id"] = "\(since_id)"
+            }
         manager.GET(dataURLString, parameters: parameters, progress: { (_ ) -> Void in
 //                SVProgressHUD.show()
             }, success: { (_ , result) -> Void in
-//            print(result)
             //将数据转化为字典结构
             guard let dict = result as? [String:AnyObject] else {
-//                print("数据结构错误")
+                print("数据结构错误")
                 SVProgressHUD.showErrorWithStatus(netErrorText)
                 return
             }
             guard let array = dict["statuses"] as? [[String : AnyObject]] else{
-//                print("数据结构错误")
+                print("数据结构错误")
                 SVProgressHUD.showErrorWithStatus(netErrorText)
                 return
             }
@@ -47,6 +53,15 @@ class RYStatusViewModel: NSObject {
                 let i = RYStatus(dict: item)//KVC
                 tempArr.append(i)
             }
+                //判断是 下拉还是 上拉
+                if since_id > 0 {
+                    //下拉刷新
+                    self.statuses = tempArr + self.statuses
+                }else {
+                    //首次加载数据
+                    self.statuses = tempArr
+                }
+                
             withSetStatuses(tempArr)
             }) { (_ , error ) -> Void in
                 print(error)
