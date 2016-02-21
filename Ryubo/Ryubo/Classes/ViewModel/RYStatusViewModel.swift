@@ -16,7 +16,7 @@ class RYStatusViewModel: NSObject {
         super.init()
     }
     // MARK: - 加载首页数据
-    func loadHomeData(withSetStatuses:([RYStatus]) -> ()) {
+    func loadHomeData(isPulling: Bool, finished: (isSuccess: Bool) -> ()) {
         let dataURLString = "https://api.weibo.com/2/statuses/home_timeline.json"
         //获取网络请求管理对象
         let manager = RYNetworkTool.sharedNetTool
@@ -26,12 +26,27 @@ class RYStatusViewModel: NSObject {
             return
         }
         var parameters = ["access_token":token]
+        
         //下拉刷新 需要给服务器传递 since_id
-            let since_id = self.statuses.first?.id ?? 0
-            if since_id > 0 {
-                //将开始点加入参数列表
-                parameters["since_id"] = "\(since_id)"
-            }
+        //上拉加载更多许要传递 max_id参数
+        //since_id 和 max_id 互斥参数 二者只能传递一个
+        var since_id: Int64 = 0
+        var max_id: Int64 = 0
+        if isPulling {
+            //上拉加载更多数据
+            max_id = self.statuses.last?.id ?? 0
+        } else {
+            //下拉刷新
+            since_id = self.statuses.first?.id ?? 0
+        }
+        //下拉刷新 需要给服务器传递 since_id
+        if since_id > 0 {
+            //将开始点加入参数列表
+            parameters["since_id"] = "\(since_id)"
+        }
+        if max_id > 0 {
+            parameters["max_id"] = "\(max_id)"
+        }
         manager.GET(dataURLString, parameters: parameters, progress: { (_ ) -> Void in
 //                SVProgressHUD.show()
             }, success: { (_ , result) -> Void in
@@ -55,15 +70,19 @@ class RYStatusViewModel: NSObject {
             }
                 //判断是 下拉还是 上拉
                 if since_id > 0 {
-                    //下拉刷新
+                    //下拉
                     self.statuses = tempArr + self.statuses
-                }else {
+                } else if max_id > 0 {
+                    //上拉
+                    self.statuses += tempArr
+                } else {
                     //首次加载数据
                     self.statuses = tempArr
                 }
                 
-            withSetStatuses(tempArr)
+            finished(isSuccess: true)
             }) { (_ , error ) -> Void in
+                finished(isSuccess: false)
                 print(error)
                 SVProgressHUD.showErrorWithStatus(netErrorText)
         }

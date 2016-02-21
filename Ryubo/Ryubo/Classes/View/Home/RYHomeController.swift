@@ -14,7 +14,7 @@ private let HomeCellId = "HomeCell"
 
 class RYHomeController: RYBasicVisitorTVC {
 
-    private lazy var statuses = [RYStatus]()
+//    private lazy var statuses = [RYStatus]()
     override func viewDidLoad() {
         super.viewDidLoad()
         guard userLogin == true else {
@@ -36,14 +36,34 @@ class RYHomeController: RYBasicVisitorTVC {
         //下拉刷新
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
+        //添加底部小菊花   上拉刷新
+        tableView.tableFooterView = indicatorView
+        
     }
     @objc private func loadData() {
-        RYStatusViewModel.sharedRYStatusViewModel.loadHomeData{ (tempArr) -> () in
+        //通过判断上啦小菊花是否转动排判断 上下啦动
+        RYStatusViewModel.sharedRYStatusViewModel.loadHomeData(indicatorView.isAnimating()) { (isSuccess) -> () in
             SVProgressHUD.dismiss()
             //停止刷新数据
             self.refreshControl?.endRefreshing()
-            self.statuses = tempArr
+//            self.statuses = tempArr
+            
+            if !isSuccess {
+                //请求首页数据失败
+                SVProgressHUD.showErrorWithStatus(netErrorText)
+                return
+            }
+            
+            //停止 上拉加载更多数据的小菊花转动动画
+            if self.indicatorView.isAnimating() {
+                //停止转动
+                self.indicatorView.stopAnimating()
+            }
+            //请求数据一定成功
+            //刷新列表
+            NSThread.sleepForTimeInterval(2)
             self.tableView.reloadData()
+            
         }
     }
     private func autoRowHeight () {
@@ -65,6 +85,15 @@ class RYHomeController: RYBasicVisitorTVC {
         //手写代码 必须手动注册cell
         let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath) as! RYHomeCell
         cell.status = RYStatusViewModel.sharedRYStatusViewModel.statuses[indexPath.row]
+        //将要加载最后一个cell的时候 并且小菊花没有转动的情况下
+        if indexPath.row == RYStatusViewModel.sharedRYStatusViewModel.statuses.count - 1 && !indicatorView.isAnimating(){
+            //1.转动小菊花
+            indicatorView.startAnimating()
+            //开始加载数据 加载更多数据
+            loadData()
+        }
         return cell
     }
+    //小菊花
+    private lazy var indicatorView: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
 }
