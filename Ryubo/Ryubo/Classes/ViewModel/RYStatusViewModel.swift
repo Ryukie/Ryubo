@@ -10,6 +10,10 @@ import UIKit
 import SVProgressHUD
 
 class RYStatusViewModel: NSObject {
+    static let sharedRYStatusViewModel : RYStatusViewModel = RYStatusViewModel()
+    private override init() {
+        super.init()
+    }
     // MARK: - 加载首页数据
     func loadHomeData(withSetStatuses:([RYStatus])->()) {
         let dataURLString = "https://api.weibo.com/2/statuses/home_timeline.json"

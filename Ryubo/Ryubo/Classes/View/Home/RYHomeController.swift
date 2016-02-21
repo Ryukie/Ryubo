@@ -23,11 +23,7 @@ class RYHomeController: RYBasicVisitorTVC {
         }
         prepareTableView()
         SVProgressHUD.show()
-        RYStatusViewModel().loadHomeData { (tempArr) -> () in
-            SVProgressHUD.dismiss()
-            self.statuses = tempArr
-            self.tableView.reloadData()
-        }
+        loadData()
     }
     
     //准备tableView
@@ -37,8 +33,19 @@ class RYHomeController: RYBasicVisitorTVC {
         tableView.rowHeight = 44
         tableView.backgroundColor = col_lightGray
         autoRowHeight()
+        //下拉刷新
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
     }
-    
+    @objc private func loadData() {
+        RYStatusViewModel.sharedRYStatusViewModel.loadHomeData { (tempArr) -> () in
+            SVProgressHUD.dismiss()
+            //停止刷新数据
+            self.refreshControl?.endRefreshing()
+            self.statuses = tempArr
+            self.tableView.reloadData()
+        }
+    }
     private func autoRowHeight () {
         //1.设置行高为自动计算行高
         //2.设置预估行高
