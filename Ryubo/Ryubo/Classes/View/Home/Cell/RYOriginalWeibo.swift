@@ -14,7 +14,6 @@ class RYOriginalWeibo: UIView {
     //weibo数据模型
     var status : RYStatus? {
         didSet {
-//            print(__FUNCTION__)
             setRetweetView()
             iv_headIcon.sd_setImageWithURL(status?.user?.headImageURL, placeholderImage: UIImage(named: "avatar_default_big"))
             lb_name.text = status?.user?.name
@@ -27,7 +26,6 @@ class RYOriginalWeibo: UIView {
     }
     
     override init(frame: CGRect) {
-//        print(__FUNCTION__)
         super.init(frame: frame)
         setUpSubView()
     }
@@ -53,10 +51,6 @@ class RYOriginalWeibo: UIView {
     private lazy var lb_content:UILabel = UILabel(text: "你成功的引起了我的注意", fontSize: 14, textColor: UIColor.darkGrayColor())
     //转发视图
     private lazy var v_retweet:RYRetweetView = RYRetweetView()
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        setRetweetView()
-//    }
     var cons : Constraint?
 }
 
@@ -125,6 +119,7 @@ extension RYOriginalWeibo {
     private func setRetweetView () {
         if status?.retweeted_status != nil {
             addSubview(v_retweet)
+            v_retweet.status = status
             v_retweet.snp_makeConstraints(closure: { (make) -> Void in
                 make.top.equalTo(lb_content.snp_bottom)
                 make.left.right.equalTo(self)

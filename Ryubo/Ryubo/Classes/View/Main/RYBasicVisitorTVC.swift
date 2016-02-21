@@ -13,9 +13,6 @@ import UIKit
 class RYBasicVisitorTVC: UITableViewController,RYVisitorViewDelegate {
     
     //定义用户是否登录的标示
-//    var userLogin = true
-//    var userLogin = false
-//    var userLogin = RYUserAccount.loadAccount() != nil
     var userLogin = RYAccountViewModel.sharedAccountViewModel.userLogin //通过是否取到token来判断是否登陆成功
 
     

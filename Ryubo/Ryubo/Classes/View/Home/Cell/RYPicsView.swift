@@ -12,23 +12,23 @@ class RYPicsView: UICollectionView {
     private let itemID = "picView"
     var picURLs : [NSURL]? {
         didSet {
-            //根据图片个数决定有多少个imageView
-            if picURLs?.count != 0 {
-                for item in picURLs! {
-                    let iv = creatAImageView(item)
-                    ivs_pic?.append(iv)
-                }
-            }
-            layoutImageViews()
+//            //根据图片个数决定有多少个imageView
+//            if picURLs?.count != 0 {
+//                for item in picURLs! {
+//                    let iv = creatAImageView(item)
+//                    ivs_pic?.append(iv)
+//                }
+//            }
+            layoutItems()
             self.reloadData()
         }
     }
-    private var ivs_pic : [UIImageView]?
-    
-    private func creatAImageView (picURL:NSURL) -> UIImageView {
-        let iv = UIImageView()
-        return iv
-    }
+//    private var ivs_pic : [UIImageView]?
+//    
+//    private func creatAImageView (picURL:NSURL) -> UIImageView {
+//        let iv = UIImageView()
+//        return iv
+//    }
     
     private var flowLayout : UICollectionViewFlowLayout?
     
@@ -40,7 +40,6 @@ class RYPicsView: UICollectionView {
         flowLayout?.sectionInset = insert
         super.init(frame: frame, collectionViewLayout: flowLayout!)
         scrollEnabled = false
-        backgroundColor = col_white95Gray
         dataSource = self
         registerClass(RYPictureCell.self, forCellWithReuseIdentifier: itemID)
     }
@@ -53,7 +52,7 @@ class RYPicsView: UICollectionView {
 //========================================================
 // MARK: - 布局子控件
 extension RYPicsView {
-    private func layoutImageViews () {
+    private func layoutItems () {
         //根据图片数量决定使用何种图片布局
         // 1 -> 等比例"全屏"
         // 2~4 -> 四宫格

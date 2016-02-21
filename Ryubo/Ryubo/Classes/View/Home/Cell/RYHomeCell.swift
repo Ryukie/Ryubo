@@ -13,16 +13,22 @@ class RYHomeCell: UITableViewCell {
         didSet {
             setUpSubviews()
             //一旦设置了微博数据模型就为View赋值
-            originalWeiboView.status = status
-//            print(__FUNCTION__)
             if status?.pic_urls?.count != 0 {
+                originalWeiboView.status = status
                 picsView.picURLs = status?.picURLs
+                picsView.backgroundColor = col_white95Gray
+            }
+            else if (status?.retweeted_status != nil && status?.retweeted_status?.pic_urls?.count != 0) {
+                originalWeiboView.status = status?.retweeted_status
+                picsView.picURLs = status?.retweeted_status?.picURLs
+                picsView.backgroundColor = col_retweetCol
             }
         }
     }
     private var isOriginalPic:Bool {
-//        print(__FUNCTION__)
-        if status?.pic_urls?.count != 0 {
+        if (status?.pic_urls?.count != 0 ){
+            return true
+        }else if  (status?.retweeted_status != nil && status?.retweeted_status?.pic_urls?.count != 0) {
             return true
         }
         return false
@@ -62,9 +68,7 @@ class RYHomeCell: UITableViewCell {
 extension RYHomeCell {
     // MARK: - 添加子控件
     private func setUpSubviews () {
-        
 //        print(isOriginalPic)
-        
         self.backgroundColor = col_white95Gray
         contentView.addSubview(originalWeiboView)
         //判断是否存在原创微博配图

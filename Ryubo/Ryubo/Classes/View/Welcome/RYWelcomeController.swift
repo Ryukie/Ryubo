@@ -106,6 +106,7 @@ class RYWelcomeController: UIViewController {
     //用户头像
     private lazy var iv_headIcon : UIImageView = UIImageView(image: UIImage(named: "avatar_default_big"))
     //欢迎语
-    private lazy var lb_welcomeWords : UILabel = UILabel(text: RYAccountViewModel.sharedAccountViewModel.userName! + " 欢迎回来", fontSize: 16, textColor: UIColor.grayColor())
+//    private lazy var lb_welcomeWords : UILabel = UILabel(text: RYAccountViewModel.sharedAccountViewModel.userName! + " 欢迎回来", fontSize: 16, textColor: UIColor.grayColor())
+    private lazy var lb_welcomeWords : UILabel = UILabel(text:" 欢迎回来", fontSize: 16, textColor: UIColor.grayColor())
     
 }

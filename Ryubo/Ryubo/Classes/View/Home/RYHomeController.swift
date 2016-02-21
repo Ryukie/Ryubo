@@ -17,7 +17,6 @@ class RYHomeController: RYBasicVisitorTVC {
     private lazy var statuses = [RYStatus]()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(userLogin)
         guard userLogin == true else {
             visitorView?.setVisitorViewWithInfo(nil, titleText: "关注一些人，你将打开新世界的大门")
             return
@@ -29,7 +28,6 @@ class RYHomeController: RYBasicVisitorTVC {
             self.statuses = tempArr
             self.tableView.reloadData()
         }
-//        self.tableView.allowsSelection = false
     }
     
     //准备tableView
@@ -58,7 +56,6 @@ class RYHomeController: RYBasicVisitorTVC {
         //手写代码 必须手动注册cell
         let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath) as! RYHomeCell
         cell.status = statuses[indexPath.row]
-//        print(cell.status?.retweeted_status)
         return cell
     }
 }
