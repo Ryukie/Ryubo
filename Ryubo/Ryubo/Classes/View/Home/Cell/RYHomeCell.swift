@@ -31,7 +31,9 @@ class RYHomeCell: UITableViewCell {
         initUI()
     }
     private func initUI () {
-        self.backgroundColor = col_white95Gray
+        selectionStyle = .None // 设置选中无样式
+//        backgroundColor = col_white95Gray
+        backgroundColor = col_white
         contentView.addSubview(originalWeiboView)
         contentView.addSubview(bottomView)
         contentView.addSubview(retweetView)

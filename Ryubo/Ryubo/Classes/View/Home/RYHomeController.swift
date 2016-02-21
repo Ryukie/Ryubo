@@ -32,8 +32,10 @@ class RYHomeController: RYBasicVisitorTVC {
     
     //准备tableView
     private func prepareTableView() {
-        self.tableView.registerClass(RYHomeCell.self, forCellReuseIdentifier: HomeCellId)
-        self.tableView.rowHeight = 44
+        tableView.separatorStyle = .None//隐藏分割线
+        tableView.registerClass(RYHomeCell.self, forCellReuseIdentifier: HomeCellId)
+        tableView.rowHeight = 44
+        tableView.backgroundColor = col_lightGray
         autoRowHeight()
     }
     

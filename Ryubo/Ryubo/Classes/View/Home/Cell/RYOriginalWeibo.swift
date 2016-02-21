@@ -107,7 +107,7 @@ extension RYOriginalWeibo {
         
 // MARK: - 设置自动设置行高
         self.snp_updateConstraints { (make) -> Void in
-            cons =  make.bottom.equalTo(picsView.snp_bottom).constraint
+            cons =  make.bottom.equalTo(picsView.snp_bottom).offset(margin).constraint
         }
     }
 
@@ -119,11 +119,11 @@ extension RYOriginalWeibo {
             picsView.backgroundColor = col_white95Gray
 
             self.snp_updateConstraints { (make) -> Void in
-                cons =  make.bottom.equalTo(picsView.snp_bottom).constraint
+                cons =  make.bottom.equalTo(picsView.snp_bottom).offset(margin).constraint
             }
         } else {
             self.snp_updateConstraints { (make) -> Void in
-                cons =  make.bottom.equalTo(lb_content.snp_bottom).constraint
+                cons =  make.bottom.equalTo(lb_content.snp_bottom).offset(margin).constraint
             }
         }
     }

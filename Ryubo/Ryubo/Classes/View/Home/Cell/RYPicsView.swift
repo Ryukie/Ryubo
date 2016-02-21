@@ -63,7 +63,7 @@ extension RYPicsView {
     private func setOnePicView () {
         flowLayout!.itemSize = CGSize(width:180, height: 120)//长 < 宽
         self.snp_updateConstraints { (make) -> Void in
-            make.size.equalTo(CGSize(width: scrWidth, height: 120))
+            make.size.equalTo(CGSize(width: 180, height: 120))
         }
     }
     private func setFourPicView () {
