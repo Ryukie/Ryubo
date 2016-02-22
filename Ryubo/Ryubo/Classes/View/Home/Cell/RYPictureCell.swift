@@ -38,6 +38,7 @@ class RYPictureCell: UICollectionViewCell {
         //将图片换成高清图片
         return iv
     }()
+    
 //MARK: - 设置视图
     private func setupUI() {
         contentView.addSubview(iconView)

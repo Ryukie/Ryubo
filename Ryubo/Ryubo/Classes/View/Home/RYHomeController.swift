@@ -13,8 +13,6 @@ import SVProgressHUD
 private let HomeCellId = "HomeCell"
 
 class RYHomeController: RYBasicVisitorTVC {
-
-//    private lazy var statuses = [RYStatus]()
     override func viewDidLoad() {
         super.viewDidLoad()
         guard userLogin == true else {
@@ -58,7 +56,6 @@ class RYHomeController: RYBasicVisitorTVC {
             }
             //请求数据一定成功
             //刷新列表
-//            NSThread.sleepForTimeInterval(2)
             if !self.tableView.dragging {
                 //如果是一直拉着就不刷新
                 self.tableView.reloadData()
@@ -93,7 +90,6 @@ class RYHomeController: RYBasicVisitorTVC {
         cell.status = RYStatusViewModel.sharedRYStatusViewModel.statuses[indexPath.row]
         return cell
     }
-    let myRefresh = RYRefresh()
     //小菊花
     private lazy var indicatorView: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
 }
