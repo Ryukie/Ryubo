@@ -35,6 +35,7 @@ class RYPictureCell: UICollectionViewCell {
         iv.contentMode = .ScaleAspectFill
         //手写代码 不会自动设置剪裁
         iv.clipsToBounds = true
+        //将图片换成高清图片
         return iv
     }()
 //MARK: - 设置视图

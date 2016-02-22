@@ -27,7 +27,8 @@ class RYStatus: NSObject {
                 //不初始化的话就是nil 无法添加进去
                 picURLs = [NSURL]()
                 for item in URLStrings {
-                    let URLString = item["thumbnail_pic"]
+                    var URLString = item["thumbnail_pic"]
+                    URLString = URLString?.stringByReplacingOccurrencesOfString("thumbnail", withString: "bmiddle")
                     let picURL = NSURL(string:URLString!)
                     picURLs?.append(picURL!)
                 }
