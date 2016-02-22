@@ -29,6 +29,7 @@
 		4A9E01181C64D6BA0045AC09 /* RYGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E01171C64D6BA0045AC09 /* RYGlobal.swift */; };
 		4A9E011A1C64DF7F0045AC09 /* RYNetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E01191C64DF7F0045AC09 /* RYNetworkTool.swift */; };
 		4AACCEE61C7AB0A400BDFDF5 /* RYRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AACCEE51C7AB0A400BDFDF5 /* RYRefresh.swift */; };
+		4AACCEE81C7B293200BDFDF5 /* RYComposeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AACCEE71C7B293200BDFDF5 /* RYComposeVC.swift */; };
 		4AD248A71C6883BC003F110A /* RYUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A61C6883BC003F110A /* RYUserAccount.swift */; };
 		4AD248A91C68A04D003F110A /* RYAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */; };
 		4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */; };
@@ -68,6 +69,7 @@
 		4A9E01171C64D6BA0045AC09 /* RYGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYGlobal.swift; sourceTree = "<group>"; };
 		4A9E01191C64DF7F0045AC09 /* RYNetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYNetworkTool.swift; sourceTree = "<group>"; };
 		4AACCEE51C7AB0A400BDFDF5 /* RYRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRefresh.swift; sourceTree = "<group>"; };
+		4AACCEE71C7B293200BDFDF5 /* RYComposeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYComposeVC.swift; sourceTree = "<group>"; };
 		4AD248A61C6883BC003F110A /* RYUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYUserAccount.swift; sourceTree = "<group>"; };
 		4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYAccountViewModel.swift; sourceTree = "<group>"; };
 		4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYWelcomeController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		4A5B88C81C5CA7D20043572D /* Compose */ = {
 			isa = PBXGroup;
 			children = (
+				4AACCEE71C7B293200BDFDF5 /* RYComposeVC.swift */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				4AACCEE61C7AB0A400BDFDF5 /* RYRefresh.swift in Sources */,
 				4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */,
 				4A5B88DC1C5CB4400043572D /* RYHomeController.swift in Sources */,
+				4AACCEE81C7B293200BDFDF5 /* RYComposeVC.swift in Sources */,
 				4ADA071B1C77FAA300A960E4 /* RYCommentVC.swift in Sources */,
 				4A7919231C749E870045DD08 /* RYAuthController.swift in Sources */,
 				4ADA07231C7803F200A960E4 /* RYBasicNaviController.swift in Sources */,

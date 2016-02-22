@@ -45,6 +45,10 @@ class RYTabBarController: UITabBarController {
     
     // MARK: - 家号按钮点击事件
     @objc private func clickPlusBtn () {
+        //modal 出来微博发布页面
+        let composeVC = UINavigationController(rootViewController: RYComposeVC())
+        //标签控制器也可以 modal
+        presentViewController(composeVC, animated: true, completion: nil)
     }
 
 }
