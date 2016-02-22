@@ -31,6 +31,9 @@ class RYRefresh: UIControl {
                 lb_text.hidden = false
                 indicatorView.hidden = true
             case .Refreshing :
+                
+                
+                
                 //想要调用加载数据的方法需要手动完成一次 valueChange
                 sendActionsForControlEvents(.ValueChanged)
                 lb_text.text = "正在刷新"
@@ -45,7 +48,7 @@ class RYRefresh: UIControl {
     override init(frame: CGRect) {
         let f = CGRectMake(0, -h, scrWidth, h)
         super.init(frame: f)
-        backgroundColor = col_white95Gray
+        backgroundColor = UIColor(red: 245/255.0, green: 246/255.0, blue: 247/255.0, alpha: 1)
         setUI()
     }
     
@@ -92,6 +95,8 @@ class RYRefresh: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
     func endAnimation () {
+        //设置延时   提高用户体验
+        NSThread.sleepForTimeInterval(1.0)
         refreshState = .Normal
     }
     //移除KVO监听者
@@ -119,25 +124,17 @@ extension RYRefresh {
         let conaditionValue = -((self.scrollView?.contentInset.top ?? 0) + h)
         //当前偏移量
         let offsetY = self.scrollView?.contentOffset.y ?? 0
-//        print(conaditionValue,offsetY)
         //根据是否正在拉  和   是否达到刷新偏移量   来设置状态
-//        print(scrollView!.dragging)
-//        print(refreshState)
-//        print(conaditionValue > offsetY)
-//        print(refreshState)
         if scrollView!.dragging {
             //正在被拽动
             if  refreshState == .Normal && conaditionValue > offsetY {
-//                print("松开刷新")
                 refreshState = .Pulling
             } else if refreshState == .Pulling && conaditionValue < offsetY {
-//                print("普通状态")
                 refreshState = .Normal
             }
         } else {
             //松手 && 满足 准备刷新的状态
             if refreshState == .Pulling {
-//                print("正在刷新")
                 refreshState = .Refreshing
             }
         }
