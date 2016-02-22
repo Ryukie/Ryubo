@@ -18,17 +18,26 @@ enum RYRefreshState: Int {
 
 //自定义下拉刷新控件 只正对 UIScrollView 及其子类对象
 class RYRefresh: UIControl {
-    var oldStste : RYRefreshState = .Normal
+    var oldState : RYRefreshState = .Normal
     var refreshState : RYRefreshState = .Normal {
         didSet {
             switch refreshState {
             case .Normal :
                 lb_text.text = "下拉刷新"
+                indicatorView.hidden = true
+                lb_text.hidden = false
             case .Pulling :
                 lb_text.text = "松开刷新界面"
+                lb_text.hidden = false
+                indicatorView.hidden = true
             case .Refreshing :
+                //想要调用加载数据的方法需要手动完成一次 valueChange
+                sendActionsForControlEvents(.ValueChanged)
                 lb_text.text = "正在刷新"
+                indicatorView.hidden = false
+                lb_text.hidden = true
             }
+            oldState = refreshState
         }
     }
     
@@ -46,8 +55,9 @@ class RYRefresh: UIControl {
         iv_look.addSubview(indicatorView)
         iv_look.addSubview(lb_text)
         indicatorView.snp_makeConstraints { (make) -> Void in
-            make.bottom.equalTo(lb_text.snp_top)
-            make.left.equalTo(lb_text)
+            make.bottom.equalTo(self)
+            make.centerX.equalTo(self)
+//            make.left.equalTo(lb_text)
             make.size.equalTo(CGSize(width: 200, height: 35))
         }
         iv_look.snp_makeConstraints { (make) -> Void in
@@ -97,36 +107,39 @@ extension RYRefresh {
         super.willMoveToSuperview(newSuperview)
         if let myFather = newSuperview as? UIScrollView {
             //将父视图记录下来
-            print("是scrollView")
             scrollView = myFather
-            //观察父视图的contentOffset 这个属性
+            //观察父视图的偏移量
             scrollView?.addObserver(self, forKeyPath: "contentOffset", options: .New, context: nil)
         }
     }
     
-    //KVO监听方法
+    //KVO监听方法   偏移量变动的时候调用该方法
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        //1.获取滚动的改变状态的临界值
+        //拉到一定程度改变刷新状态
         let conaditionValue = -((self.scrollView?.contentInset.top ?? 0) + h)
-        //2.滚动视图的位移
+        //当前偏移量
         let offsetY = self.scrollView?.contentOffset.y ?? 0
-        print(conaditionValue,offsetY)
-        //3.比较 临界值 和 位移 来改变状态
-        //怎么获取正在刷新的状态  超出临界值 并且 松手(dragging)
-        print(scrollView!.dragging)
-        print(refreshState)
+//        print(conaditionValue,offsetY)
+        //根据是否正在拉  和   是否达到刷新偏移量   来设置状态
+//        print(scrollView!.dragging)
+//        print(refreshState)
+//        print(conaditionValue > offsetY)
+//        print(refreshState)
         if scrollView!.dragging {
             //正在被拽动
             if  refreshState == .Normal && conaditionValue > offsetY {
-                print("等待刷新状态")
+//                print("松开刷新")
                 refreshState = .Pulling
             } else if refreshState == .Pulling && conaditionValue < offsetY {
-                print("普通状态")
+//                print("普通状态")
                 refreshState = .Normal
             }
         } else {
-            print("正在刷新")
-            refreshState = .Refreshing
+            //松手 && 满足 准备刷新的状态
+            if refreshState == .Pulling {
+//                print("正在刷新")
+                refreshState = .Refreshing
+            }
         }
     }
     //移除KVO监听者

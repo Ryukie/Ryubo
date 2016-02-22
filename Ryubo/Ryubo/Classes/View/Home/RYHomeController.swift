@@ -34,7 +34,6 @@ class RYHomeController: RYBasicVisitorTVC {
         tableView.backgroundColor = col_lightGray
         autoRowHeight()
         //下拉刷新   改成自定义控件
-//        let myRefresh = RYRefresh()
         tableView.addSubview(myRefresh)
         myRefresh.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
         //添加底部小菊花   上拉刷新
