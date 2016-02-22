@@ -24,6 +24,7 @@ class RYStatus: NSObject {
         didSet {
             //遍历数组转化为URL并保存到URL数组中
             if let URLStrings = pic_urls where URLStrings.count != 0 {
+                //不初始化的话就是nil 无法添加进去
                 picURLs = [NSURL]()
                 for item in URLStrings {
                     let URLString = item["thumbnail_pic"]

@@ -9,14 +9,12 @@
 import UIKit
 import AFNetworking
 
+enum RequestStyle : String {
+    case POST = "POST"
+    case GET = "GET"
+}
+
 class RYNetworkTool: AFHTTPSessionManager {
-//    func sharedNetToll () -> RYNetworkTool {
-//        let baseURL = NSURL(string:"https://api.weibo.com/")
-//        let instance = RYNetworkTool(baseURL: baseURL)
-//        dispatch_once(<#T##predicate: UnsafeMutablePointer<dispatch_once_t>##UnsafeMutablePointer<dispatch_once_t>#>, <#T##block: dispatch_block_t##dispatch_block_t##() -> Void#>)
-//        instance.responseSerializer.acceptableContentTypes?.insert("text/plain")
-//        return instance
-//    }
     static let sharedNetTool:RYNetworkTool = {
         let baseUrl = NSURL(string: "https://api.weibo.com/")
         let instance = RYNetworkTool(baseURL: baseUrl)
@@ -24,4 +22,35 @@ class RYNetworkTool: AFHTTPSessionManager {
         instance.responseSerializer.acceptableContentTypes?.insert("text/html")
         return instance
     }()
+    func requestSend (requestStye : RequestStyle ,URLString : String,parameter : [String:AnyObject]? ,finished:(success:[String:AnyObject]? ,error:NSError?)->()) {
+        if requestStye == .POST {
+            POST(URLString, parameters: parameter, progress: nil, success: { (_, result) -> Void in
+                //将 Anyobject对象转换为 字典格式数据
+                guard let dict = result as? [String : AnyObject] else {
+                    print("数据格式不合法")
+                    let myError = NSError(domain: "呵呵数据格式不合法", code: 998, userInfo: nil)
+                    //执行失败的回调
+                    finished(success: nil, error: myError)
+                    return
+                }
+                //执行成功的回调
+                finished(success: dict, error: nil)
+                }, failure: { (_ , error ) -> Void in
+                    finished(success: nil, error: error)
+            })
+        }else {
+            GET(URLString, parameters: parameter, progress: nil, success: { (_, result) -> Void in
+                guard let dict = result as? [String:AnyObject] else {
+                    print("数据格式不和法")
+                    let myError = NSError(domain: "呵呵数据格式不合法", code: 998, userInfo: nil)
+                    //执行失败的回调
+                    finished(success: nil, error: myError)
+                    return
+                }
+                finished(success: dict, error: nil)
+                }, failure: { (_ , error ) -> Void in
+                    finished(success: nil, error: error)
+            })
+        }
+    }
 }

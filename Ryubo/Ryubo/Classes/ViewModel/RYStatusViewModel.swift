@@ -17,7 +17,8 @@ class RYStatusViewModel: NSObject {
     }
     // MARK: - 加载首页数据
     func loadHomeData(isPulling: Bool, finished: (isSuccess: Bool) -> ()) {
-        let dataURLString = "https://api.weibo.com/2/statuses/home_timeline.json"
+//        let dataURLString = "https://api.weibo.com/2/statuses/home_timeline.json"
+        let dataURLString = "2/statuses/home_timeline.json"
         //获取网络请求管理对象
         let manager = RYNetworkTool.sharedNetTool
         guard let token = RYAccountViewModel.sharedAccountViewModel.token else {
@@ -45,13 +46,18 @@ class RYStatusViewModel: NSObject {
             parameters["since_id"] = "\(since_id)"
         }
         if max_id > 0 {
-            parameters["max_id"] = "\(max_id)"
+//            parameters["max_id"] = "\(max_id)"//上拉重复一条数据
+            parameters["max_id"] = "\(max_id-1)"
         }
-        manager.GET(dataURLString, parameters: parameters, progress: { (_ ) -> Void in
-//                SVProgressHUD.show()
-            }, success: { (_ , result) -> Void in
+        
+        manager.requestSend(.GET, URLString: dataURLString, parameter: parameters) { (success, error) -> () in
+            if error != nil {
+                finished(isSuccess: false)
+                SVProgressHUD.showErrorWithStatus(netErrorText)
+                return
+            }
             //将数据转化为字典结构
-            guard let dict = result as? [String:AnyObject] else {
+            guard let dict = success else {
                 print("数据结构错误")
                 SVProgressHUD.showErrorWithStatus(netErrorText)
                 return
@@ -68,23 +74,18 @@ class RYStatusViewModel: NSObject {
                 let i = RYStatus(dict: item)//KVC
                 tempArr.append(i)
             }
-                //判断是 下拉还是 上拉
-                if since_id > 0 {
-                    //下拉
-                    self.statuses = tempArr + self.statuses
-                } else if max_id > 0 {
-                    //上拉
-                    self.statuses += tempArr
-                } else {
-                    //首次加载数据
-                    self.statuses = tempArr
-                }
-                
+            //判断是 下拉还是 上拉
+            if since_id > 0 {
+                //下拉
+                self.statuses = tempArr + self.statuses
+            } else if max_id > 0 {
+                //上拉
+                self.statuses += tempArr
+            } else {
+                //首次加载数据
+                self.statuses = tempArr
+            }
             finished(isSuccess: true)
-            }) { (_ , error ) -> Void in
-                finished(isSuccess: false)
-                print(error)
-                SVProgressHUD.showErrorWithStatus(netErrorText)
         }
     }
 }
