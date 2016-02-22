@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class RYComposeVC: UIViewController {
     
@@ -76,7 +77,19 @@ class RYComposeVC: UIViewController {
     }
     
     @objc private func sendWeibo () {
-        print(__FUNCTION__)
+        let URLString = "2/statuses/update.json"
+        let parameters = ["access_token": RYAccountViewModel.sharedAccountViewModel.token,"status":tv_textInputView.text]
+        
+        RYNetworkTool.sharedNetTool.requestSend(.POST, URLString: URLString, parameter: parameters) { (success, error) -> () in
+            if error != nil {
+                //出错啦
+                SVProgressHUD.showErrorWithStatus(netErrorText)
+                return
+            }
+            //发布成功
+            SVProgressHUD.showSuccessWithStatus("发布成功")
+            self.dismissVC()
+        }
     }
 // MARK: - 点击关闭按钮的话   键盘会晚于控制器消失    为了提高体验   在控制器将要消失的时候推掉键盘
     override func viewWillDisappear(animated: Bool) {
