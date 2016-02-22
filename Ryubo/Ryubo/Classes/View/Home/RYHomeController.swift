@@ -62,8 +62,10 @@ class RYHomeController: RYBasicVisitorTVC {
             //请求数据一定成功
             //刷新列表
 //            NSThread.sleepForTimeInterval(2)
-            self.tableView.reloadData()
-            
+            if !self.tableView.dragging {
+                //如果是一直拉着就不刷新
+                self.tableView.reloadData()
+            }
         }
     }
     private func autoRowHeight () {
