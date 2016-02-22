@@ -33,21 +33,18 @@ class RYHomeController: RYBasicVisitorTVC {
         tableView.rowHeight = 44
         tableView.backgroundColor = col_lightGray
         autoRowHeight()
-        //下拉刷新
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
+        //下拉刷新   改成自定义控件
+//        let myRefresh = RYRefresh()
+        tableView.addSubview(myRefresh)
         //添加底部小菊花   上拉刷新
         tableView.tableFooterView = indicatorView
-        
     }
     @objc private func loadData() {
         //通过判断上啦小菊花是否转动排判断 上下啦动
         RYStatusViewModel.sharedRYStatusViewModel.loadHomeData(indicatorView.isAnimating()) { (isSuccess) -> () in
             SVProgressHUD.dismiss()
             //停止刷新数据
-            self.refreshControl?.endRefreshing()
-//            self.statuses = tempArr
-            
+            self.myRefresh.endAnimation()
             if !isSuccess {
                 //请求首页数据失败
                 SVProgressHUD.showErrorWithStatus(netErrorText)
@@ -96,6 +93,7 @@ class RYHomeController: RYBasicVisitorTVC {
         }
         return cell
     }
+    let myRefresh = RYRefresh()
     //小菊花
     private lazy var indicatorView: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
 }
