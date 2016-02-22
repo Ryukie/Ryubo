@@ -113,7 +113,7 @@ extension RYOriginalWeibo {
 
     private func setPicView () {
         cons?.uninstall()
-        picsView.picURLs = status?.picURLs
+        picsView.picURLs = status?.picURLs//这里会自动计算一下picView的尺寸 没有的话就是0
         if status?.picURLs?.count != 0 {
             //加载配图视图
             picsView.backgroundColor = col_white95Gray

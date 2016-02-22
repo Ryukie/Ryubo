@@ -25,14 +25,19 @@ class RYRetweetView: UIView {
     }
     private func initUI () {
         addSubview(lb_test)
+        addSubview(picsView)
         //设置约束
         lb_test.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self.snp_top).offset(margin)
             make.left.equalTo(self.snp_left).offset(margin)
         }
+        picsView.snp_makeConstraints(closure: { (make) -> Void in
+            make.top.equalTo(lb_test.snp_bottom).offset(margin)
+            make.left.equalTo(lb_test.snp_left)
+        })
         //设置底部约束相对于配图视图的底部
         self.snp_makeConstraints(closure: { (make) -> Void in
-            con = make.bottom.equalTo(lb_test.snp_bottom).offset(margin).constraint
+            con = make.bottom.equalTo(picsView.snp_bottom).offset(margin).constraint
         })
     }
     required init?(coder aDecoder: NSCoder) {
@@ -42,14 +47,9 @@ class RYRetweetView: UIView {
     private func setUI () {
         //更新约束
         con?.uninstall()
+        picsView.picURLs = status?.picURLs //这里会自动计算一下picView的尺寸 没有的话就是0
         if status?.picURLs?.count != 0 {
-            addSubview(picsView)
             picsView.backgroundColor = col_retweetCol
-            picsView.picURLs = status?.picURLs
-            picsView.snp_makeConstraints(closure: { (make) -> Void in
-                make.top.equalTo(lb_test.snp_bottom).offset(margin)
-                make.left.equalTo(lb_test.snp_left)
-            })
             self.snp_updateConstraints(closure: { (make) -> Void in
                 con = make.bottom.equalTo(picsView.snp_bottom).offset(margin).constraint
             })
