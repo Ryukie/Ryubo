@@ -84,6 +84,10 @@ class RYComposeVC: UIViewController {
         tv.font = UIFont.systemFontOfSize(18)
         tv.textColor = col_darkGray
         tv.backgroundColor = col_orange
+        //开启垂直方向的 弹簧效果
+        tv.alwaysBounceVertical = true
+        //设置键盘隐藏的方式 iOS7.0
+        tv.keyboardDismissMode = .OnDrag
         return tv
     }()
     private lazy var lb_backText:UILabel = UILabel(text: "Please Say Some Intresting Thing", fontSize: 18, textColor: col_darkGray)
