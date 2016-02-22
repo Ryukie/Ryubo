@@ -47,6 +47,7 @@ class RYComposeVC: UIViewController {
     //MARK: 设置 textView
     private func setTextView() {
         view.addSubview(tv_textInputView)
+        tv_textInputView.delegate = self
         //设置约束
         tv_textInputView.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self.view.snp_top)
@@ -91,4 +92,13 @@ class RYComposeVC: UIViewController {
         return tv
     }()
     private lazy var lb_backText:UILabel = UILabel(text: "Please Say Some Intresting Thing", fontSize: 18, textColor: col_darkGray)
+}
+
+extension RYComposeVC: UITextViewDelegate {
+    func textViewDidChange(textView: UITextView) {
+        //隐藏占位文本
+        lb_backText.hidden = textView.hasText()
+        //开始 右导航按钮的交互
+        navigationItem.rightBarButtonItem?.enabled = textView.hasText()
+    }
 }
