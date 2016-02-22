@@ -78,6 +78,10 @@ class RYComposeVC: UIViewController {
     @objc private func sendWeibo () {
         print(__FUNCTION__)
     }
+// MARK: - 点击关闭按钮的话   键盘会晚于控制器消失    为了提高体验   在控制器将要消失的时候推掉键盘
+    override func viewWillDisappear(animated: Bool) {
+        tv_textInputView.resignFirstResponder()
+    }
     
     //1.textView
     private lazy var tv_textInputView: UITextView = {
