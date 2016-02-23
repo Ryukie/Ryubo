@@ -46,6 +46,10 @@ extension RYPictureSelectCell {
     private func setUI () {
         contentView.addSubview(bt_picAdd)
         contentView.addSubview(bt_picDelete)
+        
+        //设置图片填充方式
+        bt_picAdd.imageView?.contentMode = .ScaleAspectFill
+        
         bt_picAdd.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(contentView)
         }

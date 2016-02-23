@@ -23,7 +23,10 @@ class RYHomeController: RYBasicVisitorTVC {
         SVProgressHUD.show()
         loadData()
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+//        loadData()
+    }
     //准备tableView
     private func prepareTableView() {
         tableView.separatorStyle = .None//隐藏分割线

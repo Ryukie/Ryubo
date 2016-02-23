@@ -48,8 +48,10 @@ class RYPictureSelectVC: UICollectionViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    private lazy var images = [UIImage]()
+    lazy var images = [UIImage]()
     private var selectCell : RYPictureSelectCell?
+    //设置最大图片数量
+    private let maxPicNum = 9
 }
 
 // MARK: - 实现代理方法 
@@ -98,7 +100,7 @@ extension RYPictureSelectVC {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count+1
+        return images.count + (images.count < maxPicNum ? 1 : 0)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
