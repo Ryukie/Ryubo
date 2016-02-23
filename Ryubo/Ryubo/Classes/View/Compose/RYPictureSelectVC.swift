@@ -62,8 +62,13 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
         picPicker.delegate = self
         presentViewController(picPicker, animated: true, completion: nil)
     }
-    func delectPci () {
-        print(__FUNCTION__)
+    func delectPci (sender : RYPictureSelectCell?) {
+//        print(__FUNCTION__)
+        let index = (sender?.tag)! - 100
+        if images.count != 0 {
+            images.removeAtIndex(index)
+            collectionView?.reloadData()
+        }
     }
     
 //    //选择器的代理方法
@@ -78,9 +83,7 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
 //        dismissViewControllerAnimated(true, completion: nil)
 //    }
     
-    
     //最好用下面的代替  iOS 2.0 以后
-    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
 //        print(info)
         //帮助文档中有各个键值的说明
@@ -106,6 +109,7 @@ extension RYPictureSelectVC {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! RYPictureSelectCell
         cell.backgroundColor=col_darkGray
         cell.cellDelegate = self
+        cell.tag = indexPath.row + 100
         if indexPath.row == images.count {
             cell.image = nil
         }else {

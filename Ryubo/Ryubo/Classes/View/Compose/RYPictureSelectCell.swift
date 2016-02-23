@@ -10,7 +10,7 @@ import UIKit
 
 protocol RYPictureSelectCellDelegate : NSObjectProtocol {
     func addPic ()
-    func delectPci ()
+    func delectPci (sender: RYPictureSelectCell?)
 }
 
 class RYPictureSelectCell: UICollectionViewCell {
@@ -56,6 +56,6 @@ extension RYPictureSelectCell {
         cellDelegate?.addPic()
     }
     @objc private func clickDelectPciBtn () {
-        cellDelegate?.delectPci()
+        cellDelegate?.delectPci(self)
     }
 }
