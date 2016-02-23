@@ -9,7 +9,7 @@
 import UIKit
 
 protocol RYPictureSelectCellDelegate : NSObjectProtocol {
-    func addPic ()
+    func addPic (sender: RYPictureSelectCell?)
     func delectPci (sender: RYPictureSelectCell?)
 }
 
@@ -20,10 +20,13 @@ class RYPictureSelectCell: UICollectionViewCell {
                 image = UIImage(named: "compose_pic_add")
                 bt_picAdd.setImage(image, forState: .Normal)
                 bt_picAdd.setImage(image, forState: .Highlighted)
+//                isPicAdded = false
             }
             bt_picAdd.setImage(image, forState: .Normal)
+//            isPicAdded = true
         }
     }
+    var isPicAdded = false
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
@@ -53,7 +56,7 @@ extension RYPictureSelectCell {
         bt_picDelete.addTarget(self, action: "clickDelectPciBtn", forControlEvents: .TouchUpInside)
     }
     @objc private func clickAddPicBtn () {
-        cellDelegate?.addPic()
+        cellDelegate?.addPic(self)
     }
     @objc private func clickDelectPciBtn () {
         cellDelegate?.delectPci(self)

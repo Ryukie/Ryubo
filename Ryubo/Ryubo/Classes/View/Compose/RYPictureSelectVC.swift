@@ -21,7 +21,7 @@ class RYPictureSelectVC: UICollectionViewController {
         layout.itemSize = CGSize(width: itemW, height: itemW)
         super.init(collectionViewLayout: layout)
     }
-    
+    //用这个不行
 //    override init(collectionViewLayout layout: UICollectionViewLayout) {
 //        let layout = UICollectionViewFlowLayout()
 //        layout.minimumInteritemSpacing = margin/2
@@ -49,17 +49,19 @@ class RYPictureSelectVC: UICollectionViewController {
         super.didReceiveMemoryWarning()
     }
     private lazy var images = [UIImage]()
+    private var selectCell : RYPictureSelectCell?
 }
 
 // MARK: - 实现代理方法 
 extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    func addPic () {
+    func addPic (sender: RYPictureSelectCell?) {
         if !UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
             print("访问相册失败")
             return
         }
         let picPicker = UIImagePickerController()
         picPicker.delegate = self
+        selectCell = sender
         presentViewController(picPicker, animated: true, completion: nil)
     }
     func delectPci (sender : RYPictureSelectCell?) {
@@ -67,6 +69,8 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
         let index = (sender?.tag)! - 100
         if images.count != 0 {
             images.removeAtIndex(index)
+            selectCell = sender
+            selectCell?.isPicAdded = false
             collectionView?.reloadData()
         }
     }
@@ -88,7 +92,16 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
 //        print(info)
         //帮助文档中有各个键值的说明
         let img = info["UIImagePickerControllerOriginalImage"] as! UIImage
-        images.append(img)
+        
+        //如果cell中已经有图片了  就替换这个图片
+        if selectCell!.isPicAdded == true  {
+            images.removeAtIndex((selectCell?.tag)!-100)
+            images.insert(img, atIndex: (selectCell?.tag)!-100)
+        }else {
+            images.append(img)
+            selectCell?.isPicAdded = true
+        }
+        
         collectionView?.reloadData()
 //        print(img)
         dismissViewControllerAnimated(true, completion: nil)
@@ -112,6 +125,8 @@ extension RYPictureSelectVC {
         cell.tag = indexPath.row + 100
         if indexPath.row == images.count {
             cell.image = nil
+            //保证复用的时候不会出问题
+            cell.isPicAdded = false
         }else {
             cell.image = images[indexPath.row]
         }
