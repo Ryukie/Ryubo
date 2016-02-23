@@ -20,7 +20,6 @@ class RYComposeVC: UIViewController {
         setBottomToolBar()
     }
     
-    
     @objc private func sendWeibo () {
         let URLString = "2/statuses/update.json"
         let parameters = ["access_token": RYAccountViewModel.sharedAccountViewModel.token,"status":tv_textInputView.text]

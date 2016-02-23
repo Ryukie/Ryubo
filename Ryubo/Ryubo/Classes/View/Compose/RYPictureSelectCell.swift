@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol RYPictureSelectCellDelegate : NSObjectProtocol {
+    func addPic ()
+    func delectPci ()
+}
+
 class RYPictureSelectCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,6 +24,8 @@ class RYPictureSelectCell: UICollectionViewCell {
 // MARK: - 懒加载子控件
     private lazy var bt_picAdd : UIButton = UIButton(backgroundImageName: nil, imageName: "compose_pic_add")
     private lazy var bt_picDelete : UIButton = UIButton(backgroundImageName: nil, imageName: "compose_photo_close")
+    //设置代理属性
+    weak var delegate : RYPictureSelectCellDelegate?
 }
 
 // MARK: - 布局子控件
@@ -32,5 +39,13 @@ extension RYPictureSelectCell {
         bt_picDelete.snp_makeConstraints { (make) -> Void in
             make.top.right.equalTo(contentView)
         }
+        bt_picAdd.addTarget(self, action: "clickAddPicBtn", forControlEvents: .TouchUpInside)
+        bt_picDelete.addTarget(self, action: "clickDelectPciBtn", forControlEvents: .TouchUpInside)
+    }
+    @objc private func clickAddPicBtn () {
+        delegate?.addPic()
+    }
+    @objc private func clickDelectPciBtn () {
+        delegate?.delectPci()
     }
 }

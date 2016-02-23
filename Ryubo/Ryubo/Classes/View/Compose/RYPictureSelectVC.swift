@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "picSelect"
 
-class RYPictureSelectVC: UICollectionViewController {
+class RYPictureSelectVC: UICollectionViewController,RYPictureSelectCellDelegate {
 
     init () {
         let layout = UICollectionViewFlowLayout()
@@ -50,6 +50,15 @@ class RYPictureSelectVC: UICollectionViewController {
     }
 }
 
+// MARK: - 实现代理方法 
+extension RYPictureSelectVC {
+    func addPic () {
+        print(__FUNCTION__)
+    }
+    func delectPci () {
+        print(__FUNCTION__)
+    }
+}
 
 // MARK: - dataSource
 extension RYPictureSelectVC {
@@ -62,8 +71,9 @@ extension RYPictureSelectVC {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! RYPictureSelectCell
         cell.backgroundColor=col_darkGray
+        cell.delegate = self
         return cell
     }
 }
