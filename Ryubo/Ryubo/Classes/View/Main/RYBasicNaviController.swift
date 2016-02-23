@@ -22,12 +22,19 @@ class RYBasicNaviController: UINavigationController,UIGestureRecognizerDelegate 
         if childViewControllers.count != 0 {
             //在push之前隐藏底部导航栏
             viewController.hidesBottomBarWhenPushed = true
+            let btn = UIButton(backgroundImageName: nil , titleText: "Back", textFont: 14, textColor: col_darkGray, imageName: "navigationbar_back_withtext")
+            btn.addTarget(self, action: "pop", forControlEvents: .TouchUpInside)
+            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btn)
         }
         //这句不能少否则无法跳转
         super.pushViewController(viewController, animated: true)
+//        print(childViewControllers.count)
+    }
+    @objc private func pop() {
+        self.popViewControllerAnimated(true)
     }
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-//        print(childViewControllers.count)
+//        print(-childViewControllers.count)
         //YEStrue (the default) to tell the gesture recognizer to proceed with interpreting touches, NOfalse to prevent it from attempting to recognize its gesture.
         return childViewControllers.count > 1
     }
