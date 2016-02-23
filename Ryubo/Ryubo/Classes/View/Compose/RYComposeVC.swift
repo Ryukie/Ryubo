@@ -18,6 +18,7 @@ class RYComposeVC: UIViewController {
         setNaviTitle()
         setTextView()
         setBottomToolBar()
+        setPicSelectVC()
     }
     
     @objc private func sendWeibo () {
@@ -52,7 +53,7 @@ class RYComposeVC: UIViewController {
         let tv = UITextView()
         tv.font = UIFont.systemFontOfSize(18)
         tv.textColor = col_darkGray
-        tv.backgroundColor = col_orange
+        tv.backgroundColor = col_white95Gray
         //开启垂直方向的 弹簧效果
         tv.alwaysBounceVertical = true
         //设置键盘隐藏的方式 iOS7.0
@@ -70,6 +71,17 @@ class RYComposeVC: UIViewController {
 
 // MARK: - 布局子控件
 extension RYComposeVC {
+    private func setPicSelectVC () {
+        addChildViewController(vc_picSelect)
+        view.addSubview(vc_picSelect.view)
+        //将工具条移到顶部
+        view.bringSubviewToFront(tb_bottomToolBar)
+        vc_picSelect.view.snp_makeConstraints { (make) -> Void in
+            make.left.right.bottom.equalTo(view)
+            make.height.equalTo(0)
+        }
+    }
+    
     private func setNaviItems () {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancle", style: .Plain, target: self, action: "dismissVC")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: "sendWeibo")
@@ -129,69 +141,76 @@ extension RYComposeVC {
         }
         //子工具控件集合
         var items = [UIBarButtonItem]()
-        let itemSettings = [["imageName": "compose_toolbar_picture"],
-            ["imageName": "compose_mentionbutton_background"],
-            ["imageName": "compose_trendbutton_background"],
-            ["imageName": "compose_emoticonbutton_background", "actionName": "selectEmoticon"],
-            ["imageName": "compose_add_background"]]
+        let itemSettings = [
+            //通过键值对设置背景图片   和   绑定方法
+            ["imageName": "compose_toolbar_picture",
+            "actionName": "clickPicAdd"],
+            
+            ["imageName": "compose_mentionbutton_background",
+                "actionName": "clickAtAdd"],
+            
+            ["imageName": "compose_trendbutton_background",
+                "actionName": "clickSharpAdd"],
+            
+            ["imageName": "compose_emoticonbutton_background",
+                "actionName": "clickEmojAdd"],
+            
+            ["imageName": "compose_add_background",
+                "actionName": "clickMore"]
+        ]
+        
         for item in itemSettings {
             let imageName = item["imageName"]
             let bt = UIButton(backgroundImageName: nil, imageName: imageName)
-            addTargetForItem(bt)
+            
+            if let actionName = item["actionName"] {
+                bt.addTarget(self, action: Selector(actionName), forControlEvents: .TouchUpInside)
+            }
             let barItem = UIBarButtonItem(customView: bt)
             items.append(barItem)
             //添加弹簧用来自动设置item间距
             let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
             items.append(space)
-            
         }
         //删除最后一个弹簧
         items.removeLast()
         tb_bottomToolBar.items = items
     }
-    private func addTargetForItem (item:UIButton) {
-        itemIndex++
-        switch itemIndex {
-        case 1:
-            item.addTarget(self, action: "clickPicAdd", forControlEvents: .TouchUpInside)
-        case 2:
-            item.addTarget(self, action: "clickAtAdd", forControlEvents: .TouchUpInside)
-        case 3:
-            item.addTarget(self, action: "clickSharpAdd", forControlEvents: .TouchUpInside)
-        case 4:
-            item.addTarget(self, action: "clickEmojAdd", forControlEvents: .TouchUpInside)
-        case 5:
-            item.addTarget(self, action: "clickMore", forControlEvents: .TouchUpInside)
-        default:
-            return
-        }
-    }
     
     //1 pic
     @objc private func clickPicAdd () {
 //        print(__FUNCTION__)
-        let vc = RYBasicNaviController(rootViewController: vc_picSelect)
-        navigationController?.presentViewController(vc, animated: true, completion: nil)
+//        let vc = RYBasicNaviController(rootViewController: vc_picSelect)
+//        navigationController?.presentViewController(vc, animated: true, completion: nil)
+        //更新高度
+        vc_picSelect.view.snp_updateConstraints { (make) -> Void in
+            make.height.equalTo(scrHeight*2/3)
+        }
+        //强制刷新界面
+        UIView.animateWithDuration(0.25) { () -> Void in
+            self.view.layoutIfNeeded()
+        }
+        
     }
     
     //2 @
     @objc private func clickAtAdd () {
-//        print(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     //3 #
     @objc private func clickSharpAdd () {
-//        print(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     //4 emoj
     @objc private func clickEmojAdd () {
-//        print(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     //5 more
     @objc private func clickMore () {
-//        print(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     @objc private func whenKeyboardChange (n:NSNotification) {

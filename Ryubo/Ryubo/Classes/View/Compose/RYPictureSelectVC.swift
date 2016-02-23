@@ -38,7 +38,7 @@ class RYPictureSelectVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.dataSource = self
-        collectionView?.backgroundColor = UIColor.randomColor()
+        collectionView?.backgroundColor = col_lightGray
         self.collectionView!.registerClass(RYPictureSelectCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .Plain, target: self, action: "popPicView")
     }
@@ -65,7 +65,6 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
         presentViewController(picPicker, animated: true, completion: nil)
     }
     func delectPci (sender : RYPictureSelectCell?) {
-//        print(__FUNCTION__)
         let index = (sender?.tag)! - 100
         if images.count != 0 {
             images.removeAtIndex(index)
@@ -75,24 +74,10 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
         }
     }
     
-//    //选择器的代理方法
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-//        //编辑信息
-//        print(editingInfo)
-//        //将图片加入图片数组
-//        images.append(image)
-//        //2.刷新页面
-//        collectionView?.reloadData()
-//        //一旦我们实现了这个方法 我们就的自己dismiss
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
-    
     //最好用下面的代替  iOS 2.0 以后
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-//        print(info)
         //帮助文档中有各个键值的说明
         let img = info["UIImagePickerControllerOriginalImage"] as! UIImage
-        
         //如果cell中已经有图片了  就替换这个图片
         if selectCell!.isPicAdded == true  {
             images.removeAtIndex((selectCell?.tag)!-100)
@@ -101,9 +86,7 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
             images.append(img)
             selectCell?.isPicAdded = true
         }
-        
         collectionView?.reloadData()
-//        print(img)
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
