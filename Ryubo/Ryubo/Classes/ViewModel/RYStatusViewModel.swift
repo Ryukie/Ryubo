@@ -53,7 +53,6 @@ class RYStatusViewModel: NSObject {
         manager.requestSend(.GET, URLString: dataURLString, parameter: parameters) { (success, error) -> () in
             if error != nil {
                 finished(isSuccess: false)
-                print(error)
                 SVProgressHUD.showErrorWithStatus(netErrorText)
                 return
             }

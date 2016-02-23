@@ -18,7 +18,7 @@ enum RYRefreshState: Int {
 
 //自定义下拉刷新控件 只正对 UIScrollView 及其子类对象
 class RYRefresh: UIControl {
-    var oldState : RYRefreshState = .Normal
+//    var oldState : RYRefreshState = .Normal
     var refreshState : RYRefreshState = .Normal {
         didSet {
             switch refreshState {
@@ -40,7 +40,7 @@ class RYRefresh: UIControl {
                 indicatorView.hidden = false
                 lb_text.hidden = true
             }
-            oldState = refreshState
+//            oldState = refreshState
         }
     }
     

@@ -39,8 +39,7 @@ class RYPictureSelectVC: UICollectionViewController {
         super.viewDidLoad()
         collectionView?.dataSource = self
         collectionView?.backgroundColor = UIColor.randomColor()
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
+        self.collectionView!.registerClass(RYPictureSelectCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .Plain, target: self, action: "popPicView")
     }
     @objc private func popPicView () {
@@ -51,6 +50,7 @@ class RYPictureSelectVC: UICollectionViewController {
     }
 }
 
+
 // MARK: - dataSource
 extension RYPictureSelectVC {
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -58,12 +58,12 @@ extension RYPictureSelectVC {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return 9
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
-        cell.backgroundColor=UIColor.randomColor()
+        cell.backgroundColor=col_darkGray
         return cell
     }
 }
