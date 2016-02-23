@@ -14,6 +14,16 @@ protocol RYPictureSelectCellDelegate : NSObjectProtocol {
 }
 
 class RYPictureSelectCell: UICollectionViewCell {
+    var image : UIImage? {
+        didSet {
+            if image == nil {
+                image = UIImage(named: "compose_pic_add")
+                bt_picAdd.setImage(image, forState: .Normal)
+                bt_picAdd.setImage(image, forState: .Highlighted)
+            }
+            bt_picAdd.setImage(image, forState: .Normal)
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()

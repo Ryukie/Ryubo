@@ -106,6 +106,12 @@ extension RYPictureSelectVC {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! RYPictureSelectCell
         cell.backgroundColor=col_darkGray
         cell.cellDelegate = self
+        if indexPath.row == images.count {
+            cell.image = nil
+        }else {
+            cell.image = images[indexPath.row]
+        }
+        
         return cell
     }
 }
