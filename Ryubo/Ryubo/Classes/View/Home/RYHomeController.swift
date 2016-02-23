@@ -80,6 +80,7 @@ class RYHomeController: RYBasicVisitorTVC {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //手写代码 必须手动注册cell
         let cell = tableView.dequeueReusableCellWithIdentifier(HomeCellId, forIndexPath: indexPath) as! RYHomeCell
+        cell.status = RYStatusViewModel.sharedRYStatusViewModel.statuses[indexPath.row]
         //将要加载最后一个cell的时候 并且小菊花没有转动的情况下
         if indexPath.row == RYStatusViewModel.sharedRYStatusViewModel.statuses.count - 1 && !indicatorView.isAnimating(){
             //1.转动小菊花
@@ -87,7 +88,6 @@ class RYHomeController: RYBasicVisitorTVC {
             //开始加载数据 加载更多数据
             loadData()
         }
-        cell.status = RYStatusViewModel.sharedRYStatusViewModel.statuses[indexPath.row]
         return cell
     }
     //小菊花

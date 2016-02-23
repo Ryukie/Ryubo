@@ -31,6 +31,7 @@
 		4AACCEE61C7AB0A400BDFDF5 /* RYRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AACCEE51C7AB0A400BDFDF5 /* RYRefresh.swift */; };
 		4AACCEE81C7B293200BDFDF5 /* RYComposeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AACCEE71C7B293200BDFDF5 /* RYComposeVC.swift */; };
 		4AB1B1DE1C7BF46500720046 /* RYPictureSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB1B1DD1C7BF46500720046 /* RYPictureSelectVC.swift */; };
+		4AB1B1E01C7C333200720046 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB1B1DF1C7C333200720046 /* UIColor+Extension.swift */; };
 		4AD248A71C6883BC003F110A /* RYUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A61C6883BC003F110A /* RYUserAccount.swift */; };
 		4AD248A91C68A04D003F110A /* RYAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */; };
 		4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */; };
@@ -72,6 +73,7 @@
 		4AACCEE51C7AB0A400BDFDF5 /* RYRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRefresh.swift; sourceTree = "<group>"; };
 		4AACCEE71C7B293200BDFDF5 /* RYComposeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYComposeVC.swift; sourceTree = "<group>"; };
 		4AB1B1DD1C7BF46500720046 /* RYPictureSelectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYPictureSelectVC.swift; sourceTree = "<group>"; };
+		4AB1B1DF1C7C333200720046 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4AD248A61C6883BC003F110A /* RYUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYUserAccount.swift; sourceTree = "<group>"; };
 		4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYAccountViewModel.swift; sourceTree = "<group>"; };
 		4AD248AA1C68CA98003F110A /* RYWelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYWelcomeController.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				4AED05EA1C73456900C9C7D8 /* UILabel+Extension.swift */,
 				4AED05EC1C734A1400C9C7D8 /* UIButton+Extension.swift */,
 				4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */,
+				4AB1B1DF1C7C333200720046 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				4A5B88DE1C5CB4520043572D /* RYMessageController.swift in Sources */,
 				4A6EAB781C61F2AA00A08B4B /* RYBasicVisitorTVC.swift in Sources */,
 				4A965F021C736A45005E14E1 /* RYStatusViewModel.swift in Sources */,
+				4AB1B1E01C7C333200720046 /* UIColor+Extension.swift in Sources */,
 				4AED05EB1C73456900C9C7D8 /* UILabel+Extension.swift in Sources */,
 				4AD248A71C6883BC003F110A /* RYUserAccount.swift in Sources */,
 				4A965F041C736B5F005E14E1 /* RYStatus.swift in Sources */,

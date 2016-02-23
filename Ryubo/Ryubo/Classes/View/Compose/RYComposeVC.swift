@@ -60,8 +60,13 @@ class RYComposeVC: UIViewController {
         tv.keyboardDismissMode = .OnDrag
         return tv
     }()
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
     private lazy var lb_backText:UILabel = UILabel(text: "Please Say Some Intresting Thing", fontSize: 18, textColor: col_darkGray)
     private lazy var tb_bottomToolBar : UIToolbar = UIToolbar()
+    var itemIndex : Int64 = 0
+    private lazy var vc_picSelect : RYPictureSelectVC = RYPictureSelectVC()
 }
 
 // MARK: - 布局子控件
@@ -113,6 +118,8 @@ extension RYComposeVC {
         }
         //开始输入隐藏文本
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideTextLabel", name: UITextViewTextDidBeginEditingNotification, object: tv_textInputView)
+        //弹出或收回键盘移动工具栏
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "whenKeyboardChange:", name: UIKeyboardWillChangeFrameNotification, object: nil)
     }
     private func setBottomToolBar () {
         //toolBar默认高度44
@@ -131,15 +138,78 @@ extension RYComposeVC {
         for item in itemSettings {
             let imageName = item["imageName"]
             let bt = UIButton(backgroundImageName: nil, imageName: imageName)
+            addTargetForItem(bt)
             let barItem = UIBarButtonItem(customView: bt)
             items.append(barItem)
             //添加弹簧用来自动设置item间距
             let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
             items.append(space)
+            
         }
         //删除最后一个弹簧
         items.removeLast()
         tb_bottomToolBar.items = items
+    }
+    private func addTargetForItem (item:UIButton) {
+        itemIndex++
+        switch itemIndex {
+        case 1:
+            item.addTarget(self, action: "clickPicAdd", forControlEvents: .TouchUpInside)
+        case 2:
+            item.addTarget(self, action: "clickAtAdd", forControlEvents: .TouchUpInside)
+        case 3:
+            item.addTarget(self, action: "clickSharpAdd", forControlEvents: .TouchUpInside)
+        case 4:
+            item.addTarget(self, action: "clickEmojAdd", forControlEvents: .TouchUpInside)
+        case 5:
+            item.addTarget(self, action: "clickMore", forControlEvents: .TouchUpInside)
+        default:
+            return
+        }
+    }
+    
+    //1 pic
+    @objc private func clickPicAdd () {
+//        print(__FUNCTION__)
+        let vc = RYBasicNaviController(rootViewController: vc_picSelect)
+        navigationController?.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    //2 @
+    @objc private func clickAtAdd () {
+//        print(__FUNCTION__)
+    }
+    
+    //3 #
+    @objc private func clickSharpAdd () {
+//        print(__FUNCTION__)
+    }
+    
+    //4 emoj
+    @objc private func clickEmojAdd () {
+//        print(__FUNCTION__)
+    }
+    
+    //5 more
+    @objc private func clickMore () {
+//        print(__FUNCTION__)
+    }
+    
+    @objc private func whenKeyboardChange (n:NSNotification) {
+//        print(n)
+        //获取动画时间
+        let duration = (n.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        //NSRect  是一个结构体  结构体需要包装成 NSValue
+        let endRect = (n.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let offsetY = -scrHeight + endRect.origin.y
+        UIView.animateWithDuration(duration) { () -> Void in
+            //修改底部约束
+            self.tb_bottomToolBar.snp_updateConstraints(closure: { (make) -> Void in
+                make.bottom.equalTo(self.view.snp_bottom).offset(offsetY)
+            })
+            //强制刷新
+            self.view.layoutIfNeeded()
+        }
     }
 
 }
