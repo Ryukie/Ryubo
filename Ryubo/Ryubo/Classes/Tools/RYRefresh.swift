@@ -29,7 +29,7 @@ class RYRefresh: UIControl {
                 //didSet 中自带的有上一次的值
                 if oldValue == .Refreshing {
                     var insert = scrollView?.contentInset
-                    UIView.animateWithDuration(1, animations: { () -> Void in
+                    UIView.animateWithDuration(0.5, animations: { () -> Void in
                         insert?.top -= self.h
                         self.scrollView?.contentInset = insert!
                     })
@@ -44,7 +44,7 @@ class RYRefresh: UIControl {
                 indicatorView.hidden = false
                 lb_text.hidden = true
                 var insert = scrollView?.contentInset
-                UIView.animateWithDuration(1, animations: { () -> Void in
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
                     insert?.top += self.h
                     self.scrollView?.contentInset = insert!
                 })

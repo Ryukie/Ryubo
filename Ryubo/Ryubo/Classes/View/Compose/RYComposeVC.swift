@@ -28,28 +28,25 @@ class RYComposeVC: UIViewController {
         if vc_picSelect.images.count != 0{
             //获取图片二进制数据
             // Returns the data for the specified image in PNG format
-            let imageData = UIImagePNGRepresentation(vc_picSelect.images.first!)
             //图片上传接口
             URLString = "https://upload.api.weibo.com/2/statuses/upload.json"
 
-            
-            
             //上传
             //data: 要上传的文件的二进制数据
             //name: 服务器接受的字段
             //fileName: 服务器存储的文件名  但是在这个地方 可以 '乱写' 生成 高清/中等/缩略图
             //mineType: 告诉服务器上传的文件类型
             //图片: image/jpeg  不关注文件类型可以使用:application/octet-stream(八进制的流)
-            RYNetworkTool.sharedNetTool.POST(URLString, parameters: parameters, constructingBodyWithBlock: { (fromData) -> Void in
+            RYNetworkTool.sharedNetTool.POST(URLString, parameters: parameters, constructingBodyWithBlock: { (formData) -> Void in
                 //将图片二进制文件传入拼接入 fromData
-                                fromData.appendPartWithFileData(imageData!, name: "pic", fileName: "x01", mimeType: "image/jpeg")
-                //多张图片上传
+                //多张图片上传   需要高级接口
 //                for i in 0..<(self.vc_picSelect.images.count) {
-//                    let img = self.vc_picSelect.images[i]
-//                    let strName = "pic" + "\(i)"
-//                    let strFile = "Ryukie" + "\(i)"
-//                    let imagData = UIImagePNGRepresentation(img)
-//                    fromData.appendPartWithFileData(imagData!, name: strName, fileName: strFile, mimeType: "image/jpeg")
+                    let img = self.vc_picSelect.images[1]
+                    let strName = "pic"
+                    let strFile = "Ryukie" + "\(1)"
+                    print(strFile)
+                    let imagData = UIImagePNGRepresentation(img)
+                    formData.appendPartWithFileData(imagData!, name: strName, fileName: strFile, mimeType: "image/jpeg")
 //                }
                 }, progress: nil , success: { (_ , result) -> Void in
                     //                    print(result)
