@@ -22,6 +22,8 @@ class RYNetworkTool: AFHTTPSessionManager {
         instance.responseSerializer.acceptableContentTypes?.insert("text/html")
         return instance
     }()
+//TODO: 待私有化初始化方法
+    
     func requestSend (requestStye : RequestStyle ,URLString : String,parameter : [String:AnyObject]? ,finished:(success:[String:AnyObject]? ,error:NSError?)->()) {
         if requestStye == .POST {
             POST(URLString, parameters: parameter, progress: nil, success: { (_, result) -> Void in
@@ -42,7 +44,7 @@ class RYNetworkTool: AFHTTPSessionManager {
             GET(URLString, parameters: parameter, progress: nil, success: { (_, result) -> Void in
                 guard let dict = result as? [String:AnyObject] else {
                     print("数据格式不和法")
-                    let myError = NSError(domain: "呵呵数据格式不合法", code: 998, userInfo: nil)
+                    let myError = NSError(domain: "呵呵数据格式不合法", code: -998, userInfo: nil)
                     //执行失败的回调
                     finished(success: nil, error: myError)
                     return

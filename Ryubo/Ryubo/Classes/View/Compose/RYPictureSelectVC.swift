@@ -48,6 +48,7 @@ class RYPictureSelectVC: UICollectionViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    private lazy var images = [UIImage]()
 }
 
 // MARK: - 实现代理方法 
@@ -64,9 +65,29 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
     func delectPci () {
         print(__FUNCTION__)
     }
-    //选择器的代理方法
+    
+//    //选择器的代理方法
+//    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+//        //编辑信息
+//        print(editingInfo)
+//        //将图片加入图片数组
+//        images.append(image)
+//        //2.刷新页面
+//        collectionView?.reloadData()
+//        //一旦我们实现了这个方法 我们就的自己dismiss
+//        dismissViewControllerAnimated(true, completion: nil)
+//    }
+    
+    
+    //最好用下面的代替  iOS 2.0 以后
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        print(info)
+//        print(info)
+        //帮助文档中有各个键值的说明
+        let img = info["UIImagePickerControllerOriginalImage"] as! UIImage
+        images.append(img)
+        collectionView?.reloadData()
+//        print(img)
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
@@ -78,7 +99,7 @@ extension RYPictureSelectVC {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return images.count+1
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
