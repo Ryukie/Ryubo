@@ -25,7 +25,7 @@ class RYPictureSelectCell: UICollectionViewCell {
     private lazy var bt_picAdd : UIButton = UIButton(backgroundImageName: nil, imageName: "compose_pic_add")
     private lazy var bt_picDelete : UIButton = UIButton(backgroundImageName: nil, imageName: "compose_photo_close")
     //设置代理属性
-    weak var delegate : RYPictureSelectCellDelegate?
+    weak var cellDelegate : RYPictureSelectCellDelegate?
 }
 
 // MARK: - 布局子控件
@@ -43,9 +43,9 @@ extension RYPictureSelectCell {
         bt_picDelete.addTarget(self, action: "clickDelectPciBtn", forControlEvents: .TouchUpInside)
     }
     @objc private func clickAddPicBtn () {
-        delegate?.addPic()
+        cellDelegate?.addPic()
     }
     @objc private func clickDelectPciBtn () {
-        delegate?.delectPci()
+        cellDelegate?.delectPci()
     }
 }

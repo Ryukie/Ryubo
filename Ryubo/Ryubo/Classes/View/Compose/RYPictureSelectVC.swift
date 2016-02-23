@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "picSelect"
 
-class RYPictureSelectVC: UICollectionViewController,RYPictureSelectCellDelegate {
+class RYPictureSelectVC: UICollectionViewController {
 
     init () {
         let layout = UICollectionViewFlowLayout()
@@ -51,12 +51,23 @@ class RYPictureSelectVC: UICollectionViewController,RYPictureSelectCellDelegate 
 }
 
 // MARK: - 实现代理方法 
-extension RYPictureSelectVC {
+extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func addPic () {
-        print(__FUNCTION__)
+        if !UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            print("访问相册失败")
+            return
+        }
+        let picPicker = UIImagePickerController()
+        picPicker.delegate = self
+        presentViewController(picPicker, animated: true, completion: nil)
     }
     func delectPci () {
         print(__FUNCTION__)
+    }
+    //选择器的代理方法
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        print(info)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
@@ -73,7 +84,7 @@ extension RYPictureSelectVC {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! RYPictureSelectCell
         cell.backgroundColor=col_darkGray
-        cell.delegate = self
+        cell.cellDelegate = self
         return cell
     }
 }

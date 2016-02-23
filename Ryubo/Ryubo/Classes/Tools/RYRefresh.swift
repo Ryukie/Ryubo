@@ -23,22 +23,31 @@ class RYRefresh: UIControl {
         didSet {
             switch refreshState {
             case .Normal :
-                lb_text.text = "下拉刷新"
+                lb_text.text = "继续下拉刷新"
                 indicatorView.hidden = true
                 lb_text.hidden = false
+                //didSet 中自带的有上一次的值
+                if oldValue == .Refreshing {
+                    var insert = scrollView?.contentInset
+                    UIView.animateWithDuration(1, animations: { () -> Void in
+                        insert?.top -= self.h
+                        self.scrollView?.contentInset = insert!
+                    })
+                }
             case .Pulling :
                 lb_text.text = "松开刷新界面"
                 lb_text.hidden = false
                 indicatorView.hidden = true
             case .Refreshing :
-                
-                
-                
                 //想要调用加载数据的方法需要手动完成一次 valueChange
                 sendActionsForControlEvents(.ValueChanged)
-                lb_text.text = "正在刷新"
                 indicatorView.hidden = false
                 lb_text.hidden = true
+                var insert = scrollView?.contentInset
+                UIView.animateWithDuration(1, animations: { () -> Void in
+                    insert?.top += self.h
+                    self.scrollView?.contentInset = insert!
+                })
             }
 //            oldState = refreshState
         }
