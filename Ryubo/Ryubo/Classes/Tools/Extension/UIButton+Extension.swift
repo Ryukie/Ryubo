@@ -12,12 +12,17 @@ extension UIButton {
     /**
      仅有背景图和图片-加号按钮
      */
-    convenience init (backgroundImageName:String,imageName:String) {
+    convenience init (backgroundImageName:String?,imageName:String?
+        ) {
         self.init()
-        setBackgroundImage(UIImage(named:  backgroundImageName), forState: .Normal)
-        setBackgroundImage(UIImage(named:  backgroundImageName + "_highlighted"), forState: .Highlighted)
-        setImage(UIImage(named: imageName), forState: .Normal)
-        setImage(UIImage(named: imageName + "_highlighted"), forState: .Highlighted)
+            if backgroundImageName != nil {
+                setBackgroundImage(UIImage(named:  backgroundImageName!), forState: .Normal)
+                setBackgroundImage(UIImage(named:  backgroundImageName! + "_highlighted"), forState: .Highlighted)
+            }
+            if imageName != nil {
+                setImage(UIImage(named: imageName!), forState: .Normal)
+                setImage(UIImage(named: imageName! + "_highlighted"), forState: .Highlighted)
+            }
         sizeToFit()
     }
     /**
