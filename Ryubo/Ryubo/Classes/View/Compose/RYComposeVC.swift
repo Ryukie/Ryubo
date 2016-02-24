@@ -256,7 +256,8 @@ extension RYComposeVC {
 //        print(__FUNCTION__)
         //先取消第一响应者
         tv_textInputView.resignFirstResponder()
-        tv_textInputView.inputView = tv_textInputView.inputView == nil ? v_emotionKryboard : nil
+//        tv_textInputView.inputView = tv_textInputView.inputView == nil ? v_emotionKryboard : nil
+        tv_textInputView.inputView = tv_textInputView.inputView == nil ? RYEmotionView() : nil
         //成为第一响应者调出键盘
         tv_textInputView.becomeFirstResponder()
     }
