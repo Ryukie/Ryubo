@@ -84,8 +84,8 @@ class RYComposeVC: UIViewController {
         //TODO : 不为空的时候提示保存草稿
     }
     //1.textView
-    private lazy var tv_textInputView: UITextView = {
-        let tv = UITextView()
+    private lazy var tv_textInputView: EmoticonTextView = {
+        let tv = EmoticonTextView()
         tv.font = UIFont.systemFontOfSize(18)
         tv.textColor = col_darkGray
         tv.backgroundColor = col_white95Gray
@@ -102,6 +102,12 @@ class RYComposeVC: UIViewController {
     private lazy var tb_bottomToolBar : UIToolbar = UIToolbar()
     var itemIndex : Int64 = 0
     private lazy var vc_picSelect : RYPictureSelectVC = RYPictureSelectVC()
+    //插入表情键盘
+    private lazy var v_emotionKryboard: EmoticonKeyBoardView = EmoticonKeyBoardView { (em) -> () in
+//        print(em)
+        //在闭包中智能提示 不怎么样  系统键盘存在的时候 输入视图 为 nil
+        self.tv_textInputView.insetText(em)
+    }
 }
 
 // MARK: - 布局子控件
@@ -240,7 +246,12 @@ extension RYComposeVC {
     
     //4 emoj
     @objc private func clickEmojAdd () {
-        print(__FUNCTION__)
+//        print(__FUNCTION__)
+        //先取消第一响应者
+        tv_textInputView.resignFirstResponder()
+        tv_textInputView.inputView = tv_textInputView.inputView == nil ? v_emotionKryboard : nil
+        //成为第一响应者调出键盘
+        tv_textInputView.becomeFirstResponder()
     }
     
     //5 more
@@ -260,6 +271,17 @@ extension RYComposeVC {
             self.tb_bottomToolBar.snp_updateConstraints(closure: { (make) -> Void in
                 make.bottom.equalTo(self.view.snp_bottom).offset(offsetY)
             })
+            
+            //设置动画曲线
+            let curve = (n.userInfo![UIKeyboardAnimationCurveUserInfoKey] as!NSNumber).integerValue
+            UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: curve)!)
+            /*
+            苹果官方没有提供关于 UIViewAnimationCurve 数值等于 7 的文档说明，不过通过实际测试发现，可以设置动画的优先级
+            UIViewAnimationCurve == 7 时
+            如果图层之前动画没有结束，会被终止并执行后续的动画
+            同时将动画时长修改为 0.5 s，并且设定的动画时长不再有效
+            */
+            
             //强制刷新
             self.view.layoutIfNeeded()
         }
