@@ -42,7 +42,6 @@
 		4ACE2DB21C7DC83600AF6946 /* EmoticonTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DAA1C7DC83600AF6946 /* EmoticonTextView.swift */; };
 		4ACE2DB31C7DC83600AF6946 /* String+Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DAB1C7DC83600AF6946 /* String+Emoticon.swift */; };
 		4ACE2DB81C7DCFB800AF6946 /* RYEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DB71C7DCFB800AF6946 /* RYEmotionView.swift */; };
-		4ACE2DBA1C7DE3CA00AF6946 /* RYEmotionCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DB91C7DE3CA00AF6946 /* RYEmotionCollection.swift */; };
 		4ACE2DBC1C7DE71A00AF6946 /* RYEmotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DBB1C7DE71A00AF6946 /* RYEmotionCell.swift */; };
 		4AD248A71C6883BC003F110A /* RYUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A61C6883BC003F110A /* RYUserAccount.swift */; };
 		4AD248A91C68A04D003F110A /* RYAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */; };
@@ -96,7 +95,6 @@
 		4ACE2DAA1C7DC83600AF6946 /* EmoticonTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonTextView.swift; sourceTree = "<group>"; };
 		4ACE2DAB1C7DC83600AF6946 /* String+Emoticon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Emoticon.swift"; sourceTree = "<group>"; };
 		4ACE2DB71C7DCFB800AF6946 /* RYEmotionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYEmotionView.swift; sourceTree = "<group>"; };
-		4ACE2DB91C7DE3CA00AF6946 /* RYEmotionCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYEmotionCollection.swift; sourceTree = "<group>"; };
 		4ACE2DBB1C7DE71A00AF6946 /* RYEmotionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYEmotionCell.swift; sourceTree = "<group>"; };
 		4AD248A61C6883BC003F110A /* RYUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYUserAccount.swift; sourceTree = "<group>"; };
 		4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYAccountViewModel.swift; sourceTree = "<group>"; };
@@ -324,7 +322,6 @@
 			isa = PBXGroup;
 			children = (
 				4ACE2DB71C7DCFB800AF6946 /* RYEmotionView.swift */,
-				4ACE2DB91C7DE3CA00AF6946 /* RYEmotionCollection.swift */,
 				4ACE2DBB1C7DE71A00AF6946 /* RYEmotionCell.swift */,
 			);
 			path = RYEmotion;
@@ -516,7 +513,6 @@
 				4ADA07271C78534300A960E4 /* RYRetweetView.swift in Sources */,
 				4A5B88B31C5CA03B0043572D /* AppDelegate.swift in Sources */,
 				4A5B88DA1C5CB42B0043572D /* RYDiscoverController.swift in Sources */,
-				4ACE2DBA1C7DE3CA00AF6946 /* RYEmotionCollection.swift in Sources */,
 				4AD248A91C68A04D003F110A /* RYAccountViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

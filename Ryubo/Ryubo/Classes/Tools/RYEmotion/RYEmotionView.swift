@@ -10,7 +10,8 @@ import UIKit
 
 class RYEmotionView: UIView {
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        let f = CGRectMake(0, 0, scrHeight, scrHeight)
+        super.init(frame: f)
         backgroundColor = col_orange
         setUI()
     }
@@ -20,7 +21,7 @@ class RYEmotionView: UIView {
 // MARK: - 懒加载控件
     // MARK: - 懒加载控件
     /// 表情集合视图
-    private lazy var cv_EmotionCollection: RYEmotionCollection = {
+    private lazy var cv_EmotionCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -29,9 +30,12 @@ class RYEmotionView: UIView {
         let marginTopBot = (self.bounds.height - 3.0 * w - 40) / 2
         layout.sectionInset = UIEdgeInsets(top: marginTopBot, left: 0, bottom: marginTopBot, right: 0)
         layout.scrollDirection = .Horizontal
-//        let testFrame = CGRect(x: 0, y: -scrHeight/3, width: scrWidth, height: scrHeight)
-        let cv = RYEmotionCollection(frame: CGRectZero, collectionViewLayout: layout)
+        let testFrame = CGRect(x: 0, y: 0, width: scrWidth, height: scrHeight)
+//        let cv = RYEmotionCollection(frame: CGRectZero, collectionViewLayout: layout)
+        let cv = UICollectionView(frame: testFrame, collectionViewLayout: layout)
         cv.registerClass(RYEmotionCell.self, forCellWithReuseIdentifier: emotionCellReuseID)
+        cv.dataSource = self
+        cv.delegate = self
         return cv
     }()
     /// 工具栏
@@ -77,5 +81,19 @@ extension RYEmotionView {
         print(item?.tag)
     }
 }
-
+extension RYEmotionView : UICollectionViewDataSource,UICollectionViewDelegate {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 21
+    }
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(emotionCellReuseID, forIndexPath: indexPath) as! RYEmotionCell
+        //        cell.backgroundColor = UIColor.randomColor()
+        cell.backgroundColor = indexPath.item % 2 == 0 ? UIColor.redColor() : UIColor.greenColor()
+        cell.bt_emotion.setTitle("\(indexPath.item)", forState: .Normal)
+        return cell
+    }
+}
 
