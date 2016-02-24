@@ -22,6 +22,13 @@ class RYComposeVC: UIViewController {
     }
     
     @objc private func sendWeibo () {
+        
+        //判断用户是否登录
+        guard RYAccountViewModel.sharedAccountViewModel.userLogin else {
+            SVProgressHUD.showErrorWithStatus("PleaseLogin", maskType: .Gradient)
+            return
+        }
+        
         var URLString = "2/statuses/update.json"
         let parameters = ["access_token": RYAccountViewModel.sharedAccountViewModel.token,"status":tv_textInputView.text]
         
