@@ -14,6 +14,11 @@ class RYEmotionViewManager: NSObject {
     lazy var packages = [RYEmotionPackage]()
     private override init() {
         super.init()
+        
+        // 0. 添加最近分组   plist中没有
+        packages.append(RYEmotionPackage(dict: ["group_name_cn": "最近"]))
+        
+        
         //从plist加载表情包信息
         // 1. emoticons.plist 路径
         guard let filePath = NSBundle.mainBundle().pathForResource("emoticons", ofType: "plist",inDirectory: "Emoticons.bundle") else {
@@ -36,7 +41,7 @@ class RYEmotionViewManager: NSObject {
     /// 加载 id 目录下的 info.plist 文件
     private func loadInfoPlist(id: String) {
         print(id)
-        let filePath = NSBundle.mainBundle().pathForResource("info", ofType: "plist", inDirectory: "Emoticons.bundle/\(id)")
+        let filePath = NSBundle.mainBundle().pathForResource("Info", ofType: "plist", inDirectory: "Emoticons.bundle/\(id)")
         let dict = NSDictionary(contentsOfFile: filePath!) as! [String: AnyObject]
         packages.append(RYEmotionPackage(dict: dict))
     }

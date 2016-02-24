@@ -9,9 +9,25 @@
 import UIKit
 
 class RYEmotionCell: UICollectionViewCell {
+    /// 表情符号
+    var emotion: RYEmotionModel? {
+        didSet {
+            bt_emotion.setImage(UIImage(named: emotion!.imagePath! ?? ""), forState: .Normal)
+            bt_emotion.setTitle(emotion?.emoji ?? "", forState: .Normal)
+            
+            // 是否删除按钮
+            if emotion!.isRemoved {
+                bt_emotion.setImage(UIImage(named: "compose_emotion_delete"), forState: .Normal)
+            }
+            
+        }
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        bt_emotion.titleLabel?.font = UIFont.systemFontOfSize(32)
+        bt_emotion.userInteractionEnabled = false
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -20,6 +36,7 @@ class RYEmotionCell: UICollectionViewCell {
     
 // MARK: - 懒加载控件
     lazy var bt_emotion : UIButton = UIButton()
+    
 }
 // MARK: - 布局子空间
 extension RYEmotionCell {

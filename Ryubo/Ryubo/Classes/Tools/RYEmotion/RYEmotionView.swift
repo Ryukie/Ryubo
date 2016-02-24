@@ -9,12 +9,31 @@
 import UIKit
 
 class RYEmotionView: UIView {
-    override init(frame: CGRect) {
-        let f = CGRectMake(0, 0, scrHeight, scrHeight)
-        super.init(frame: f)
-        backgroundColor = col_orange
-        setUI()
+    
+    /// 选中表情回调函数
+    private var selectedEmoticonCallBack: (emoticon: RYEmotionModel) -> ()
+    
+    // MARK: - 构造函数
+    init(selectedEmoticon: (emoticon: RYEmotionModel) -> ()) {
+        self.selectedEmoticonCallBack = selectedEmoticon
+        var rect = UIScreen.mainScreen().bounds
+        rect.size.height = 216
+        super.init(frame: rect)
+        // 设置控件
+        self.setUI()
+        // 跳转到默认分组
+        let indexPath = NSIndexPath(forItem: 0, inSection: 1)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.cv_EmotionCollection.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
+        }
     }
+    
+//    override init(frame: CGRect) {
+//        let f = CGRectMake(0, 0, scrHeight, scrHeight)
+//        super.init(frame: f)
+//        backgroundColor = col_orange
+//        setUI()
+//    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -42,6 +61,8 @@ class RYEmotionView: UIView {
     private lazy var tb_toolBar = UIToolbar()
     // item Tag
     private var index = 0
+    /// 表情包数组
+    private lazy var packages = RYEmotionViewManager.sharedEmotionManager.packages
 }
 // MARK: - 布局键盘
 extension RYEmotionView {
@@ -63,11 +84,10 @@ extension RYEmotionView {
         }
     }
     private func setToolBar () {
-        
         tintColor = UIColor.darkGrayColor()
         var tbItems = [UIBarButtonItem]()
-        for title in ["最近","默认","emoji","浪小花"] {
-            let item = UIBarButtonItem(title: title, style: .Plain, target: self, action: "clickItem:")
+        for package in packages {
+            let item = UIBarButtonItem(title: package.group_name_cn, style: .Plain, target: self, action: "clickItem:")
             item.tag = index++
             tbItems.append(item)
             //家弹簧
@@ -76,24 +96,38 @@ extension RYEmotionView {
         tbItems.removeLast()
         tb_toolBar.items = tbItems
     }
-    //通过判断item的tag来实现不同的效果
+    //通过判断item的tag来实现   点击切换  section  到起始位置
     private func clickItem (item:UIBarButtonItem?) {
         print(item?.tag)
+        let indexPath = NSIndexPath(forItem: 0, inSection: item!.tag)
+        cv_EmotionCollection.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: true)
+        
+//        // 跳转到默认分组
+//        let indexPath = NSIndexPath(forItem: 0, inSection: 1)
+//        dispatch_async(dispatch_get_main_queue()) {
+//            self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
+//        }
+//        
     }
 }
 extension RYEmotionView : UICollectionViewDataSource,UICollectionViewDelegate {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return packages.count
     }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 21
+        return packages[section].emotions.count
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(emotionCellReuseID, forIndexPath: indexPath) as! RYEmotionCell
         //        cell.backgroundColor = UIColor.randomColor()
         cell.backgroundColor = indexPath.item % 2 == 0 ? UIColor.redColor() : UIColor.greenColor()
         cell.bt_emotion.setTitle("\(indexPath.item)", forState: .Normal)
+        cell.emotion = packages[indexPath.section].emotions[indexPath.item]
         return cell
+    }
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let em = packages[indexPath.section].emotions[indexPath.item]
+        selectedEmoticonCallBack(emoticon: em)
     }
 }
 

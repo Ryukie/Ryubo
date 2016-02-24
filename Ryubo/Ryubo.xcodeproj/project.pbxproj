@@ -33,14 +33,6 @@
 		4AB1B1DE1C7BF46500720046 /* RYPictureSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB1B1DD1C7BF46500720046 /* RYPictureSelectVC.swift */; };
 		4AB1B1E01C7C333200720046 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB1B1DF1C7C333200720046 /* UIColor+Extension.swift */; };
 		4AB1B1E21C7C3C4300720046 /* RYPictureSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB1B1E11C7C3C4300720046 /* RYPictureSelectCell.swift */; };
-		4ACE2DAC1C7DC83600AF6946 /* Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DA41C7DC83600AF6946 /* Emoticon.swift */; };
-		4ACE2DAD1C7DC83600AF6946 /* EmoticonKeyBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DA51C7DC83600AF6946 /* EmoticonKeyBoardView.swift */; };
-		4ACE2DAE1C7DC83600AF6946 /* EmoticonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DA61C7DC83600AF6946 /* EmoticonManager.swift */; };
-		4ACE2DAF1C7DC83600AF6946 /* EmoticonPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DA71C7DC83600AF6946 /* EmoticonPackages.swift */; };
-		4ACE2DB01C7DC83600AF6946 /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4ACE2DA81C7DC83600AF6946 /* Emoticons.bundle */; };
-		4ACE2DB11C7DC83600AF6946 /* EmoticonTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DA91C7DC83600AF6946 /* EmoticonTextAttachment.swift */; };
-		4ACE2DB21C7DC83600AF6946 /* EmoticonTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DAA1C7DC83600AF6946 /* EmoticonTextView.swift */; };
-		4ACE2DB31C7DC83600AF6946 /* String+Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DAB1C7DC83600AF6946 /* String+Emoticon.swift */; };
 		4ACE2DB81C7DCFB800AF6946 /* RYEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DB71C7DCFB800AF6946 /* RYEmotionView.swift */; };
 		4ACE2DBC1C7DE71A00AF6946 /* RYEmotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE2DBB1C7DE71A00AF6946 /* RYEmotionCell.swift */; };
 		4AD248A71C6883BC003F110A /* RYUserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD248A61C6883BC003F110A /* RYUserAccount.swift */; };
@@ -50,6 +42,7 @@
 		4AD57A9A1C7DF27800FE3C9C /* RYEmotionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD57A991C7DF27800FE3C9C /* RYEmotionModel.swift */; };
 		4AD57A9C1C7DF34A00FE3C9C /* RYEmotionPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD57A9B1C7DF34A00FE3C9C /* RYEmotionPackage.swift */; };
 		4AD57AA21C7DF41600FE3C9C /* RYEmotionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD57AA11C7DF41600FE3C9C /* RYEmotionViewManager.swift */; };
+		4AD57AA51C7DFB3600FE3C9C /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD57AA41C7DFB3600FE3C9C /* String+Emoji.swift */; };
 		4ADA071B1C77FAA300A960E4 /* RYCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA071A1C77FAA300A960E4 /* RYCommentVC.swift */; };
 		4ADA071D1C77FBAE00A960E4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */; };
 		4ADA07211C77FFF800A960E4 /* RYRetweetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA07201C77FFF800A960E4 /* RYRetweetVC.swift */; };
@@ -90,14 +83,6 @@
 		4AB1B1DD1C7BF46500720046 /* RYPictureSelectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYPictureSelectVC.swift; sourceTree = "<group>"; };
 		4AB1B1DF1C7C333200720046 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4AB1B1E11C7C3C4300720046 /* RYPictureSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYPictureSelectCell.swift; sourceTree = "<group>"; };
-		4ACE2DA41C7DC83600AF6946 /* Emoticon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoticon.swift; sourceTree = "<group>"; };
-		4ACE2DA51C7DC83600AF6946 /* EmoticonKeyBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonKeyBoardView.swift; sourceTree = "<group>"; };
-		4ACE2DA61C7DC83600AF6946 /* EmoticonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonManager.swift; sourceTree = "<group>"; };
-		4ACE2DA71C7DC83600AF6946 /* EmoticonPackages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonPackages.swift; sourceTree = "<group>"; };
-		4ACE2DA81C7DC83600AF6946 /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
-		4ACE2DA91C7DC83600AF6946 /* EmoticonTextAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonTextAttachment.swift; sourceTree = "<group>"; };
-		4ACE2DAA1C7DC83600AF6946 /* EmoticonTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonTextView.swift; sourceTree = "<group>"; };
-		4ACE2DAB1C7DC83600AF6946 /* String+Emoticon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Emoticon.swift"; sourceTree = "<group>"; };
 		4ACE2DB71C7DCFB800AF6946 /* RYEmotionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYEmotionView.swift; sourceTree = "<group>"; };
 		4ACE2DBB1C7DE71A00AF6946 /* RYEmotionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYEmotionCell.swift; sourceTree = "<group>"; };
 		4AD248A61C6883BC003F110A /* RYUserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYUserAccount.swift; sourceTree = "<group>"; };
@@ -107,6 +92,7 @@
 		4AD57A991C7DF27800FE3C9C /* RYEmotionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYEmotionModel.swift; sourceTree = "<group>"; };
 		4AD57A9B1C7DF34A00FE3C9C /* RYEmotionPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYEmotionPackage.swift; sourceTree = "<group>"; };
 		4AD57AA11C7DF41600FE3C9C /* RYEmotionViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYEmotionViewManager.swift; sourceTree = "<group>"; };
+		4AD57AA41C7DFB3600FE3C9C /* String+Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		4ADA071A1C77FAA300A960E4 /* RYCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYCommentVC.swift; sourceTree = "<group>"; };
 		4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		4ADA07201C77FFF800A960E4 /* RYRetweetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRetweetVC.swift; sourceTree = "<group>"; };
@@ -192,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				4ACE2DB41C7DCF1B00AF6946 /* RYEmotion */,
-				4ACE2DA31C7DC83600AF6946 /* EmoticonTools */,
 				4AED05E91C73455A00C9C7D8 /* Extension */,
 				4A9E01171C64D6BA0045AC09 /* RYGlobal.swift */,
 				4A9E01191C64DF7F0045AC09 /* RYNetworkTool.swift */,
@@ -311,21 +296,6 @@
 			path = AuthView;
 			sourceTree = "<group>";
 		};
-		4ACE2DA31C7DC83600AF6946 /* EmoticonTools */ = {
-			isa = PBXGroup;
-			children = (
-				4ACE2DA41C7DC83600AF6946 /* Emoticon.swift */,
-				4ACE2DA51C7DC83600AF6946 /* EmoticonKeyBoardView.swift */,
-				4ACE2DA61C7DC83600AF6946 /* EmoticonManager.swift */,
-				4ACE2DA71C7DC83600AF6946 /* EmoticonPackages.swift */,
-				4ACE2DA81C7DC83600AF6946 /* Emoticons.bundle */,
-				4ACE2DA91C7DC83600AF6946 /* EmoticonTextAttachment.swift */,
-				4ACE2DAA1C7DC83600AF6946 /* EmoticonTextView.swift */,
-				4ACE2DAB1C7DC83600AF6946 /* String+Emoticon.swift */,
-			);
-			path = EmoticonTools;
-			sourceTree = "<group>";
-		};
 		4ACE2DB41C7DCF1B00AF6946 /* RYEmotion */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +340,7 @@
 				4AED05EC1C734A1400C9C7D8 /* UIButton+Extension.swift */,
 				4ADA071C1C77FBAE00A960E4 /* UIView+Extension.swift */,
 				4AB1B1DF1C7C333200720046 /* UIColor+Extension.swift */,
+				4AD57AA41C7DFB3600FE3C9C /* String+Emoji.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -448,7 +419,6 @@
 			files = (
 				4A5B88BA1C5CA03B0043572D /* Assets.xcassets in Resources */,
 				4AD57A971C7DF21700FE3C9C /* Emoticons.bundle in Resources */,
-				4ACE2DB01C7DC83600AF6946 /* Emoticons.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,15 +480,14 @@
 				4A7BC8541C76BDE800519D65 /* RYPicsView.swift in Sources */,
 				4AD57AA21C7DF41600FE3C9C /* RYEmotionViewManager.swift in Sources */,
 				4A9E01181C64D6BA0045AC09 /* RYGlobal.swift in Sources */,
+				4AD57AA51C7DFB3600FE3C9C /* String+Emoji.swift in Sources */,
 				4A965F061C737185005E14E1 /* RYUser.swift in Sources */,
 				4AACCEE61C7AB0A400BDFDF5 /* RYRefresh.swift in Sources */,
 				4AD248AB1C68CA98003F110A /* RYWelcomeController.swift in Sources */,
 				4A5B88DC1C5CB4400043572D /* RYHomeController.swift in Sources */,
-				4ACE2DB31C7DC83600AF6946 /* String+Emoticon.swift in Sources */,
 				4AACCEE81C7B293200BDFDF5 /* RYComposeVC.swift in Sources */,
 				4ADA071B1C77FAA300A960E4 /* RYCommentVC.swift in Sources */,
 				4A7919231C749E870045DD08 /* RYAuthController.swift in Sources */,
-				4ACE2DAE1C7DC83600AF6946 /* EmoticonManager.swift in Sources */,
 				4ADA07231C7803F200A960E4 /* RYBasicNaviController.swift in Sources */,
 				4ACE2DB81C7DCFB800AF6946 /* RYEmotionView.swift in Sources */,
 				4A965E761C75C72F00DB1FBC /* RYBottomView.swift in Sources */,
@@ -528,12 +497,10 @@
 				4A7BC8561C77616F00519D65 /* RYPictureCell.swift in Sources */,
 				4ADA071D1C77FBAE00A960E4 /* UIView+Extension.swift in Sources */,
 				4A5B88D81C5CAE5D0043572D /* RYTabBar.swift in Sources */,
-				4ACE2DAF1C7DC83600AF6946 /* EmoticonPackages.swift in Sources */,
 				4A5B88E01C5CB4690043572D /* RYProfileController.swift in Sources */,
 				4A5B88DE1C5CB4520043572D /* RYMessageController.swift in Sources */,
 				4A6EAB781C61F2AA00A08B4B /* RYBasicVisitorTVC.swift in Sources */,
 				4A965F021C736A45005E14E1 /* RYStatusViewModel.swift in Sources */,
-				4ACE2DB21C7DC83600AF6946 /* EmoticonTextView.swift in Sources */,
 				4AB1B1E01C7C333200720046 /* UIColor+Extension.swift in Sources */,
 				4AED05EB1C73456900C9C7D8 /* UILabel+Extension.swift in Sources */,
 				4AD248A71C6883BC003F110A /* RYUserAccount.swift in Sources */,
@@ -546,9 +513,6 @@
 				4AB1B1DE1C7BF46500720046 /* RYPictureSelectVC.swift in Sources */,
 				4AB1B1E21C7C3C4300720046 /* RYPictureSelectCell.swift in Sources */,
 				4ADA07211C77FFF800A960E4 /* RYRetweetVC.swift in Sources */,
-				4ACE2DAD1C7DC83600AF6946 /* EmoticonKeyBoardView.swift in Sources */,
-				4ACE2DAC1C7DC83600AF6946 /* Emoticon.swift in Sources */,
-				4ACE2DB11C7DC83600AF6946 /* EmoticonTextAttachment.swift in Sources */,
 				4AD57A9C1C7DF34A00FE3C9C /* RYEmotionPackage.swift in Sources */,
 				4ADA07271C78534300A960E4 /* RYRetweetView.swift in Sources */,
 				4A5B88B31C5CA03B0043572D /* AppDelegate.swift in Sources */,

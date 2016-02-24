@@ -91,8 +91,8 @@ class RYComposeVC: UIViewController {
         //TODO : 不为空的时候提示保存草稿
     }
     //1.textView
-    private lazy var tv_textInputView: EmoticonTextView = {
-        let tv = EmoticonTextView()
+    private lazy var tv_textInputView: UITextView = {
+        let tv = UITextView()
         tv.font = UIFont.systemFontOfSize(18)
         tv.textColor = col_darkGray
         tv.backgroundColor = col_white95Gray
@@ -110,10 +110,31 @@ class RYComposeVC: UIViewController {
     var itemIndex : Int64 = 0
     private lazy var vc_picSelect : RYPictureSelectVC = RYPictureSelectVC()
     //插入表情键盘
-    private lazy var v_emotionKryboard: EmoticonKeyBoardView = EmoticonKeyBoardView { (em) -> () in
-//        print(em)
-        //在闭包中智能提示 不怎么样  系统键盘存在的时候 输入视图 为 nil
-        self.tv_textInputView.insetText(em)
+    /// 表情键盘视图
+    //注意：此处会有循环引用！
+    private lazy var emoticonView: RYEmotionView = RYEmotionView { [weak self] (emoticon) -> () in
+        self?.insertEmoticon(emoticon)
+    }
+    /// 插入表情符号
+    ///
+    /// - parameter em: 表情符号
+    func insertEmoticon(em: RYEmotionModel) {
+        print(em)
+        // 1. 空白表情
+        if em.isEmpty {
+            return
+        }
+        
+        // 2. 删除按钮
+        if em.isRemoved {
+            tv_textInputView.deleteBackward()
+            return
+        }
+        // 3. emoji
+        if let emoji = em.emoji {
+            tv_textInputView.replaceRange(tv_textInputView.selectedTextRange!, withText: emoji)
+            return
+        }
     }
 }
 
@@ -256,8 +277,7 @@ extension RYComposeVC {
 //        print(__FUNCTION__)
         //先取消第一响应者
         tv_textInputView.resignFirstResponder()
-//        tv_textInputView.inputView = tv_textInputView.inputView == nil ? v_emotionKryboard : nil
-        tv_textInputView.inputView = tv_textInputView.inputView == nil ? RYEmotionView() : nil
+        tv_textInputView.inputView = tv_textInputView.inputView == nil ?emoticonView : nil
         //成为第一响应者调出键盘
         tv_textInputView.becomeFirstResponder()
     }
