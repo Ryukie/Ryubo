@@ -227,18 +227,26 @@ extension RYComposeVC {
     
     //1 pic
     @objc private func clickPicAdd () {
-//        print(__FUNCTION__)
+        
 //        let vc = RYBasicNaviController(rootViewController: vc_picSelect)
 //        navigationController?.presentViewController(vc, animated: true, completion: nil)
         //更新高度
-        vc_picSelect.view.snp_updateConstraints { (make) -> Void in
-            make.height.equalTo(scrHeight*2/3)
+        if vc_picSelect.isShowed == false {
+            tv_textInputView.resignFirstResponder()
+            vc_picSelect.isShowed = true
+            vc_picSelect.view.snp_updateConstraints { (make) -> Void in
+                make.height.equalTo(scrHeight*2/3)
+            }
+        }else {
+            vc_picSelect.isShowed = false
+            vc_picSelect.view.snp_updateConstraints { (make) -> Void in
+                make.height.equalTo(0)
+            }
         }
         //强制刷新界面
         UIView.animateWithDuration(0.25) { () -> Void in
             self.view.layoutIfNeeded()
         }
-        
     }
     
     //2 @
@@ -268,6 +276,9 @@ extension RYComposeVC {
     
     @objc private func whenKeyboardChange (n:NSNotification) {
 //        print(n)
+        if vc_picSelect.isShowed == true {
+            clickPicAdd()
+        }
         //获取动画时间
         let duration = (n.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         //NSRect  是一个结构体  结构体需要包装成 NSValue

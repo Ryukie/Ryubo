@@ -76,8 +76,10 @@ class RYStatusViewModel: NSObject {
             }
             //判断是 下拉还是 上拉
             if since_id > 0 {
+//                print(since_id)
                 //下拉
                 self.statuses = tempArr + self.statuses
+//                print(tempArr[0])
             } else if max_id > 0 {
                 //上拉
                 self.statuses += tempArr

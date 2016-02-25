@@ -30,11 +30,13 @@ class RYPictureSelectVC: UICollectionViewController {
 //        layout.itemSize = CGSize(width: itemW, height: itemW)
 //        super.init(collectionViewLayout: layout)
 //    }
-
+    var changeKeyboard : (() -> Void)?
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.dataSource = self
@@ -50,8 +52,10 @@ class RYPictureSelectVC: UICollectionViewController {
     }
     lazy var images = [UIImage]()
     private var selectCell : RYPictureSelectCell?
-    //设置最大图片数量
+    // 设置最大图片数量
     private let maxPicNum = 9
+    // 是否显示
+    var isShowed : Bool = false
 }
 
 // MARK: - 实现代理方法 
