@@ -31,7 +31,6 @@ class RYHomeController: RYBasicVisitorTVC {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 //        loadData()
-        setBadgeIcon()
     }
     //准备tableView
     private func prepareTableView() {
@@ -68,9 +67,9 @@ class RYHomeController: RYBasicVisitorTVC {
             if !self.tableView.dragging {
                 //如果是一直拉着就不刷新
                 self.tableView.reloadData()
+                self.setBadgeIcon()
             }
         }
-        setBadgeIcon()
     }
     private func autoRowHeight () {
         //1.设置行高为自动计算行高
