@@ -21,16 +21,13 @@ class RYHomeController: RYBasicVisitorTVC {
         }
         prepareTableView()
         SVProgressHUD.show()
-        loadData()
-//        setBadgeIcon()
-        
         //定时刷新badge
         let timer = NSTimer(timeInterval: 30, target: self, selector: "setBadgeIcon", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-//        loadData()
+        loadData()
     }
     //准备tableView
     private func prepareTableView() {
