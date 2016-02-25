@@ -22,10 +22,16 @@ class RYHomeController: RYBasicVisitorTVC {
         prepareTableView()
         SVProgressHUD.show()
         loadData()
+//        setBadgeIcon()
+        
+        //定时刷新badge
+        let timer = NSTimer(timeInterval: 30, target: self, selector: "setBadgeIcon", userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
     }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
 //        loadData()
+        setBadgeIcon()
     }
     //准备tableView
     private func prepareTableView() {
@@ -64,6 +70,7 @@ class RYHomeController: RYBasicVisitorTVC {
                 self.tableView.reloadData()
             }
         }
+        setBadgeIcon()
     }
     private func autoRowHeight () {
         //1.设置行高为自动计算行高
@@ -95,4 +102,40 @@ class RYHomeController: RYBasicVisitorTVC {
     }
     //小菊花
     private lazy var indicatorView: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+    //获取并显示badgeIcon
+    @objc private func setBadgeIcon () {
+        print(__FUNCTION__)
+        /*
+        必选	类型及范围	说明
+        source	false	string	采用OAuth授权方式不需要此参数，其他授权方式为必填参数，数值为应用的AppKey。
+        access_token	false	string	采用OAuth授权方式为必填参数，其他授权方式不需要此参数，OAuth授权后获得。
+        uid	true	int64	需要获取消息未读数的用户UID，必须是当前登录用户。
+        callback	false	string	JSONP回调函数，用于前端调用返回JS格式的信息。
+        unread_message	false	boolean	未读数版本。0：原版未读数，1：新版未读数。默认为0。
+
+        */
+        let account = RYAccountViewModel.sharedAccountViewModel.userAccount
+        let uid = (account?.uid)! as NSString
+        var parameter = [String : AnyObject]()
+        parameter["access_token"] = account?.access_token
+        parameter["uid"] = uid.integerValue
+//        parameter["unread_message"] = 1
+//        print(parameter)
+        RYNetworkTool.sharedNetTool.requestSend(.GET, URLString: "2/remind/unread_count.json", parameter: parameter) { (success, error) -> () in
+            if success != nil {
+//                print(success)
+                let dict = success! as [String:AnyObject]
+//                print(dict)
+                let unread = RYUnread(dict: dict)
+                print(unread.status)
+                if unread.status == 0 {
+                    self.tabBarItem.badgeValue = nil
+                    return
+                }
+                self.tabBarItem.badgeValue = "\(unread.status)"
+            }else {
+                print(error)
+            }
+        }
+    }
 }

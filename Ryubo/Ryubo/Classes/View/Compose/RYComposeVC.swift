@@ -48,7 +48,7 @@ class RYComposeVC: UIViewController {
                 //将图片二进制文件传入拼接入 fromData
                 //多张图片上传   需要高级接口
 //                for i in 0..<(self.vc_picSelect.images.count) {
-                    let img = self.vc_picSelect.images[1]
+                    let img = self.vc_picSelect.images[0]
                     let strName = "pic"
                     let strFile = "Ryukie" + "\(1)"
                     print(strFile)

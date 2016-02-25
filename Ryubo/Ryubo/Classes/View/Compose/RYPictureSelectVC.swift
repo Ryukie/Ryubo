@@ -67,6 +67,8 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
         }
         let picPicker = UIImagePickerController()
         picPicker.delegate = self
+        //开启编辑
+        picPicker.allowsEditing = true;
         selectCell = sender
         presentViewController(picPicker, animated: true, completion: nil)
     }
@@ -83,7 +85,18 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
     //最好用下面的代替  iOS 2.0 以后
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         //帮助文档中有各个键值的说明
-        let img = info["UIImagePickerControllerOriginalImage"] as! UIImage
+//        let img = info["UIImagePickerControllerOriginalImage"] as! UIImage
+        /*
+        let UIImagePickerControllerMediaType: String
+        let UIImagePickerControllerOriginalImage: String
+        let UIImagePickerControllerEditedImage: String
+        let UIImagePickerControllerCropRect: String
+        let UIImagePickerControllerMediaURL: String
+        let UIImagePickerControllerReferenceURL: String
+        let UIImagePickerControllerMediaMetadata: String
+        let UIImagePickerControllerLivePhoto: String
+        */
+        let img = info["UIImagePickerControllerEditedImage"] as! UIImage
         //如果cell中已经有图片了  就替换这个图片
         if selectCell!.isPicAdded == true  {
             images.removeAtIndex((selectCell?.tag)!-100)
@@ -93,8 +106,10 @@ extension RYPictureSelectVC:RYPictureSelectCellDelegate,UIImagePickerControllerD
             selectCell?.isPicAdded = true
         }
         collectionView?.reloadData()
+        //使用协议方法后   页面的 dismiss 就交给程序员了
         dismissViewControllerAnimated(true, completion: nil)
     }
+
 }
 
 // MARK: - dataSource
