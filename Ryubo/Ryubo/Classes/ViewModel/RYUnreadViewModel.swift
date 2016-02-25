@@ -14,7 +14,7 @@ class RYUnreadViewModel: NSObject {
     private override init() {
         super.init()
     }
-    func setBadge (SetSuccess:(result : RYUnread?,error : NSError?)->()) {
+    func setBadgeForTabBarItem (tabBarItem : UITabBarItem) {
         /*
         必选	类型及范围	说明
         source	false	string	采用OAuth授权方式不需要此参数，其他授权方式为必填参数，数值为应用的AppKey。
@@ -32,10 +32,14 @@ class RYUnreadViewModel: NSObject {
             if success != nil {
                 let dict = success! as [String:AnyObject]
                 let unread = RYUnread(dict: dict)
-                    SetSuccess(result : unread , error : nil)
+                print(unread.status)
+                if unread.status != 0 {
+                    tabBarItem.badgeValue = "\(unread.status)"
+                }else {
+                    tabBarItem.badgeValue = nil
+                }
             }else {
                 print(error)
-                SetSuccess(result: nil, error: error)
             }
         }
     }

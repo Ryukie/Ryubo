@@ -100,17 +100,6 @@ class RYHomeController: RYBasicVisitorTVC {
     private lazy var indicatorView: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
     //获取并显示badgeIcon
     @objc private func setBadgeIcon () {
-        RYUnreadViewModel.sharedUnreadViewModel.setBadge { (result, error) -> () in
-            if result != nil {
-                print(result?.status)
-                if result?.status != 0 {
-                    self.tabBarItem.badgeValue = "\(result?.status)"
-                }else {
-                    self.tabBarItem.badgeValue = nil
-                }
-            }else {
-                print(error)
-            }
-        }
+        RYUnreadViewModel.sharedUnreadViewModel.setBadgeForTabBarItem(tabBarItem)
     }
 }
