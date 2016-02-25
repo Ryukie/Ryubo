@@ -22,7 +22,7 @@ class RYHomeController: RYBasicVisitorTVC {
         prepareTableView()
         SVProgressHUD.show()
         //定时刷新badge
-        let timer = NSTimer(timeInterval: 30, target: self, selector: "setBadgeIcon", userInfo: nil, repeats: true)
+        let timer = NSTimer(timeInterval: 15, target: self, selector: "setBadgeIcon", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
     }
     override func viewDidAppear(animated: Bool) {
@@ -58,14 +58,18 @@ class RYHomeController: RYBasicVisitorTVC {
             if self.indicatorView.isAnimating() {
                 //停止转动
                 self.indicatorView.stopAnimating()
+                self.tableView.reloadData()
+                return
             }
-            //请求数据一定成功
+            
+            //下拉  请求数据一定成功
             //刷新列表
             if !self.tableView.dragging {
                 //如果是一直拉着就不刷新
                 self.tableView.reloadData()
                 self.setBadgeIcon()
             }
+            
         }
     }
     private func autoRowHeight () {

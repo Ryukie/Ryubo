@@ -25,6 +25,7 @@ class RYRefresh: UIControl {
             case .Normal :
                 lb_text.text = "继续下拉刷新"
                 indicatorView.hidden = true
+                indicatorView.stopAnimating()
                 lb_text.hidden = false
                 //didSet 中自带的有上一次的值
                 if oldValue == .Refreshing {
@@ -42,6 +43,7 @@ class RYRefresh: UIControl {
                 //想要调用加载数据的方法需要手动完成一次 valueChange
                 sendActionsForControlEvents(.ValueChanged)
                 indicatorView.hidden = false
+                indicatorView.startAnimating()
                 lb_text.hidden = true
                 var insert = scrollView?.contentInset
                 UIView.animateWithDuration(0.5, animations: { () -> Void in
