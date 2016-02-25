@@ -41,6 +41,7 @@ class RYPictureCell: UICollectionViewCell {
     
 //MARK: - 设置视图
     private func setupUI() {
+        contentView.backgroundColor = col_darkGray
         contentView.addSubview(iconView)
         //        iconView.image = UIImage(named: "Brave Shine")
         //设置约束

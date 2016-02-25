@@ -114,7 +114,12 @@ extension RYOriginalWeibo {
     private func setPicView () {
         cons?.uninstall()
         picsView.picURLs = status?.picURLs//这里会自动计算一下picView的尺寸 没有的话就是0
-        if status?.picURLs?.count != 0 {
+        //imURL 不为空   且   count 不为 0
+        // imURLS 永远不为空    没有的话会给一个 空数组
+        // 如果之判定  count 是否为空的话   没有配图的视图的count的话
+//            if status!.picURLs!.count != 0 {
+        if ( picsView.picURLs != nil && picsView.picURLs?.count != 0 )  {
+//        if let imURLs = status?.picURLs where imURLs.count != 0 {
             //加载配图视图
             picsView.backgroundColor = col_white95Gray
 
