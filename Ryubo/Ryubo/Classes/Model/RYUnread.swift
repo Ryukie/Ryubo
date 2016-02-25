@@ -67,4 +67,8 @@ class RYUnread: NSObject {
         let dict = self.dictionaryWithValuesForKeys(keys)
         return dict.description
     }
+    //获取未读参数
+    func getUnreadInfo (result:(info:RYUnread)->()) {
+        
+    }
 }

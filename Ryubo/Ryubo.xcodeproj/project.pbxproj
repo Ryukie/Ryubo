@@ -27,6 +27,7 @@
 		4A965F021C736A45005E14E1 /* RYStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A965F011C736A45005E14E1 /* RYStatusViewModel.swift */; };
 		4A965F041C736B5F005E14E1 /* RYStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A965F031C736B5F005E14E1 /* RYStatus.swift */; };
 		4A965F061C737185005E14E1 /* RYUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A965F051C737185005E14E1 /* RYUser.swift */; };
+		4A9A40011C7F10E100697C57 /* RYUnreadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A40001C7F10E100697C57 /* RYUnreadViewModel.swift */; };
 		4A9E01181C64D6BA0045AC09 /* RYGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E01171C64D6BA0045AC09 /* RYGlobal.swift */; };
 		4A9E011A1C64DF7F0045AC09 /* RYNetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E01191C64DF7F0045AC09 /* RYNetworkTool.swift */; };
 		4AACCEE61C7AB0A400BDFDF5 /* RYRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AACCEE51C7AB0A400BDFDF5 /* RYRefresh.swift */; };
@@ -79,6 +80,7 @@
 		4A965F011C736A45005E14E1 /* RYStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYStatusViewModel.swift; sourceTree = "<group>"; };
 		4A965F031C736B5F005E14E1 /* RYStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYStatus.swift; sourceTree = "<group>"; };
 		4A965F051C737185005E14E1 /* RYUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYUser.swift; sourceTree = "<group>"; };
+		4A9A40001C7F10E100697C57 /* RYUnreadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYUnreadViewModel.swift; sourceTree = "<group>"; };
 		4A9E01171C64D6BA0045AC09 /* RYGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYGlobal.swift; sourceTree = "<group>"; };
 		4A9E01191C64DF7F0045AC09 /* RYNetworkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYNetworkTool.swift; sourceTree = "<group>"; };
 		4AACCEE51C7AB0A400BDFDF5 /* RYRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRefresh.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			children = (
 				4AD248A81C68A04D003F110A /* RYAccountViewModel.swift */,
 				4A965F011C736A45005E14E1 /* RYStatusViewModel.swift */,
+				4A9A40001C7F10E100697C57 /* RYUnreadViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9A40011C7F10E100697C57 /* RYUnreadViewModel.swift in Sources */,
 				4A7BC8541C76BDE800519D65 /* RYPicsView.swift in Sources */,
 				4A9E01181C64D6BA0045AC09 /* RYGlobal.swift in Sources */,
 				4A965F061C737185005E14E1 /* RYUser.swift in Sources */,
