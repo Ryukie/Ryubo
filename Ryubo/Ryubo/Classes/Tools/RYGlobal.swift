@@ -43,3 +43,6 @@ let scrHeight = UIScreen.mainScreen().bounds.size.height
 *  图片配图间距
 */
 let picCellMargin : CGFloat = 5
+
+
+let emotionCellReuseID = "emotionCell"

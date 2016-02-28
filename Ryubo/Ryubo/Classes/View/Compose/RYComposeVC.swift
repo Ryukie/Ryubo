@@ -91,8 +91,8 @@ class RYComposeVC: UIViewController {
         //TODO : 不为空的时候提示保存草稿
     }
     //1.textView
-    private lazy var tv_textInputView: EmoticonTextView = {
-        let tv = EmoticonTextView()
+    private lazy var tv_textInputView: UITextView = {
+        let tv = UITextView()
         tv.font = UIFont.systemFontOfSize(18)
         tv.textColor = col_darkGray
         tv.backgroundColor = col_white95Gray
@@ -110,10 +110,9 @@ class RYComposeVC: UIViewController {
     var itemIndex : Int64 = 0
     private lazy var vc_picSelect : RYPictureSelectVC = RYPictureSelectVC()
     //插入表情键盘
-    private lazy var v_emotionKryboard: EmoticonKeyBoardView = EmoticonKeyBoardView { (em) -> () in
-//        print(em)
-        //在闭包中智能提示 不怎么样  系统键盘存在的时候 输入视图 为 nil
-        self.tv_textInputView.insetText(em)
+    private lazy var v_emotionKryboard : RYEmotionView = RYEmotionView { (emotion) -> () in
+        //通过block回调输入textView
+        print(emotion)
     }
 }
 
