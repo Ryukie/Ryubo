@@ -21,8 +21,8 @@ class RYEmotionView: UIView {
         super.init(frame: rect)
         // 设置控件
         self.setUI()
-        // 跳转到默认分组
         let indexPath = NSIndexPath(forItem: 0, inSection: 0)
+        //在主线程空闲的时候执行滚动 ??
         dispatch_async(dispatch_get_main_queue()) {
             self.cv_EmotionCollection.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
         }
