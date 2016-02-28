@@ -16,10 +16,10 @@ class RYEmotionPackage: NSObject {
     /// 表情包数组
     lazy var emotions = [RYEmotionModel]()
     
-    init(dict: [String: AnyObject]) {
+    init(dict: [String: AnyObject],idStr:String) {
         super.init()
         var index = 0
-        id = dict["id"] as? String
+        id = idStr
         group_name_cn = dict["group_name_cn"] as? String
         if let array = dict["emoticons"] as? [[String: String]] {
             //运行测试，发现无法显示图片，原因是 em.png 中只有图片的名称，而没有图片路径
@@ -29,12 +29,13 @@ class RYEmotionPackage: NSObject {
                 if let png = d["png"] {
                     d["png"] = dir! + "/" + png
                 }
-                emotions.append(RYEmotionModel(dict: d,id: id!))
                 // 追加删除按钮
-                if ++index == 20 {
+                if index == 20 {
                     emotions.append(RYEmotionModel(isRemoved: true))
                     index = 0
                 }
+                index++
+                emotions.append(RYEmotionModel(dict: d,id: id!))
             }
         }
         addEmptyButton()
@@ -56,7 +57,7 @@ class RYEmotionPackage: NSObject {
     }
     
     override var description: String {
-        let keys = ["id", "group_name_cn", "emoticons"]
+        let keys = ["id", "group_name_cn", "emotions"]
         return dictionaryWithValuesForKeys(keys).description
     }
 }

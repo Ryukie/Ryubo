@@ -18,8 +18,10 @@ class RYEmotionModel: NSObject {
             //一个模型 只需要计算一次
             //给imagePath赋值
             //NSBundle.mainBundle().bundlePath + "/Emoticons.bundle/" + "\(bundleId)/" + "\(png)"
-            if let bundleId = id, imageName = png {
-                imagePath = NSBundle.mainBundle().bundlePath + "/Emoticons.bundle/" + "\(bundleId)/" + "\(imageName)"
+//            if let bundleId = id, imageName = png {
+            if let imageName = png {
+//                imagePath = NSBundle.mainBundle().bundlePath + "/Emoticons.bundle/" + "\(bundleId)/" + "\(imageName)"
+                imagePath = NSBundle.mainBundle().bundlePath + "/Emoticons.bundle/" + "\(imageName)"
             }
         }
     }

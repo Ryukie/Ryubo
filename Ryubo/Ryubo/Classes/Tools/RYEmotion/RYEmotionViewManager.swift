@@ -16,7 +16,7 @@ class RYEmotionViewManager: NSObject {
         super.init()
         
         // 0. 添加最近分组   plist中没有
-        packages.append(RYEmotionPackage(dict: ["group_name_cn": "最近"]))
+//        packages.append(RYEmotionPackage(dict: ["group_name_cn": "最近"]))
         
         
         //从plist加载表情包信息
@@ -32,17 +32,18 @@ class RYEmotionViewManager: NSObject {
         }
         // 3. 提取 packages 中的 id 字符串对应的数组
         // valueForKey  可以获得数组
-        let idArr = (dict["packages"] as! NSArray).valueForKey("id") as! [String]
+        let idArr = dict["packages"] as! NSArray
         // 4. 遍历数组，字典转模型
-        for id in idArr {
+        for item in idArr {
+            let id = item["id"] as! String
             loadInfoPlist(id)
         }
     }
     /// 加载 id 目录下的 info.plist 文件
     private func loadInfoPlist(id: String) {
-        print(id)
         let filePath = NSBundle.mainBundle().pathForResource("Info", ofType: "plist", inDirectory: "Emoticons.bundle/\(id)")
         let dict = NSDictionary(contentsOfFile: filePath!) as! [String: AnyObject]
-        packages.append(RYEmotionPackage(dict: dict))
+        let package = RYEmotionPackage(dict: dict, idStr: id)
+        packages.append(package)
     }
 }
